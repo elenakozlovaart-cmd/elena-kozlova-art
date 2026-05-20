@@ -85,6 +85,15 @@ function Index() {
           "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
         ],
         aboutCta: "Запросить доступные работы",
+        seriesKicker: "Серии работ",
+        seriesTitle: "Серии",
+        series: [
+          { title: "Армения", desc: "Акварельные впечатления от света, гор, архитектуры и древних мест." },
+          { title: "Пейзажи внутреннего состояния", desc: "Пейзаж как способ передать тишину, память и настроение." },
+          { title: "Фигуративные этюды", desc: "Наблюдение за человеком, жестом, позой и состоянием." },
+          { title: "Город и память", desc: "Городские пространства, в которых важны свет, ритм и личное воспоминание." },
+          { title: "Пленэрные наблюдения", desc: "Работы, созданные из непосредственного контакта с местом." },
+        ],
         worksKicker: "Работы",
         worksTitle: "Избранное",
         worksIntro: "Подборка недавних акварелей.\nКаждая работа уникальна и существует в единственном экземпляре.",
@@ -135,6 +144,15 @@ function Index() {
           "Her works are held in private collections across Europe and Russia.",
         ],
         aboutCta: "Inquire about available works",
+        seriesKicker: "Series",
+        seriesTitle: "Series",
+        series: [
+          { title: "Armenia", desc: "Watercolour impressions of light, mountains, architecture and ancient places." },
+          { title: "Landscapes of inner states", desc: "Landscape as a way to convey silence, memory and mood." },
+          { title: "Figurative studies", desc: "Observation of the human figure, gesture, posture and state." },
+          { title: "City and memory", desc: "Urban spaces where light, rhythm and personal recollection matter." },
+          { title: "Plein air observations", desc: "Works born from direct contact with a place." },
+        ],
         worksKicker: "Works",
         worksTitle: "Selected",
         worksIntro: "A selection of recent works in watercolour.\nEach piece is unique and created as an original.",
@@ -276,6 +294,30 @@ function Index() {
             <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
               {t.aboutCta}
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* SERIES */}
+      <section className="py-24 md:py-32 border-t border-border/50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.seriesKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.seriesTitle}</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
+            {t.series.map((s, i) => (
+              <div key={i} className="group border-t border-border pt-6">
+                <h3 style={serif} className="text-2xl md:text-3xl italic font-light leading-tight mb-4">
+                  {s.title}
+                </h3>
+                <p className="text-[14px] leading-[1.75] text-foreground/65">
+                  {s.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
