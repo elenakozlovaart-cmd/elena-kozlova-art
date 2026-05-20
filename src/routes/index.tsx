@@ -49,10 +49,10 @@ const works = [
   { src: w10, ru: { t: "Ступа на Ольхоне", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Stupa on Olkhon", s: "38 × 56 cm", y: "2024", st: "Available" } },
   { src: w11, ru: { t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available" } },
   { src: w12, ru: { t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available" } },
-  { src: w13, ru: { t: "Огни города", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "City Lights", s: "38 × 56 cm", y: "2025", st: "Available" } },
-  { src: w14, ru: { t: "Чайка над водой", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Gull Above Water", s: "38 × 56 cm", y: "2025", st: "Available" } },
-  { src: w15, ru: { t: "Полёт", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Flight", s: "38 × 56 cm", y: "2025", st: "Available" } },
-  { src: w16, ru: { t: "Москва на закате", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "38 × 56 cm", y: "2025", st: "Available" } },
+  { src: w13, ru: { t: "Огни города", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "City Lights", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w14, ru: { t: "Чайка над водой", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Gull Above Water", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w15, ru: { t: "Полёт", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Flight", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w16, ru: { t: "Москва на закате", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "38 × 56 cm", y: "2024", st: "Available" } },
 ];
 
 function Index() {
