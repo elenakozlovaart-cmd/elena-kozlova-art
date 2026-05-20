@@ -90,25 +90,15 @@ function Index() {
     e.preventDefault();
     setFormState("sending");
     try {
-      const payload = {
-        _subject: lang === "ru"
-          ? `Запрос стоимости${formFields.artwork ? `: ${formFields.artwork}` : ""}`
-          : `Price request${formFields.artwork ? `: ${formFields.artwork}` : ""}`,
-        _template: "table",
-        _captcha: "false",
-        Name: formFields.name,
-        Email: formFields.email,
-        "Telegram/Phone": formFields.contact,
-        Artwork: formFields.artwork,
-        Comment: formFields.comment,
-        Language: lang,
-      };
-      const res = await fetch("https://formsubmit.co/ajax/elenakozlova77@yandex.ru", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
+      const { error } = await supabase.from("price_requests").insert({
+        name: formFields.name.trim(),
+        email: formFields.email.trim(),
+        contact: formFields.contact.trim() || null,
+        artwork: formFields.artwork.trim() || null,
+        comment: formFields.comment.trim() || null,
+        language: lang,
       });
-      if (!res.ok) throw new Error("send failed");
+      if (error) throw error;
       setFormState("success");
     } catch {
       setFormState("error");
