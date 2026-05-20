@@ -470,6 +470,29 @@ function Index() {
         );
       })()}
 
+      {/* ABOUT */}
+      <section id="about" className="py-32 md:py-44 border-t border-border/50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
+          <div className="md:col-span-5 md:col-start-1">
+            <div className="md:sticky md:top-32">
+              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} className="w-full h-auto object-cover" />
+            </div>
+          </div>
+          <div className="md:col-span-6 md:col-start-7 md:pt-16">
+            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.aboutKicker}</p>
+            <h2 style={serif} className="text-3xl md:text-5xl leading-[1.15] font-light mb-12">
+              {lang === "ru" ? "Акварель как фиксация ускользающего." : "Watercolour as a record of the fleeting."}
+            </h2>
+            <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
+              {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
+            </div>
+            <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              {t.aboutCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
 
       {/* CV */}
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
