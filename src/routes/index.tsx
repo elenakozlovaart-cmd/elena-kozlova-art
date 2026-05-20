@@ -481,7 +481,7 @@ function Index() {
                     href="https://t.me/ElenaKozlova_Art"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 hover:bg-foreground hover:text-background transition-colors"
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
                   >
                     {labels.ask}
                   </a>
