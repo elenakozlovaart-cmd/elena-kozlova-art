@@ -307,7 +307,7 @@ function Index() {
             <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
+            <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
               {t.aboutCta}
             </a>
           </div>
