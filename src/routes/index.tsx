@@ -253,11 +253,11 @@ function Index() {
             <p className="mt-10 text-base md:text-[15px] leading-[1.8] text-foreground/70 whitespace-pre-line max-w-md">
               {t.heroLead}
             </p>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#works" className="border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
+            <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
+              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.heroCta}
               </a>
-              <a href="#about" className="text-foreground/60 hover:text-foreground transition-colors">
+              <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
                 {t.heroCta2}
               </a>
             </div>
@@ -307,7 +307,7 @@ function Index() {
             <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
+            <a href={mailto} className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
               {t.aboutCta}
             </a>
           </div>
@@ -397,7 +397,7 @@ function Index() {
                         {info.st}
                       </span>
                       {!sold && (
-                        <a href={mailto} className="text-[10px] tracking-[0.25em] uppercase border-b border-foreground/60 pb-0.5 hover:border-foreground transition-colors">
+                        <a href={mailto} className="text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-1.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
                           {t.cardCta}
                         </a>
                       )}
@@ -473,7 +473,7 @@ function Index() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <a
                     href={mailto}
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 bg-foreground text-background hover:bg-transparent hover:text-foreground transition-colors"
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
                   >
                     {labels.cta}
                   </a>
@@ -481,7 +481,7 @@ function Index() {
                     href="https://t.me/ElenaKozlova_Art"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 hover:bg-foreground hover:text-background transition-colors"
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
                   >
                     {labels.ask}
                   </a>
@@ -532,7 +532,7 @@ function Index() {
             href="https://t.me/ElenaKozlova_Art"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+            className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
           >
             {t.tgCta}
           </a>
@@ -606,7 +606,7 @@ function Index() {
                 @ElenaKozlovaArt
               </a>
             </div>
-            <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-3 hover:bg-foreground hover:text-background transition-colors">
+            <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
               {t.footerCta}
             </a>
           </div>
