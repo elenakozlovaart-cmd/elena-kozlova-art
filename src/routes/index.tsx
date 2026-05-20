@@ -57,6 +57,20 @@ const works = [
 
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (openIdx === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenIdx(null); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [openIdx]);
+
   const t = lang === "ru"
     ? {
         nav: { works: "Работы", about: "О художнике", cv: "Выставки", contact: "Контакты" },
