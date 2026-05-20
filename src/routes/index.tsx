@@ -86,7 +86,7 @@ function Index() {
     };
   }, [openIdx, priceForm.open]);
 
-  const submitPriceForm = async (e: React.FormEvent) => {
+  const submitPriceForm = async (e: FormEvent) => {
     e.preventDefault();
     setFormState("sending");
     try {
