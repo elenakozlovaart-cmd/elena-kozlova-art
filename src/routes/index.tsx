@@ -448,22 +448,33 @@ function Index() {
                     {info.d}
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2.5">
-                  <a
-                    href={mailto}
-                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                  >
-                    {labels.cta}
-                  </a>
-                  <a
-                    href="https://t.me/ElenaKozlova_Art"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                  >
-                    {labels.ask}
-                  </a>
-                </div>
+                {(() => {
+                  const priceSubject = lang === "ru"
+                    ? `Запрос стоимости работы: ${info.t}`
+                    : `Price request for artwork: ${info.t}`;
+                  const priceBody = lang === "ru"
+                    ? `Здравствуйте, Елена!\n\nХочу уточнить стоимость работы «${info.t}».\n\nСпасибо.`
+                    : `Hello Elena,\n\nI would like to ask about the price of "${info.t}".\n\nThank you.`;
+                  const priceMailto = `mailto:elenakozlova77@yandex.ru?subject=${encodeURIComponent(priceSubject)}&body=${encodeURIComponent(priceBody)}`;
+                  return (
+                    <div className="flex flex-col sm:flex-row gap-2.5">
+                      <a
+                        href={priceMailto}
+                        className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                      >
+                        {labels.cta}
+                      </a>
+                      <a
+                        href="https://t.me/ElenaKozlova_Art"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                      >
+                        {labels.ask}
+                      </a>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </div>
