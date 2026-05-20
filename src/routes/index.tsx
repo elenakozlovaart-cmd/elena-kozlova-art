@@ -399,8 +399,8 @@ function Index() {
         const w = works[openIdx];
         const info = w[lang];
         const labels = lang === "ru"
-          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить стоимость", close: "Закрыть" }
-          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Inquire", close: "Close" };
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить стоимость", ask: "Задать вопрос о работе", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Inquire", ask: "Ask about this work", close: "Close" };
         const rows: { label: string; value: string }[] = [
           { label: labels.cat, value: info.c },
           { label: labels.tech, value: info.m },
