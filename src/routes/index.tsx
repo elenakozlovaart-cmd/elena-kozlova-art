@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
 type Lang = "ru" | "en";
 
 const works = [
-  { src: w1, ru: { t: "Дилижан", s: "32 × 41 см", y: "2026", st: "В наличии" }, en: { t: "Dilijan", s: "32 × 41 cm", y: "2026", st: "Available" } },
+  { src: w1, ru: { t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии" }, en: { t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available" } },
   { src: w2, ru: { t: "Нораванк", s: "36 × 48 см", y: "2026", st: "В наличии" }, en: { t: "Noravank", s: "36 × 48 cm", y: "2026", st: "Available" } },
   { src: w3, ru: { t: "Озеро Севан", s: "30 × 42 см", y: "2026", st: "в наличии" }, en: { t: "Lake Sevan", s: "30 × 42 cm", y: "2026", st: "Available" } },
   { src: w4, ru: { t: "Ереван. Площадь Республики", s: "32 × 45 см", y: "2025", st: "В наличии" }, en: { t: "Yerevan, Republic Square", s: "32 × 45 cm", y: "2025", st: "Available" } },
