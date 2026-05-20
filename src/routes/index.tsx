@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import hero from "@/assets/hero.jpeg";
 import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
@@ -37,26 +37,40 @@ export const Route = createFileRoute("/")({
 type Lang = "ru" | "en";
 
 const works = [
-  { src: w1, ru: { t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w2, ru: { t: "Нораванк", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Noravank", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w3, ru: { t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "в наличии", m: "Акварель на бумаге" }, en: { t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w4, ru: { t: "Ереван. Площадь Республики", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Yerevan, Republic Square", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w5, ru: { t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w6, ru: { t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
-  { src: w7, ru: { t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "в наличии", m: "Акварель на бумаге" }, en: { t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
-  { src: w8, ru: { t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
-  { src: w9, ru: { t: "Деревня на Ольхоне. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Village on Olkhon. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
-  { src: w10, ru: { t: "Ступа Просветления на острове Огой. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Stupa of Enlightenment on Ogoy Island. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
-  { src: w11, ru: { t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
-  { src: w12, ru: { t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
-  { src: w13, ru: { t: "Огни города", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "City Lights", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
-  { src: w14, ru: { t: "Чайка над водой", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Gull Above Water", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
-  { src: w15, ru: { t: "Полёт", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Flight", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
-  { src: w16, ru: { t: "Москва на закате", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Moscow at Sunset", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
+  { src: w1, ru: { c: "Армения", t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Туман укрывает горные склоны Дилижана — воздух будто растворяет очертания деревьев, оставляя только дыхание леса." }, en: { c: "Armenia", t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Mist drapes the slopes of Dilijan — the air dissolves the contours of trees, leaving only the breath of the forest." } },
+  { src: w2, ru: { c: "Армения", t: "Нораванк", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тёплый камень древнего монастыря, выросший из охристых скал. Свет здесь хранит память столетий." }, en: { c: "Armenia", t: "Noravank", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Warm stone of the ancient monastery rising from ochre cliffs. The light here holds the memory of centuries." } },
+  { src: w3, ru: { c: "Армения", t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "в наличии", m: "Акварель на бумаге", d: "Прозрачная синь высокогорного озера, где небо и вода говорят на одном языке тишины." }, en: { c: "Armenia", t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The transparent blue of a highland lake, where sky and water share one language of stillness." } },
+  { src: w4, ru: { c: "Армения", t: "Ереван. Площадь Республики", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Розовый туф города оживает в мягком вечернем свете — архитектура дышит, отражаясь в движении прохожих." }, en: { c: "Armenia", t: "Yerevan, Republic Square", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The pink tuff of the city comes alive in the soft evening light — architecture breathes through the motion of passers-by." } },
+  { src: w5, ru: { c: "Армения", t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тихие улицы Гюмри, где время движется неспешно, а каждый дом хранит свой собственный сюжет." }, en: { c: "Armenia", t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Quiet streets of Gyumri, where time moves slowly and each house keeps its own quiet story." } },
+  { src: w6, ru: { c: "Родина-мать", t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Монументальный силуэт, растворённый в воздушной перспективе — величие, переданное лёгкостью акварели." }, en: { c: "Motherland", t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A monumental silhouette dissolved into aerial perspective — grandeur conveyed through the lightness of watercolour." } },
+  { src: w7, ru: { c: "Родина-мать", t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "в наличии", m: "Акварель на бумаге", d: "Продолжение размышления о памяти и пространстве: фигура и небо сливаются в единое состояние." }, en: { c: "Motherland", t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A continuation of a reflection on memory and space: figure and sky merge into a single state." } },
+  { src: w8, ru: { c: "Городская лирика", t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме", d: "Город сквозь стеклянную пелену дождя — отражения и движение размывают границы между улицей и сном." }, en: { c: "Urban lyrics", t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed", d: "A city seen through a glassy veil of rain — reflections and movement blur the line between street and dream." } },
+  { src: w9, ru: { c: "Байкал", t: "Деревня на Ольхоне. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Деревянные дома на ветреном острове — простая жизнь у большой воды, написанная в скупой и тёплой палитре." }, en: { c: "Baikal", t: "Village on Olkhon. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Wooden houses on a windswept island — quiet life beside the great water, painted in a sparing, warm palette." } },
+  { src: w10, ru: { c: "Байкал", t: "Ступа Просветления на острове Огой. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Белая ступа над озером — точка покоя в широте байкальского пейзажа, где горизонт становится молитвой." }, en: { c: "Baikal", t: "Stupa of Enlightenment on Ogoy Island. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "A white stupa above the lake — a point of stillness in the vastness of Baikal, where the horizon turns into prayer." } },
+  { src: w11, ru: { c: "Байкал", t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Силуэты кораблей у берега — пауза между плаванием и тишиной, между водой и небом." }, en: { c: "Baikal", t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Silhouettes of ships at the shore — a pause between voyage and silence, between water and sky." } },
+  { src: w12, ru: { c: "Байкал", t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Скала Шаманка — древний образ Байкала, написанный почти иконографично: камень, ветер и свет." }, en: { c: "Baikal", t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Shamanka Rock — an ancient image of Baikal rendered almost iconographically: stone, wind and light." } },
+  { src: w13, ru: { c: "Круглая серия", t: "Огни города", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме", d: "Ночные огни, собранные в круг — городская мелодия, увиденная издалека и сведённая к чистому свету." }, en: { c: "Circular series", t: "City Lights", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed", d: "Night lights gathered into a circle — an urban melody seen from afar and distilled into pure light." } },
+  { src: w14, ru: { c: "Круглая серия", t: "Чайка над водой", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме", d: "Лёгкое движение крыла над водной гладью — мгновение, остановленное прозрачным мазком." }, en: { c: "Circular series", t: "Gull Above Water", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed", d: "The light motion of a wing above still water — an instant held by a single transparent stroke." } },
+  { src: w15, ru: { c: "Круглая серия", t: "Полёт", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме", d: "Птица в свободном пространстве воздуха — образ внутренней лёгкости и тишины." }, en: { c: "Circular series", t: "Flight", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed", d: "A bird in the open space of air — an image of inner lightness and stillness." } },
+  { src: w16, ru: { c: "Круглая серия", t: "Москва на закате", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме", d: "Тёплый закатный свет ложится на знакомые силуэты — город становится мягким, почти музыкальным." }, en: { c: "Circular series", t: "Moscow at Sunset", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed", d: "Warm sunset light falls on familiar silhouettes — the city becomes soft, almost musical." } },
 ];
 
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (openIdx === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenIdx(null); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [openIdx]);
+
   const t = lang === "ru"
     ? {
         nav: { works: "Работы", about: "О художнике", cv: "Выставки", contact: "Контакты" },
@@ -290,17 +304,26 @@ function Index() {
               const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
               return (
                 <figure key={i} className={`group ${layout}`}>
-                  <div className="relative overflow-hidden bg-secondary">
+                  <button
+                    type="button"
+                    onClick={() => setOpenIdx(i)}
+                    aria-label={info.t}
+                    className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+                  >
                     <img src={w.src} alt={info.t} className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                     <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                       <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                         {info.t}
                       </span>
                     </div>
-                  </div>
+                  </button>
                   <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
                     <div className="col-span-8">
-                      <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">{info.t}</h3>
+                      <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                        <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                          {info.t}
+                        </button>
+                      </h3>
                       <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
                         {info.m || t.cardMedium} · {info.s} · {info.y}
                       </p>
@@ -322,6 +345,79 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* ARTWORK MODAL */}
+      {openIdx !== null && (() => {
+        const w = works[openIdx];
+        const info = w[lang];
+        const labels = lang === "ru"
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить стоимость", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Inquire", close: "Close" };
+        const rows: { label: string; value: string }[] = [
+          { label: labels.cat, value: info.c },
+          { label: labels.tech, value: info.m },
+          { label: labels.size, value: info.s },
+          { label: labels.year, value: info.y },
+          { label: labels.status, value: info.st },
+        ];
+        return (
+          <div
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
+            onClick={() => setOpenIdx(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={info.t}
+          >
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setOpenIdx(null); }}
+              aria-label={labels.close}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
+            >
+              ×
+            </button>
+            <div
+              className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="md:col-span-8 flex items-center justify-center">
+                <img
+                  src={w.src}
+                  alt={info.t}
+                  className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                />
+              </div>
+              <div className="md:col-span-4 flex flex-col justify-center md:py-8">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
+                <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
+                  {info.t}
+                </h2>
+                <dl className="space-y-5 mb-10">
+                  {rows.slice(1).map((r) => (
+                    <div key={r.label} className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3">
+                      <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{r.label}</dt>
+                      <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mb-10">
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mb-3">{labels.desc}</p>
+                  <p style={serif} className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic">
+                    {info.d}
+                  </p>
+                </div>
+                <a
+                  href={mailto}
+                  className="inline-block self-start text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  {labels.cta}
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
 
       {/* CV */}
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
