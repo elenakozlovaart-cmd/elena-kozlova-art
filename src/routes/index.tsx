@@ -570,11 +570,14 @@ function Index() {
                 href="https://t.me/ElenaKozlova_Art"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground bg-foreground text-background px-8 py-4 hover:bg-transparent hover:text-foreground transition-colors"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
               >
                 {t.acqCta}
               </a>
-              <a href={mailto} className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors">
+              <a
+                href={mailto}
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+              >
                 {lang === "ru" ? "Написать на почту" : "Email Elena"}
               </a>
             </div>
