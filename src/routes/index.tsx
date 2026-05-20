@@ -454,12 +454,22 @@ function Index() {
                     {info.d}
                   </p>
                 </div>
-                <a
-                  href={mailto}
-                  className="inline-block self-start text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
-                >
-                  {labels.cta}
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <a
+                    href={mailto}
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 bg-foreground text-background hover:bg-transparent hover:text-foreground transition-colors"
+                  >
+                    {labels.cta}
+                  </a>
+                  <a
+                    href="https://t.me/ElenaKozlova_Art"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 hover:bg-foreground hover:text-background transition-colors"
+                  >
+                    {labels.ask}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
