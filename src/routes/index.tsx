@@ -393,8 +393,8 @@ function Index() {
         const w = works[openIdx];
         const info = w[lang];
         const labels = lang === "ru"
-          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить стоимость", ask: "Задать вопрос о работе", close: "Закрыть" }
-          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Inquire", ask: "Ask about this work", close: "Close" };
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
         const rows: { label: string; value: string }[] = [
           { label: labels.cat, value: info.c },
           { label: labels.tech, value: info.m },
@@ -448,10 +448,10 @@ function Index() {
                     {info.d}
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-2.5">
                   <a
                     href={mailto}
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
                   >
                     {labels.cta}
                   </a>
@@ -459,7 +459,7 @@ function Index() {
                     href="https://t.me/ElenaKozlova_Art"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
                   >
                     {labels.ask}
                   </a>
