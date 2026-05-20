@@ -253,11 +253,11 @@ function Index() {
             <p className="mt-10 text-base md:text-[15px] leading-[1.8] text-foreground/70 whitespace-pre-line max-w-md">
               {t.heroLead}
             </p>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#works" className="border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
+            <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
+              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.heroCta}
               </a>
-              <a href="#about" className="text-foreground/60 hover:text-foreground transition-colors">
+              <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
                 {t.heroCta2}
               </a>
             </div>
