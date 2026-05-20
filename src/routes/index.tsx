@@ -532,7 +532,7 @@ function Index() {
             href="https://t.me/ElenaKozlova_Art"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+            className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
           >
             {t.tgCta}
           </a>
