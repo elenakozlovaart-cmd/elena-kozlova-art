@@ -578,13 +578,23 @@ function Index() {
                     <p style={serif} className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic mb-8">
                       {L.success}
                     </p>
-                    <button
-                      type="button"
-                      onClick={closePriceForm}
-                      className="inline-block text-[10px] tracking-[0.25em] uppercase rounded-full px-6 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                    >
-                      {L.close}
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-2.5">
+                      <a
+                        href="https://t.me/ElenaKozlova_Art"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center text-[10px] tracking-[0.25em] uppercase rounded-full px-6 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                      >
+                        {L.telegram}
+                      </a>
+                      <button
+                        type="button"
+                        onClick={closePriceForm}
+                        className="inline-flex items-center justify-center text-[10px] tracking-[0.25em] uppercase rounded-full px-6 py-2.5 bg-white text-foreground border border-[#e8dcdb] hover:bg-[#f5ecea] transition-colors"
+                      >
+                        {L.close}
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={submitPriceForm} className="space-y-4">
