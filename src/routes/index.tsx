@@ -519,6 +519,160 @@ function Index() {
         );
       })()}
 
+      {/* PRICE REQUEST FORM MODAL */}
+      {priceForm.open && (() => {
+        const L = lang === "ru"
+          ? {
+              title: "Запросить стоимость",
+              name: "Имя",
+              email: "Email",
+              contact: "Telegram или телефон",
+              artwork: "Название работы",
+              artworkPh: "Например: Дилижан",
+              comment: "Комментарий",
+              submit: "Отправить запрос",
+              sending: "Отправка…",
+              success: "Спасибо! Ваш запрос отправлен. Елена свяжется с вами в ближайшее время.",
+              error: "Не удалось отправить запрос. Попробуйте ещё раз или напишите в Telegram.",
+              close: "Закрыть",
+              required: "обязательно",
+            }
+          : {
+              title: "Request artwork price",
+              name: "Name",
+              email: "Email",
+              contact: "Telegram or phone",
+              artwork: "Artwork title",
+              artworkPh: "e.g. Dilijan",
+              comment: "Comment",
+              submit: "Send request",
+              sending: "Sending…",
+              success: "Thank you! Your request has been sent. Elena will contact you soon.",
+              error: "Could not send the request. Please try again or write on Telegram.",
+              close: "Close",
+              required: "required",
+            };
+        return (
+          <div
+            className="fixed inset-0 z-[120] bg-background/95 backdrop-blur-sm overflow-y-auto"
+            onClick={closePriceForm}
+            role="dialog"
+            aria-modal="true"
+            aria-label={L.title}
+          >
+            <div className="min-h-full flex items-center justify-center p-4 md:p-8">
+              <div
+                className="relative w-full max-w-lg bg-[#fbf6f4] border border-[#e8dcdb] rounded-2xl shadow-xl px-6 md:px-10 py-10 md:py-12"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={closePriceForm}
+                  aria-label={L.close}
+                  className="absolute top-3 right-3 w-10 h-10 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors text-2xl leading-none font-light"
+                >
+                  ×
+                </button>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-3">
+                  {lang === "ru" ? "Запрос" : "Inquiry"}
+                </p>
+                <h2 style={serif} className="text-3xl md:text-4xl font-light italic leading-tight mb-8">
+                  {L.title}
+                </h2>
+
+                {formState === "success" ? (
+                  <div className="py-6">
+                    <p style={serif} className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic mb-8">
+                      {L.success}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={closePriceForm}
+                      className="inline-block text-[10px] tracking-[0.25em] uppercase rounded-full px-6 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                    >
+                      {L.close}
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={submitPriceForm} className="space-y-4">
+                    <div>
+                      <label className="block text-[10px] tracking-[0.25em] uppercase text-foreground/55 mb-1.5">{L.name}</label>
+                      <input
+                        type="text"
+                        required
+                        maxLength={120}
+                        value={formFields.name}
+                        onChange={(e) => setFormFields({ ...formFields, name: e.target.value })}
+                        className="w-full bg-white border border-[#e8dcdb] rounded-lg px-4 py-2.5 text-[14px] text-foreground placeholder-foreground/40 focus:outline-none focus:border-[#b89a99] focus:ring-2 focus:ring-[#b89a99]/20 transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] tracking-[0.25em] uppercase text-foreground/55 mb-1.5">{L.email}</label>
+                      <input
+                        type="email"
+                        required
+                        maxLength={200}
+                        value={formFields.email}
+                        onChange={(e) => setFormFields({ ...formFields, email: e.target.value })}
+                        className="w-full bg-white border border-[#e8dcdb] rounded-lg px-4 py-2.5 text-[14px] text-foreground placeholder-foreground/40 focus:outline-none focus:border-[#b89a99] focus:ring-2 focus:ring-[#b89a99]/20 transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] tracking-[0.25em] uppercase text-foreground/55 mb-1.5">{L.contact}</label>
+                      <input
+                        type="text"
+                        maxLength={120}
+                        value={formFields.contact}
+                        onChange={(e) => setFormFields({ ...formFields, contact: e.target.value })}
+                        placeholder="@username / +7 ..."
+                        className="w-full bg-white border border-[#e8dcdb] rounded-lg px-4 py-2.5 text-[14px] text-foreground placeholder-foreground/40 focus:outline-none focus:border-[#b89a99] focus:ring-2 focus:ring-[#b89a99]/20 transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] tracking-[0.25em] uppercase text-foreground/55 mb-1.5">{L.artwork}</label>
+                      <input
+                        type="text"
+                        maxLength={200}
+                        value={formFields.artwork}
+                        onChange={(e) => setFormFields({ ...formFields, artwork: e.target.value })}
+                        placeholder={L.artworkPh}
+                        className="w-full bg-white border border-[#e8dcdb] rounded-lg px-4 py-2.5 text-[14px] text-foreground placeholder-foreground/40 focus:outline-none focus:border-[#b89a99] focus:ring-2 focus:ring-[#b89a99]/20 transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] tracking-[0.25em] uppercase text-foreground/55 mb-1.5">{L.comment}</label>
+                      <textarea
+                        rows={3}
+                        maxLength={2000}
+                        value={formFields.comment}
+                        onChange={(e) => setFormFields({ ...formFields, comment: e.target.value })}
+                        className="w-full bg-white border border-[#e8dcdb] rounded-lg px-4 py-2.5 text-[14px] text-foreground placeholder-foreground/40 focus:outline-none focus:border-[#b89a99] focus:ring-2 focus:ring-[#b89a99]/20 transition resize-none"
+                      />
+                    </div>
+
+                    {formState === "error" && (
+                      <p className="text-[12px] text-[#a8444a]">{L.error}</p>
+                    )}
+
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={formState === "sending"}
+                        className="w-full inline-flex items-center justify-center text-[11px] tracking-[0.25em] uppercase rounded-full px-6 py-3 bg-[#b89a99] text-white hover:bg-[#a8888a] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                      >
+                        {formState === "sending" ? L.sending : L.submit}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+
+
       {/* ABOUT */}
       <section id="about" className="py-32 md:py-44 border-t border-border/50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
