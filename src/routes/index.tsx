@@ -193,8 +193,16 @@ function Index() {
             </div>
           </div>
           <div className="md:col-span-7 relative">
-            <div className="aspect-[3/4] md:aspect-[4/5] overflow-hidden bg-secondary">
+            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden bg-secondary">
               <img src={hero} alt="Elena Kozlova" className="w-full h-full object-cover" />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to right, hsl(var(--background)) 0%, color-mix(in oklab, hsl(var(--background)) 92%, transparent) 18%, color-mix(in oklab, hsl(var(--background)) 60%, transparent) 42%, color-mix(in oklab, hsl(var(--background)) 25%, transparent) 65%, transparent 88%)",
+                }}
+              />
             </div>
             <p className="mt-3 text-[10px] tracking-[0.3em] uppercase text-foreground/40 text-right">
               {lang === "ru" ? "Портрет художника" : "Portrait of the artist"}
