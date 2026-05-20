@@ -302,7 +302,7 @@ function Index() {
                     <div className="col-span-8">
                       <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">{info.t}</h3>
                       <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
-                        {t.cardMedium} · {info.s} · {info.y}
+                        {info.m || t.cardMedium} · {info.s} · {info.y}
                       </p>
                     </div>
                     <div className="col-span-4 flex flex-col items-end gap-2 text-right">
