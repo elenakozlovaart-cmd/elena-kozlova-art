@@ -10,6 +10,14 @@ import w5 from "@/assets/work-05.jpg";
 import w6 from "@/assets/work-06.jpeg";
 import w7 from "@/assets/work-07.jpeg";
 import w8 from "@/assets/work-08.jpeg";
+import w9 from "@/assets/work-09.jpg";
+import w10 from "@/assets/work-10.jpg";
+import w11 from "@/assets/work-11.jpg";
+import w12 from "@/assets/work-12.jpg";
+import w13 from "@/assets/work-13.png";
+import w14 from "@/assets/work-14.png";
+import w15 from "@/assets/work-15.png";
+import w16 from "@/assets/work-16.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,6 +45,14 @@ const works = [
   { src: w6, ru: { t: "Родина-мать I", s: "30 × 42 см", y: "2025", st: "В наличии" }, en: { t: "Motherland I", s: "30 × 42 cm", y: "2025", st: "Available" } },
   { src: w7, ru: { t: "Родина-мать II", s: "30 × 42 см", y: "2025", st: "в наличии" }, en: { t: "Motherland II", s: "30 × 42 cm", y: "2025", st: "Available" } },
   { src: w8, ru: { t: "Сквозь дождь", s: "26 × 36 см", y: "2025", st: "В наличии" }, en: { t: "Through the Rain", s: "26 × 36 cm", y: "2025", st: "Available" } },
+  { src: w9, ru: { t: "Деревня", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Village", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w10, ru: { t: "Ступа на Ольхоне", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Stupa on Olkhon", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w11, ru: { t: "Байкал. Корабли", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Baikal. Ships", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w12, ru: { t: "Ольхон. Шаманка", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Olkhon. Shamanka", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w13, ru: { t: "Огни города", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "City Lights", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w14, ru: { t: "Чайка над водой", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Gull Above Water", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w15, ru: { t: "Полёт", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Flight", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w16, ru: { t: "Москва на закате", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
 ];
 
 function Index() {
@@ -259,7 +275,7 @@ function Index() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
             {works.map((w, i) => {
-              const layout = [
+              const layouts = [
                 "md:col-span-7",
                 "md:col-span-5 md:mt-40",
                 "md:col-span-5",
@@ -268,7 +284,8 @@ function Index() {
                 "md:col-span-5 md:mt-32",
                 "md:col-span-6",
                 "md:col-span-5 md:col-start-8 md:mt-20",
-              ][i];
+              ];
+              const layout = layouts[i % layouts.length];
               const info = w[lang];
               const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
               return (
