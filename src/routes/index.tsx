@@ -397,7 +397,7 @@ function Index() {
                         {info.st}
                       </span>
                       {!sold && (
-                        <a href={mailto} className="text-[10px] tracking-[0.25em] uppercase border-b border-foreground/60 pb-0.5 hover:border-foreground transition-colors">
+                        <a href={mailto} className="text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-1.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
                           {t.cardCta}
                         </a>
                       )}
