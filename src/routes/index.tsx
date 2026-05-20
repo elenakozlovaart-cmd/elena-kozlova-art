@@ -31,11 +31,11 @@ type Lang = "ru" | "en";
 const works = [
   { src: w1, ru: { t: "Дилижан", s: "32 × 41 см", y: "2026", st: "В наличии" }, en: { t: "Dilijan", s: "32 × 41 cm", y: "2026", st: "Available" } },
   { src: w2, ru: { t: "Нораванк", s: "36 × 48 см", y: "2026", st: "В наличии" }, en: { t: "Noravank", s: "36 × 48 cm", y: "2026", st: "Available" } },
-  { src: w3, ru: { t: "Озеро Севан", s: "30 × 42 см", y: "2026", st: "Продано" }, en: { t: "Lake Sevan", s: "30 × 42 cm", y: "2026", st: "Sold" } },
+  { src: w3, ru: { t: "Озеро Севан", s: "30 × 42 см", y: "2026", st: "в наличии" }, en: { t: "Lake Sevan", s: "30 × 42 cm", y: "2026", st: "Available" } },
   { src: w4, ru: { t: "Ереван. Площадь Республики", s: "32 × 45 см", y: "2025", st: "В наличии" }, en: { t: "Yerevan, Republic Square", s: "32 × 45 cm", y: "2025", st: "Available" } },
   { src: w5, ru: { t: "Гюмри", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Gyumri", s: "38 × 56 cm", y: "2025", st: "Available" } },
   { src: w6, ru: { t: "Родина-мать I", s: "30 × 42 см", y: "2025", st: "В наличии" }, en: { t: "Motherland I", s: "30 × 42 cm", y: "2025", st: "Available" } },
-  { src: w7, ru: { t: "Родина-мать II", s: "30 × 42 см", y: "2025", st: "Продано" }, en: { t: "Motherland II", s: "30 × 42 cm", y: "2025", st: "Sold" } },
+  { src: w7, ru: { t: "Родина-мать II", s: "30 × 42 см", y: "2025", st: "в наличии" }, en: { t: "Motherland II", s: "30 × 42 cm", y: "2025", st: "Available" } },
   { src: w8, ru: { t: "Сквозь дождь", s: "26 × 36 см", y: "2025", st: "В наличии" }, en: { t: "Through the Rain", s: "26 × 36 cm", y: "2025", st: "Available" } },
 ];
 
@@ -270,7 +270,7 @@ function Index() {
                 "md:col-span-5 md:col-start-8 md:mt-20",
               ][i];
               const info = w[lang];
-              const sold = lang === "ru" ? info.st === "Продано" : info.st === "Sold";
+              const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
               return (
                 <figure key={i} className={`group ${layout}`}>
                   <div className="relative overflow-hidden bg-secondary">
