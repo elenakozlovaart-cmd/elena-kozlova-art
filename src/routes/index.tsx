@@ -413,7 +413,7 @@ function Index() {
                         <button
                           type="button"
                           onClick={(e) => { e.stopPropagation(); openPriceForm(info.t); }}
-                          className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-2xl px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                          className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
                         >
                           {t.cardCta}
                         </button>
