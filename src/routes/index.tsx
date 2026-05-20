@@ -58,10 +58,25 @@ const works = [
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [priceForm, setPriceForm] = useState<{ open: boolean; artwork: string }>({ open: false, artwork: "" });
+  const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
+
+  const openPriceForm = (artwork: string = "") => {
+    setFormFields({ name: "", email: "", contact: "", artwork, comment: "" });
+    setFormState("idle");
+    setPriceForm({ open: true, artwork });
+  };
+  const closePriceForm = () => setPriceForm({ open: false, artwork: "" });
 
   useEffect(() => {
-    if (openIdx === null) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpenIdx(null); };
+    const anyOpen = openIdx !== null || priceForm.open;
+    if (!anyOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (priceForm.open) closePriceForm();
+      else setOpenIdx(null);
+    };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -69,7 +84,36 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx]);
+  }, [openIdx, priceForm.open]);
+
+  const submitPriceForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormState("sending");
+    try {
+      const payload = {
+        _subject: lang === "ru"
+          ? `Запрос стоимости${formFields.artwork ? `: ${formFields.artwork}` : ""}`
+          : `Price request${formFields.artwork ? `: ${formFields.artwork}` : ""}`,
+        _template: "table",
+        _captcha: "false",
+        Name: formFields.name,
+        Email: formFields.email,
+        "Telegram/Phone": formFields.contact,
+        Artwork: formFields.artwork,
+        Comment: formFields.comment,
+        Language: lang,
+      };
+      const res = await fetch("https://formsubmit.co/ajax/elenakozlova77@yandex.ru", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("send failed");
+      setFormState("success");
+    } catch {
+      setFormState("error");
+    }
+  };
 
   const t = lang === "ru"
     ? {
