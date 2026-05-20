@@ -37,22 +37,22 @@ export const Route = createFileRoute("/")({
 type Lang = "ru" | "en";
 
 const works = [
-  { src: w1, ru: { t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии" }, en: { t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available" } },
-  { src: w2, ru: { t: "Нораванк", s: "36 × 48 см", y: "2026", st: "В наличии" }, en: { t: "Noravank", s: "36 × 48 cm", y: "2026", st: "Available" } },
-  { src: w3, ru: { t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "в наличии" }, en: { t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available" } },
-  { src: w4, ru: { t: "Ереван. Площадь Республики", s: "32 × 45 см", y: "2025", st: "В наличии" }, en: { t: "Yerevan, Republic Square", s: "32 × 45 cm", y: "2025", st: "Available" } },
-  { src: w5, ru: { t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии" }, en: { t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available" } },
-  { src: w6, ru: { t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии" }, en: { t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available" } },
-  { src: w7, ru: { t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "в наличии" }, en: { t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available" } },
-  { src: w8, ru: { t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии" }, en: { t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available" } },
-  { src: w9, ru: { t: "Деревня", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Village", s: "38 × 56 cm", y: "2024", st: "Available" } },
-  { src: w10, ru: { t: "Ступа на Ольхоне", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Stupa on Olkhon", s: "38 × 56 cm", y: "2024", st: "Available" } },
-  { src: w11, ru: { t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available" } },
-  { src: w12, ru: { t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available" } },
-  { src: w13, ru: { t: "Огни города", s: "d 50 см", y: "2025", st: "В наличии" }, en: { t: "City Lights", s: "d 50 cm", y: "2025", st: "Available" } },
-  { src: w14, ru: { t: "Чайка над водой", s: "d 50 см", y: "2025", st: "В наличии" }, en: { t: "Gull Above Water", s: "d 50 cm", y: "2025", st: "Available" } },
-  { src: w15, ru: { t: "Полёт", s: "d 50 см", y: "2025", st: "В наличии" }, en: { t: "Flight", s: "d 50 cm", y: "2025", st: "Available" } },
-  { src: w16, ru: { t: "Москва на закате", s: "d 50 см", y: "2025", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "d 50 cm", y: "2025", st: "Available" } },
+  { src: w1, ru: { t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
+  { src: w2, ru: { t: "Нораванк", s: "36 × 48 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Noravank", s: "36 × 48 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
+  { src: w3, ru: { t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "в наличии", m: "Акварель на бумаге" }, en: { t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
+  { src: w4, ru: { t: "Ереван. Площадь Республики", s: "32 × 45 см", y: "2025", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Yerevan, Republic Square", s: "32 × 45 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
+  { src: w5, ru: { t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
+  { src: w6, ru: { t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
+  { src: w7, ru: { t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "в наличии", m: "Акварель на бумаге" }, en: { t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
+  { src: w8, ru: { t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
+  { src: w9, ru: { t: "Деревня", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Village", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
+  { src: w10, ru: { t: "Ступа на Ольхоне", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Stupa on Olkhon", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
+  { src: w11, ru: { t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
+  { src: w12, ru: { t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper" } },
+  { src: w13, ru: { t: "Огни города", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "City Lights", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
+  { src: w14, ru: { t: "Чайка над водой", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Gull Above Water", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
+  { src: w15, ru: { t: "Полёт", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Flight", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
+  { src: w16, ru: { t: "Москва на закате", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на подрамнике, в раме" }, en: { t: "Moscow at Sunset", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on stretcher, framed" } },
 ];
 
 function Index() {
