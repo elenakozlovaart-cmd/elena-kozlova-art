@@ -105,6 +105,9 @@ function Index() {
         ],
         cvPleinItems: ["2024 — остров Ольхон, Байкал", "2026 — художественный тур по Армении"],
         acqKicker: "Приобретение",
+        tgKicker: "Следить за новыми работами",
+        tgBody: "В Telegram Елена публикует новые акварели, фрагменты процесса, выставки и доступные работы.",
+        tgCta: "Подписаться на Telegram",
         acqBody: "Работы доступны по запросу.\nДля уточнения стоимости, наличия и условий доставки свяжитесь с художником.",
         footerName: "Елена Козлова",
         footerTagline: "современный художник, работающий в технике акварели",
@@ -152,6 +155,9 @@ function Index() {
         ],
         cvPleinItems: ["2024 — Olkhon Island, Lake Baikal", "2026 — Armenia (art tour)"],
         acqKicker: "Acquisition",
+        tgKicker: "Follow new works",
+        tgBody: "On Telegram, Elena shares new watercolors, fragments of the creative process, exhibitions and available works.",
+        tgCta: "Follow on Telegram",
         acqBody: "Works are available upon request.\nFor pricing, availability, and shipping details, please get in touch.",
         footerName: "Elena Kozlova",
         footerTagline: "contemporary watercolour artist",
@@ -444,6 +450,24 @@ function Index() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* TELEGRAM */}
+      <section className="py-32 md:py-40 border-t border-border/50">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.tgKicker}</p>
+          <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
+            {t.tgBody}
+          </p>
+          <a
+            href="https://t.me/ElenaKozlova_Art"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+          >
+            {t.tgCta}
+          </a>
         </div>
       </section>
 
