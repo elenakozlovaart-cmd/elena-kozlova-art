@@ -270,7 +270,7 @@ function Index() {
                 "md:col-span-5 md:col-start-8 md:mt-20",
               ][i];
               const info = w[lang];
-              const sold = lang === "ru" ? info.st === "Продано" : info.st === "Sold";
+              const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
               return (
                 <figure key={i} className={`group ${layout}`}>
                   <div className="relative overflow-hidden bg-secondary">
