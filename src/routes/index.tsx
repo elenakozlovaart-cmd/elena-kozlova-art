@@ -45,14 +45,14 @@ const works = [
   { src: w6, ru: { t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии" }, en: { t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available" } },
   { src: w7, ru: { t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "в наличии" }, en: { t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available" } },
   { src: w8, ru: { t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии" }, en: { t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available" } },
-  { src: w9, ru: { t: "Деревня", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Village", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w10, ru: { t: "Ступа на Ольхоне", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Stupa on Olkhon", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w11, ru: { t: "Байкал. Корабли", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Baikal. Ships", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w12, ru: { t: "Ольхон. Шаманка", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Olkhon. Shamanka", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w13, ru: { t: "Огни города", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "City Lights", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w14, ru: { t: "Чайка над водой", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Gull Above Water", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w15, ru: { t: "Полёт", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Flight", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
-  { src: w16, ru: { t: "Москва на закате", s: "Размер уточняется", y: "Год уточняется", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "Size to be confirmed", y: "Year to be confirmed", st: "Available" } },
+  { src: w9, ru: { t: "Деревня", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Village", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w10, ru: { t: "Ступа на Ольхоне", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Stupa on Olkhon", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w11, ru: { t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w12, ru: { t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии" }, en: { t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available" } },
+  { src: w13, ru: { t: "Огни города", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "City Lights", s: "38 × 56 cm", y: "2025", st: "Available" } },
+  { src: w14, ru: { t: "Чайка над водой", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Gull Above Water", s: "38 × 56 cm", y: "2025", st: "Available" } },
+  { src: w15, ru: { t: "Полёт", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Flight", s: "38 × 56 cm", y: "2025", st: "Available" } },
+  { src: w16, ru: { t: "Москва на закате", s: "38 × 56 см", y: "2025", st: "В наличии" }, en: { t: "Moscow at Sunset", s: "38 × 56 cm", y: "2025", st: "Available" } },
 ];
 
 function Index() {
