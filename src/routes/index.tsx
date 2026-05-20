@@ -473,7 +473,7 @@ function Index() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <a
                     href={mailto}
-                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-4 bg-foreground text-background hover:bg-transparent hover:text-foreground transition-colors"
+                    className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
                   >
                     {labels.cta}
                   </a>
