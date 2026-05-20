@@ -541,14 +541,44 @@ function Index() {
 
       {/* ACQUISITION */}
       <section className="py-32 md:py-40 border-t border-border/50">
-        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.acqKicker}</p>
-          <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
-            {t.acqBody}
-          </p>
-          <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors">
-            {lang === "ru" ? "Связаться" : "Get in touch"}
-          </a>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.acqKicker}</p>
+              <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">{t.acqTitle}</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-20">
+            {t.acqSteps.map((s) => (
+              <div key={s.n} className="border-t border-border pt-6">
+                <p className="text-[11px] tracking-[0.3em] text-foreground/45 mb-5">{s.n}</p>
+                <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight mb-4">
+                  {s.title}
+                </h3>
+                <p className="text-[14px] leading-[1.75] text-foreground/65">
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="max-w-2xl">
+            <p style={serif} className="text-xl md:text-2xl leading-[1.5] font-light text-foreground/80 italic mb-10">
+              {t.acqNote}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://t.me/ElenaKozlova_Art"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground bg-foreground text-background px-8 py-4 hover:bg-transparent hover:text-foreground transition-colors"
+              >
+                {t.acqCta}
+              </a>
+              <a href={mailto} className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors">
+                {lang === "ru" ? "Написать на почту" : "Email Elena"}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
