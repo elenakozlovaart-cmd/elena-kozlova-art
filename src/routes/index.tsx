@@ -606,7 +606,7 @@ function Index() {
                 @ElenaKozlovaArt
               </a>
             </div>
-            <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-6 py-3 hover:bg-foreground hover:text-background transition-colors">
+            <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
               {t.footerCta}
             </a>
           </div>
