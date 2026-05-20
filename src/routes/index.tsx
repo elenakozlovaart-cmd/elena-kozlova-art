@@ -38,7 +38,7 @@ type Lang = "ru" | "en";
 
 const works = [
   { src: w1, ru: { t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
-  { src: w2, ru: { t: "Нораванк", s: "36 × 48 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Noravank", s: "36 × 48 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
+  { src: w2, ru: { t: "Нораванк", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Noravank", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
   { src: w3, ru: { t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "в наличии", m: "Акварель на бумаге" }, en: { t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
   { src: w4, ru: { t: "Ереван. Площадь Республики", s: "32 × 45 см", y: "2025", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Yerevan, Republic Square", s: "32 × 45 cm", y: "2025", st: "Available", m: "Watercolour on paper" } },
   { src: w5, ru: { t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге" }, en: { t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper" } },
