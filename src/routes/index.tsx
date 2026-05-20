@@ -193,14 +193,24 @@ function Index() {
             </div>
           </div>
           <div className="md:col-span-7 relative">
-            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden bg-secondary">
+            <div
+              className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.7) 28%, #000 55%, #000 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.7) 28%, #000 55%, #000 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)",
+                WebkitMaskComposite: "source-in",
+                maskComposite: "intersect",
+              }}
+            >
               <img src={hero} alt="Elena Kozlova" className="w-full h-full object-cover" />
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(to right, hsl(var(--background)) 0%, color-mix(in oklab, hsl(var(--background)) 92%, transparent) 18%, color-mix(in oklab, hsl(var(--background)) 60%, transparent) 42%, color-mix(in oklab, hsl(var(--background)) 25%, transparent) 65%, transparent 88%)",
+                    "linear-gradient(to right, hsl(var(--background)) 0%, color-mix(in oklab, hsl(var(--background)) 88%, transparent) 18%, color-mix(in oklab, hsl(var(--background)) 55%, transparent) 42%, color-mix(in oklab, hsl(var(--background)) 22%, transparent) 65%, transparent 88%)",
                 }}
               />
             </div>
