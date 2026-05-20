@@ -419,9 +419,13 @@ function Index() {
                         {info.st}
                       </span>
                       {!sold && (
-                        <a href={mailto} className="inline-block text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-5 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); openPriceForm(info.t); }}
+                          className="inline-block text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-5 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                        >
                           {t.cardCta}
-                        </a>
+                        </button>
                       )}
                     </div>
                   </figcaption>
