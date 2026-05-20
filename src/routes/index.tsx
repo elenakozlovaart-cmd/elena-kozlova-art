@@ -114,10 +114,18 @@ function Index() {
         ],
         cvPleinItems: ["2024 — остров Ольхон, Байкал", "2026 — художественный тур по Армении"],
         acqKicker: "Приобретение",
+        acqTitle: "Как приобрести работу",
+        acqSteps: [
+          { n: "01", title: "Выберите работу", desc: "Посмотрите доступные акварели в разделе «Работы»." },
+          { n: "02", title: "Нажмите «Запросить стоимость»", desc: "Отправьте запрос по понравившейся работе." },
+          { n: "03", title: "Уточните детали", desc: "Елена ответит по наличию, стоимости, оформлению и доставке." },
+          { n: "04", title: "Согласуйте покупку или резерв", desc: "Работу можно приобрести, зарезервировать или обсудить индивидуальный запрос." },
+        ],
+        acqNote: "Можно обсудить оформление, доставку, резерв работы и возможность создания похожей акварели по индивидуальному запросу.",
+        acqCta: "Написать в Telegram",
         tgKicker: "Следить за новыми работами",
         tgBody: "В Telegram Елена публикует новые акварели, фрагменты процесса, выставки и доступные работы.",
         tgCta: "Подписаться на Telegram",
-        acqBody: "Работы доступны по запросу.\nДля уточнения стоимости, наличия и условий доставки свяжитесь с художником.",
         footerName: "Елена Козлова",
         footerTagline: "современный художник, работающий в технике акварели",
         footerBio: "Практика Елены Козловой сосредоточена на изображении пейзажей внутренних состояний и фигуративных этюдов. В её работах акварель выступает как средство фиксации эмоциональных и пластических наблюдений, соединяя спонтанность и точность.",
@@ -173,10 +181,18 @@ function Index() {
         ],
         cvPleinItems: ["2024 — Olkhon Island, Lake Baikal", "2026 — Armenia (art tour)"],
         acqKicker: "Acquisition",
+        acqTitle: "How to acquire a work",
+        acqSteps: [
+          { n: "01", title: "Choose a work", desc: "Browse available watercolours in the “Works” section." },
+          { n: "02", title: "Click “Inquire”", desc: "Send a request for the work you are interested in." },
+          { n: "03", title: "Discuss the details", desc: "Elena will reply about availability, price, framing and shipping." },
+          { n: "04", title: "Confirm purchase or reserve", desc: "The work can be purchased, reserved, or discussed as a personal commission." },
+        ],
+        acqNote: "We can discuss framing, shipping, reserving a work, and the possibility of creating a similar watercolour as a personal commission.",
+        acqCta: "Message on Telegram",
         tgKicker: "Follow new works",
         tgBody: "On Telegram, Elena shares new watercolors, fragments of the creative process, exhibitions and available works.",
         tgCta: "Follow on Telegram",
-        acqBody: "Works are available upon request.\nFor pricing, availability, and shipping details, please get in touch.",
         footerName: "Elena Kozlova",
         footerTagline: "contemporary watercolour artist",
         footerBio: "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
@@ -525,14 +541,44 @@ function Index() {
 
       {/* ACQUISITION */}
       <section className="py-32 md:py-40 border-t border-border/50">
-        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.acqKicker}</p>
-          <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
-            {t.acqBody}
-          </p>
-          <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors">
-            {lang === "ru" ? "Связаться" : "Get in touch"}
-          </a>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.acqKicker}</p>
+              <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">{t.acqTitle}</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-20">
+            {t.acqSteps.map((s) => (
+              <div key={s.n} className="border-t border-border pt-6">
+                <p className="text-[11px] tracking-[0.3em] text-foreground/45 mb-5">{s.n}</p>
+                <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight mb-4">
+                  {s.title}
+                </h3>
+                <p className="text-[14px] leading-[1.75] text-foreground/65">
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="max-w-2xl">
+            <p style={serif} className="text-xl md:text-2xl leading-[1.5] font-light text-foreground/80 italic mb-10">
+              {t.acqNote}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://t.me/ElenaKozlova_Art"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground bg-foreground text-background px-8 py-4 hover:bg-transparent hover:text-foreground transition-colors"
+              >
+                {t.acqCta}
+              </a>
+              <a href={mailto} className="inline-block text-center text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors">
+                {lang === "ru" ? "Написать на почту" : "Email Elena"}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
