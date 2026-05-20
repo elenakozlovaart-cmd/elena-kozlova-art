@@ -76,9 +76,9 @@ function Index() {
         nav: { works: "Работы", about: "О художнике", cv: "Выставки", contact: "Контакты" },
         heroKicker: "Художник-акварелист",
         heroName: "Елена\nКозлова",
-        heroLead: "Работает с темой внутренних состояний через пейзаж и фигуративные этюды.\nУчастница выставок в России, работы в частных коллекциях Европы и России.",
+        heroLead: "Современный художник-акварелист. Елена работает с темами света, памяти, путешествий и внутренних состояний, создавая атмосферные акварели, в которых важны прозрачность, воздух и ощущение момента.",
         heroCta: "Смотреть работы",
-        heroCta2: "Связаться",
+        heroCta2: "Познакомиться с художником",
         aboutKicker: "О художнике",
         aboutBody: [
           "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
@@ -122,9 +122,9 @@ function Index() {
         nav: { works: "Works", about: "About", cv: "Exhibitions", contact: "Contact" },
         heroKicker: "Watercolour artist",
         heroName: "Elena\nKozlova",
-        heroLead: "Landscapes of inner states and figurative studies.\nOriginal works available.",
+        heroLead: "Contemporary watercolour artist. Elena works with themes of light, memory, journeys and inner states, creating atmospheric watercolours where transparency, air and the feeling of the moment matter.",
         heroCta: "View works",
-        heroCta2: "Inquire",
+        heroCta2: "Meet the artist",
         aboutKicker: "About the artist",
         aboutBody: [
           "Elena Kozlova is a contemporary watercolour artist whose practice explores the relationship between perception and inner experience. Her work moves between landscape and figurative study, treating both as spaces of observation and reflection.",
@@ -217,7 +217,7 @@ function Index() {
               <a href="#works" className="border-b border-foreground pb-1 hover:text-foreground/60 hover:border-foreground/60 transition-colors">
                 {t.heroCta}
               </a>
-              <a href={mailto} className="text-foreground/60 hover:text-foreground transition-colors">
+              <a href="#about" className="text-foreground/60 hover:text-foreground transition-colors">
                 {t.heroCta2}
               </a>
             </div>
