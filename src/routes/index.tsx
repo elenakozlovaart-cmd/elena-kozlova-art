@@ -304,17 +304,26 @@ function Index() {
               const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
               return (
                 <figure key={i} className={`group ${layout}`}>
-                  <div className="relative overflow-hidden bg-secondary">
+                  <button
+                    type="button"
+                    onClick={() => setOpenIdx(i)}
+                    aria-label={info.t}
+                    className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+                  >
                     <img src={w.src} alt={info.t} className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                     <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                       <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                         {info.t}
                       </span>
                     </div>
-                  </div>
+                  </button>
                   <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
                     <div className="col-span-8">
-                      <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">{info.t}</h3>
+                      <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                        <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                          {info.t}
+                        </button>
+                      </h3>
                       <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
                         {info.m || t.cardMedium} · {info.s} · {info.y}
                       </p>
@@ -336,6 +345,79 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* ARTWORK MODAL */}
+      {openIdx !== null && (() => {
+        const w = works[openIdx];
+        const info = w[lang];
+        const labels = lang === "ru"
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить стоимость", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Inquire", close: "Close" };
+        const rows: { label: string; value: string }[] = [
+          { label: labels.cat, value: info.c },
+          { label: labels.tech, value: info.m },
+          { label: labels.size, value: info.s },
+          { label: labels.year, value: info.y },
+          { label: labels.status, value: info.st },
+        ];
+        return (
+          <div
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
+            onClick={() => setOpenIdx(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={info.t}
+          >
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setOpenIdx(null); }}
+              aria-label={labels.close}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
+            >
+              ×
+            </button>
+            <div
+              className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="md:col-span-8 flex items-center justify-center">
+                <img
+                  src={w.src}
+                  alt={info.t}
+                  className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                />
+              </div>
+              <div className="md:col-span-4 flex flex-col justify-center md:py-8">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
+                <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
+                  {info.t}
+                </h2>
+                <dl className="space-y-5 mb-10">
+                  {rows.slice(1).map((r) => (
+                    <div key={r.label} className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3">
+                      <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{r.label}</dt>
+                      <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mb-10">
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mb-3">{labels.desc}</p>
+                  <p style={serif} className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic">
+                    {info.d}
+                  </p>
+                </div>
+                <a
+                  href={mailto}
+                  className="inline-block self-start text-[11px] tracking-[0.3em] uppercase border border-foreground px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  {labels.cta}
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
 
       {/* CV */}
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
