@@ -91,6 +91,40 @@ function Index() {
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
 
+  const worldScrollRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef<{ down: boolean; startX: number; startScroll: number; moved: boolean }>({ down: false, startX: 0, startScroll: 0, moved: false });
+
+  const scrollWorld = (dir: 1 | -1) => {
+    const el = worldScrollRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-world-card]");
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  const onWorldPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = worldScrollRef.current;
+    if (!el) return;
+    dragState.current = { down: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+  };
+  const onWorldPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragState.current.down) return;
+    const el = worldScrollRef.current;
+    if (!el) return;
+    const dx = e.clientX - dragState.current.startX;
+    if (Math.abs(dx) > 4) dragState.current.moved = true;
+    el.scrollLeft = dragState.current.startScroll - dx;
+  };
+  const onWorldPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragState.current.down = false;
+    try { worldScrollRef.current?.releasePointerCapture(e.pointerId); } catch {}
+  };
+  const onWorldCardClick = (e: React.MouseEvent) => {
+    if (dragState.current.moved) { e.preventDefault(); return; }
+    scrollWorld(1);
+  };
+
   const openPriceForm = (artwork: string = "") => {
     setFormFields({ name: "", email: "", contact: "", artwork, comment: "" });
     setFormState("idle");
