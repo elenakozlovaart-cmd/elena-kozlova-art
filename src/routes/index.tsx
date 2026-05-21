@@ -85,6 +85,7 @@ const works = [
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [priceForm, setPriceForm] = useState<{ open: boolean; artwork: string }>({ open: false, artwork: "" });
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
@@ -97,12 +98,13 @@ function Index() {
   const closePriceForm = () => setPriceForm({ open: false, artwork: "" });
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || priceForm.open;
+    const anyOpen = openIdx !== null || priceForm.open || openCategory !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (priceForm.open) closePriceForm();
-      else setOpenIdx(null);
+      else if (openIdx !== null) setOpenIdx(null);
+      else setOpenCategory(null);
     };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -111,7 +113,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, priceForm.open]);
+  }, [openIdx, priceForm.open, openCategory]);
 
   const submitPriceForm = async (e: FormEvent) => {
     e.preventDefault();
@@ -274,7 +276,7 @@ function Index() {
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
           <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
-            <a href="#paintings" className="hover:text-foreground transition-colors">{t.nav.works}</a>
+            <a href="#works" className="hover:text-foreground transition-colors">{t.nav.works}</a>
             <a href="#about" className="hover:text-foreground transition-colors">{t.nav.about}</a>
             <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
@@ -309,7 +311,7 @@ function Index() {
               {t.heroLead}
             </p>
             <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#paintings" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.heroCta}
               </a>
               <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
@@ -347,18 +349,28 @@ function Index() {
       </section>
 
 
-      {/* CATEGORY TILES */}
-      <section className="py-24 md:py-32 border-t border-border/50">
+      {/* WORKS — category tiles */}
+      <section id="works" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worksTitle}</h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 md:pt-4">
+              <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
             {[
-              { id: "paintings", title: t.paintingsTitle, img: paintingsTile },
-              { id: "postcards", title: t.postcardsTitle, img: postcardsTile as string | null },
+              { id: "paintings" as const, title: t.paintingsTitle, img: paintingsTile as string | null },
+              { id: "postcards" as const, title: t.postcardsTitle, img: postcardsTile as string | null },
             ].map((cat) => (
-              <a
+              <button
                 key={cat.id}
-                href={`#${cat.id}`}
-                className="group block rounded-3xl overflow-hidden bg-[#f1e6e5] border border-border/40 hover:border-foreground/20 transition-colors"
+                type="button"
+                onClick={() => setOpenCategory(cat.id)}
+                className="group block text-left rounded-3xl overflow-hidden bg-[#f1e6e5] border border-border/40 hover:border-foreground/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b89a99]/40"
               >
                 <div className="aspect-[4/3] relative overflow-hidden bg-[#e8dcdb]">
                   {cat.img ? (
@@ -386,105 +398,118 @@ function Index() {
                     →
                   </span>
                 </div>
-              </a>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PAINTINGS */}
-      <section id="paintings" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-12 gap-8 mb-20 md:mb-28">
-            <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.paintingsTitle}</h2>
-            </div>
-            <div className="md:col-span-5 md:col-start-8 md:pt-4">
-              <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
-            </div>
-          </div>
+      {/* CATEGORY OVERLAY */}
+      {openCategory !== null && (() => {
+        const closeLabel = lang === "ru" ? "Закрыть" : "Close";
+        const title = openCategory === "paintings" ? t.paintingsTitle : t.postcardsTitle;
+        return (
+          <div
+            className="fixed inset-0 z-[90] bg-background overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenCategory(null)}
+              aria-label={closeLabel}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[95] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light bg-background/80 backdrop-blur rounded-full border border-border/40"
+            >
+              ×
+            </button>
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 md:py-24">
+              <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
+                <div className="md:col-span-7">
+                  <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
+                  <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{title}</h2>
+                </div>
+                {openCategory === "paintings" && (
+                  <div className="md:col-span-5 md:pt-4">
+                    <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
+                  </div>
+                )}
+              </div>
 
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
-            {works.map((w, i) => {
-              const layouts = [
-                "md:col-span-7",
-                "md:col-span-5 md:mt-40",
-                "md:col-span-5",
-                "md:col-span-6 md:mt-24 md:col-start-7",
-                "md:col-span-7",
-                "md:col-span-5 md:mt-32",
-                "md:col-span-6",
-                "md:col-span-5 md:col-start-8 md:mt-20",
-              ];
-              const layout = layouts[i % layouts.length];
-              const info = w[lang];
-              const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
-              return (
-                <figure key={i} className={`group ${layout}`}>
-                  <button
-                    type="button"
-                    onClick={() => setOpenIdx(i)}
-                    aria-label={info.t}
-                    className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
-                  >
-                    <img src={w.src} alt={info.t} className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
-                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
-                      <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
-                        {info.t}
-                      </span>
-                    </div>
-                  </button>
-                  <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
-                    <div className="col-span-8">
-                      <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
-                        <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
-                          {info.t}
-                        </button>
-                      </h3>
-                      <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
-                        {info.m || t.cardMedium} · {info.s} · {info.y}
-                      </p>
-                    </div>
-                    <div className="col-span-4 flex flex-col items-end gap-2 text-right">
-                      <span className={`text-[10px] tracking-[0.25em] uppercase ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
-                        {info.st}
-                      </span>
-                      {!sold && (
+              {openCategory === "paintings" ? (
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
+                  {works.map((w, i) => {
+                    const layouts = [
+                      "md:col-span-7",
+                      "md:col-span-5 md:mt-40",
+                      "md:col-span-5",
+                      "md:col-span-6 md:mt-24 md:col-start-7",
+                      "md:col-span-7",
+                      "md:col-span-5 md:mt-32",
+                      "md:col-span-6",
+                      "md:col-span-5 md:col-start-8 md:mt-20",
+                    ];
+                    const layout = layouts[i % layouts.length];
+                    const info = w[lang];
+                    const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
+                    return (
+                      <figure key={i} className={`group ${layout}`}>
                         <button
                           type="button"
-                          onClick={(e) => { e.stopPropagation(); openPriceForm(info.t); }}
-                          className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                          onClick={() => setOpenIdx(i)}
+                          aria-label={info.t}
+                          className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
                         >
-                          {t.cardCta}
+                          <img src={w.src} alt={info.t} className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
+                            <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
+                              {info.t}
+                            </span>
+                          </div>
                         </button>
-                      )}
-                    </div>
-                  </figcaption>
-                </figure>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* POSTCARDS */}
-      <section id="postcards" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-12 gap-8 mb-12">
-            <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.postcardsTitle}</h2>
+                        <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
+                          <div className="col-span-8">
+                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                              <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                                {info.t}
+                              </button>
+                            </h3>
+                            <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
+                              {info.m || t.cardMedium} · {info.s} · {info.y}
+                            </p>
+                          </div>
+                          <div className="col-span-4 flex flex-col items-end gap-2 text-right">
+                            <span className={`text-[10px] tracking-[0.25em] uppercase ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                              {info.st}
+                            </span>
+                            {!sold && (
+                              <button
+                                type="button"
+                                onClick={(e) => { e.stopPropagation(); openPriceForm(info.t); }}
+                                className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                              >
+                                {t.cardCta}
+                              </button>
+                            )}
+                          </div>
+                        </figcaption>
+                      </figure>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="rounded-3xl border border-border/50 bg-[#f7efee] px-8 py-16 md:py-24 text-center">
+                  <p style={serif} className="text-2xl md:text-3xl italic font-light text-foreground/70">
+                    {t.postcardsEmpty}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-          <div className="rounded-3xl border border-border/50 bg-[#f7efee] px-8 py-16 md:py-24 text-center">
-            <p style={serif} className="text-2xl md:text-3xl italic font-light text-foreground/70">
-              {t.postcardsEmpty}
-            </p>
-          </div>
-        </div>
-      </section>
+        );
+      })()}
+
+
 
 
 
