@@ -85,6 +85,7 @@ const works = [
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [priceForm, setPriceForm] = useState<{ open: boolean; artwork: string }>({ open: false, artwork: "" });
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
@@ -97,12 +98,13 @@ function Index() {
   const closePriceForm = () => setPriceForm({ open: false, artwork: "" });
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || priceForm.open;
+    const anyOpen = openIdx !== null || priceForm.open || openCategory !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (priceForm.open) closePriceForm();
-      else setOpenIdx(null);
+      else if (openIdx !== null) setOpenIdx(null);
+      else setOpenCategory(null);
     };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -111,7 +113,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, priceForm.open]);
+  }, [openIdx, priceForm.open, openCategory]);
 
   const submitPriceForm = async (e: FormEvent) => {
     e.preventDefault();
