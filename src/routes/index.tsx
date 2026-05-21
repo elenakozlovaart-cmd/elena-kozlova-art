@@ -865,8 +865,8 @@ function Index() {
               <a href={mailto} className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 elenakozlova77@yandex.ru
               </a>
-              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                @ElenaKozlovaArt
+              <a href="https://t.me/ElenaKozlova_Art" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                @ElenaKozlova_Art
               </a>
             </div>
             <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
