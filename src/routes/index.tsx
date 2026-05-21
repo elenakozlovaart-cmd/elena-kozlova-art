@@ -276,7 +276,7 @@ function Index() {
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
           <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
-            <a href="#paintings" className="hover:text-foreground transition-colors">{t.nav.works}</a>
+            <a href="#works" className="hover:text-foreground transition-colors">{t.nav.works}</a>
             <a href="#about" className="hover:text-foreground transition-colors">{t.nav.about}</a>
             <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
