@@ -33,6 +33,16 @@ import world07 from "@/assets/world-07.jpg";
 import world08 from "@/assets/world-08.jpg";
 import world09 from "@/assets/world-09.jpg";
 import world10 from "@/assets/world-10.jpg";
+import pc1 from "@/assets/postcard-01.jpeg";
+import pc2 from "@/assets/postcard-02.jpeg";
+import pc3 from "@/assets/postcard-03.jpeg";
+import pc4 from "@/assets/postcard-04.jpg";
+import pc5 from "@/assets/postcard-05.jpeg";
+import pc6 from "@/assets/postcard-06.jpg";
+import pc7 from "@/assets/postcard-07.jpeg";
+import pc8 from "@/assets/postcard-08.jpg";
+import pc9 from "@/assets/postcard-09.jpeg";
+import postcardBack from "@/assets/postcard-back.jpg";
 
 const worldPhotos = [
   { src: world01, ru: "Художник у работ в выставочном зале", en: "Artist with her works in the exhibition hall" },
@@ -45,6 +55,18 @@ const worldPhotos = [
   { src: world09, ru: "Этюд деревни — процесс и палитра", en: "Village study — process and palette" },
   { src: world04, ru: "Создание акварели в мастерской", en: "Creating a watercolour in the studio" },
   { src: world02, ru: "У художественной галереи", en: "At the art gallery" },
+];
+
+const postcards = [
+  { src: pc1, ru: "Скворец", en: "Starling" },
+  { src: pc2, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch" },
+  { src: pc3, ru: "Скворец на ветке", en: "Starling on a Branch" },
+  { src: pc4, ru: "Верба", en: "Pussy Willow" },
+  { src: pc5, ru: "Верба на закате", en: "Pussy Willow at Sunset" },
+  { src: pc6, ru: "Скворец на берёзе", en: "Starling on a Birch" },
+  { src: pc7, ru: "Японская белоглазка", en: "Japanese White-eye" },
+  { src: pc8, ru: "Голубая верба", en: "Blue Pussy Willow" },
+  { src: pc9, ru: "Синица и сакура", en: "Tit and Sakura" },
 ];
 
 export const Route = createFileRoute("/")({
