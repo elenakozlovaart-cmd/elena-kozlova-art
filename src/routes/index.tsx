@@ -728,6 +728,32 @@ function Index() {
         </div>
       </section>
 
+      {/* ARTIST'S WORLD */}
+      <section className="py-24 md:py-32 border-t border-border/50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worldKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worldTitle}</h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 md:pt-4">
+              <p className="text-[15px] leading-[1.85] text-foreground/70">{t.worldBody}</p>
+            </div>
+          </div>
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 [column-fill:_balance]">
+            {worldPhotos.map((p, i) => (
+              <figure key={i} className="mb-3 md:mb-4 break-inside-avoid overflow-hidden bg-secondary rounded-sm">
+                <img
+                  src={p.src}
+                  alt={lang === "ru" ? p.ru : p.en}
+                  loading="lazy"
+                  className="w-full h-auto object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03]"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CV */}
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
