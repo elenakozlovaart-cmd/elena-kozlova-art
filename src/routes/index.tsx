@@ -832,18 +832,51 @@ function Index() {
               <p className="text-[15px] leading-[1.85] text-foreground/70">{t.worldBody}</p>
             </div>
           </div>
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 [column-fill:_balance]">
-            {worldPhotos.map((p, i) => (
-              <figure key={i} className="mb-3 md:mb-4 break-inside-avoid overflow-hidden bg-secondary rounded-sm">
-                <img
-                  src={p.src}
-                  alt={lang === "ru" ? p.ru : p.en}
-                  loading="lazy"
-                  className="w-full h-auto object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03]"
-                />
-              </figure>
-            ))}
+          <div className="relative">
+            <div
+              ref={worldScrollRef}
+              onPointerDown={onWorldPointerDown}
+              onPointerMove={onWorldPointerMove}
+              onPointerUp={onWorldPointerUp}
+              onPointerCancel={onWorldPointerUp}
+              className="flex gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              style={{ scrollSnapType: "x mandatory" }}
+            >
+              {worldPhotos.map((p, i) => (
+                <figure
+                  key={i}
+                  data-world-card
+                  onClick={onWorldCardClick}
+                  className="snap-start shrink-0 overflow-hidden bg-secondary rounded-sm w-[70%] sm:w-[45%] md:w-[32%] lg:w-[24%] xl:w-[20%] aspect-[4/5]"
+                >
+                  <img
+                    src={p.src}
+                    alt={lang === "ru" ? p.ru : p.en}
+                    loading="lazy"
+                    draggable={false}
+                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03] pointer-events-none"
+                  />
+                </figure>
+              ))}
+            </div>
+            <button
+              type="button"
+              aria-label="Prev"
+              onClick={() => scrollWorld(-1)}
+              className="hidden md:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur border border-border/60 text-foreground/70 hover:text-foreground hover:bg-background transition"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next"
+              onClick={() => scrollWorld(1)}
+              className="hidden md:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur border border-border/60 text-foreground/70 hover:text-foreground hover:bg-background transition"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
+
         </div>
       </section>
 
