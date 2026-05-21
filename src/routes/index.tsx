@@ -19,6 +19,29 @@ import w13 from "@/assets/work-13.png";
 import w14 from "@/assets/work-14.png";
 import w15 from "@/assets/work-15.png";
 import w16 from "@/assets/work-16.png";
+import world01 from "@/assets/world-01.jpeg";
+import world02 from "@/assets/world-02.jpg";
+import world03 from "@/assets/world-03.jpg";
+import world04 from "@/assets/world-04.jpg";
+import world05 from "@/assets/world-05.jpg";
+import world06 from "@/assets/world-06.jpg";
+import world07 from "@/assets/world-07.jpg";
+import world08 from "@/assets/world-08.jpg";
+import world09 from "@/assets/world-09.jpg";
+import world10 from "@/assets/world-10.jpg";
+
+const worldPhotos = [
+  { src: world01, ru: "Художник у работ в выставочном зале", en: "Artist with her works in the exhibition hall" },
+  { src: world07, ru: "Пленэр на Площади Республики, Ереван", en: "Plein air at Republic Square, Yerevan" },
+  { src: world06, ru: "Пленэр в Дилижане, Армения", en: "Plein air in Dilijan, Armenia" },
+  { src: world10, ru: "Пленэр на Байкале", en: "Plein air at Lake Baikal" },
+  { src: world03, ru: "Работа на пленэре в парке", en: "Working en plein air in the park" },
+  { src: world08, ru: "Пленэр у воды, Москва", en: "Plein air by the water, Moscow" },
+  { src: world05, ru: "Палитра и акварель в работе", en: "Palette and watercolour in progress" },
+  { src: world09, ru: "Этюд деревни — процесс и палитра", en: "Village study — process and palette" },
+  { src: world04, ru: "Создание акварели в мастерской", en: "Creating a watercolour in the studio" },
+  { src: world02, ru: "У художественной галереи", en: "At the art gallery" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
