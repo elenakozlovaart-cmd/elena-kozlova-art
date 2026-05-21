@@ -276,7 +276,7 @@ function Index() {
           "Working primarily with watercolour, she focuses on light, movement and the subtle tension of form. Each piece is approached as a singular work — responsive, immediate, and materially sensitive.",
           "Her works are held in private collections across Europe and Russia.",
         ],
-        aboutCta: "Inquire about available works",
+        aboutCta: "Collaboration",
         worldKicker: "Artist's World",
         worldTitle: "Artist's World",
         worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
