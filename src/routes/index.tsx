@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import hero from "@/assets/hero.jpeg";
+import postcardsTile from "@/assets/postcards-tile.png";
 import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
 import w2 from "@/assets/work-02.jpeg";
@@ -350,7 +351,7 @@ function Index() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
             {[
               { id: "paintings", title: t.paintingsTitle, img: w4 },
-              { id: "postcards", title: t.postcardsTitle, img: null as string | null },
+              { id: "postcards", title: t.postcardsTitle, img: postcardsTile as string | null },
             ].map((cat) => (
               <a
                 key={cat.id}
