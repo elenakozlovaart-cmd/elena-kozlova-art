@@ -634,10 +634,11 @@ function Index() {
         const labels = lang === "ru"
           ? { tech: "Техника", size: "Размер", status: "Статус", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
           : { tech: "Technique", size: "Size", status: "Status", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
+        const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
         const rows = [
           { label: labels.tech, value: t.postcardMedium },
           { label: labels.size, value: t.postcardSize },
-          { label: labels.status, value: t.postcardStatus },
+          { label: labels.status, value: statusText },
         ];
         return (
           <div
