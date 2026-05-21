@@ -300,9 +300,9 @@ function Index() {
       </nav>
 
       {/* HERO */}
-      <section id="top" className="pt-28 md:pt-32">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-8 md:gap-12 items-end min-h-[88vh] pb-16 md:pb-24">
-          <div className="md:col-span-5 md:pb-12">
+      <section id="top" className="pt-28 md:pt-20">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-8 md:gap-12 items-end md:items-center min-h-[88vh] md:min-h-[calc(100vh-5rem)] pb-16 md:pb-12">
+          <div className="md:col-span-5">
             <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.heroKicker}</p>
             <h1 style={serif} className="text-6xl md:text-[7.5rem] leading-[0.92] font-light whitespace-pre-line tracking-tight">
               {t.heroName}
