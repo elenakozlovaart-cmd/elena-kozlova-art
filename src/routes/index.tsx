@@ -156,11 +156,12 @@ function Index() {
   const closePriceForm = () => setPriceForm({ open: false, artwork: "" });
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || priceForm.open || openCategory !== null;
+    const anyOpen = openIdx !== null || priceForm.open || openCategory !== null || openPostcardIdx !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (priceForm.open) closePriceForm();
+      else if (openPostcardIdx !== null) setOpenPostcardIdx(null);
       else if (openIdx !== null) setOpenIdx(null);
       else setOpenCategory(null);
     };
@@ -171,7 +172,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, priceForm.open, openCategory]);
+  }, [openIdx, priceForm.open, openCategory, openPostcardIdx]);
 
   const submitPriceForm = async (e: FormEvent) => {
     e.preventDefault();
