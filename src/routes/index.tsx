@@ -57,14 +57,14 @@ const worldPhotos = [
   { src: world02, ru: "У художественной галереи", en: "At the art gallery" },
 ];
 
-const postcards = [
+const postcards: { src: string; ru: string; en: string; sold?: boolean }[] = [
   { src: pc1, ru: "Скворец", en: "Starling" },
-  { src: pc2, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch" },
+  { src: pc2, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch", sold: true },
   { src: pc3, ru: "Скворец на ветке", en: "Starling on a Branch" },
   { src: pc4, ru: "Верба", en: "Pussy Willow" },
   { src: pc5, ru: "Верба на закате", en: "Pussy Willow at Sunset" },
   { src: pc6, ru: "Скворец на берёзе", en: "Starling on a Birch" },
-  { src: pc7, ru: "Японская белоглазка", en: "Japanese White-eye" },
+  { src: pc7, ru: "Японская белоглазка", en: "Japanese White-eye", sold: true },
   { src: pc8, ru: "Голубая верба", en: "Blue Pussy Willow" },
   { src: pc9, ru: "Синица и сакура", en: "Tit and Sakura" },
 ];
