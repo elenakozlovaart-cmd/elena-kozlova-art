@@ -57,14 +57,14 @@ const worldPhotos = [
   { src: world02, ru: "У художественной галереи", en: "At the art gallery" },
 ];
 
-const postcards = [
+const postcards: { src: string; ru: string; en: string; sold?: boolean }[] = [
   { src: pc1, ru: "Скворец", en: "Starling" },
-  { src: pc2, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch" },
+  { src: pc2, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch", sold: true },
   { src: pc3, ru: "Скворец на ветке", en: "Starling on a Branch" },
   { src: pc4, ru: "Верба", en: "Pussy Willow" },
   { src: pc5, ru: "Верба на закате", en: "Pussy Willow at Sunset" },
   { src: pc6, ru: "Скворец на берёзе", en: "Starling on a Birch" },
-  { src: pc7, ru: "Японская белоглазка", en: "Japanese White-eye" },
+  { src: pc7, ru: "Японская белоглазка", en: "Japanese White-eye", sold: true },
   { src: pc8, ru: "Голубая верба", en: "Blue Pussy Willow" },
   { src: pc9, ru: "Синица и сакура", en: "Tit and Sakura" },
 ];
@@ -577,6 +577,7 @@ function Index() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
                   {postcards.map((p, i) => {
                     const title = lang === "ru" ? p.ru : p.en;
+                    const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
                     return (
                       <figure key={i} className="group">
                         <button
@@ -604,8 +605,8 @@ function Index() {
                             </p>
                           </div>
                           <div className="col-span-4 flex flex-col items-end gap-2 text-right">
-                            <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/80">
-                              {t.postcardStatus}
+                            <span className={`text-[10px] tracking-[0.25em] uppercase ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                              {statusText}
                             </span>
                             <button
                               type="button"
@@ -633,10 +634,11 @@ function Index() {
         const labels = lang === "ru"
           ? { tech: "Техника", size: "Размер", status: "Статус", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
           : { tech: "Technique", size: "Size", status: "Status", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
+        const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
         const rows = [
           { label: labels.tech, value: t.postcardMedium },
           { label: labels.size, value: t.postcardSize },
-          { label: labels.status, value: t.postcardStatus },
+          { label: labels.status, value: statusText },
         ];
         return (
           <div
