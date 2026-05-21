@@ -505,6 +505,11 @@ function Index() {
                     <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
                   </div>
                 )}
+                {openCategory === "postcards" && (
+                  <div className="md:col-span-5 md:pt-4">
+                    <p className="text-[15px] leading-[1.85] text-foreground/70">{t.postcardsIntro}</p>
+                  </div>
+                )}
               </div>
 
               {openCategory === "paintings" ? (
