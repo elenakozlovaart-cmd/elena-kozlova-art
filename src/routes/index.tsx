@@ -466,6 +466,25 @@ function Index() {
         </div>
       </section>
 
+      {/* POSTCARDS */}
+      <section id="postcards" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-12">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.postcardsTitle}</h2>
+            </div>
+          </div>
+          <div className="rounded-3xl border border-border/50 bg-[#f7efee] px-8 py-16 md:py-24 text-center">
+            <p style={serif} className="text-2xl md:text-3xl italic font-light text-foreground/70">
+              {t.postcardsEmpty}
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* ARTWORK MODAL */}
       {openIdx !== null && (() => {
         const w = works[openIdx];
