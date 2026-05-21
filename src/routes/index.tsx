@@ -574,12 +574,135 @@ function Index() {
                   })}
                 </div>
               ) : (
-                <div className="rounded-3xl border border-border/50 bg-[#f7efee] px-8 py-16 md:py-24 text-center">
-                  <p style={serif} className="text-2xl md:text-3xl italic font-light text-foreground/70">
-                    {t.postcardsEmpty}
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
+                  {postcards.map((p, i) => {
+                    const title = lang === "ru" ? p.ru : p.en;
+                    return (
+                      <figure key={i} className="group">
+                        <button
+                          type="button"
+                          onClick={() => setOpenPostcardIdx(i)}
+                          aria-label={title}
+                          className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+                        >
+                          <img src={p.src} alt={title} className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
+                            <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
+                              {title}
+                            </span>
+                          </div>
+                        </button>
+                        <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
+                          <div className="col-span-8">
+                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                              <button type="button" onClick={() => setOpenPostcardIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                                {title}
+                              </button>
+                            </h3>
+                            <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
+                              {t.postcardMedium} · {t.postcardSize}
+                            </p>
+                          </div>
+                          <div className="col-span-4 flex flex-col items-end gap-2 text-right">
+                            <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/80">
+                              {t.postcardStatus}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); openPriceForm(title); }}
+                              className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                            >
+                              {t.cardCta}
+                            </button>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    );
+                  })}
                 </div>
               )}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* POSTCARD MODAL */}
+      {openPostcardIdx !== null && (() => {
+        const p = postcards[openPostcardIdx];
+        const title = lang === "ru" ? p.ru : p.en;
+        const labels = lang === "ru"
+          ? { tech: "Техника", size: "Размер", status: "Статус", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
+          : { tech: "Technique", size: "Size", status: "Status", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
+        const rows = [
+          { label: labels.tech, value: t.postcardMedium },
+          { label: labels.size, value: t.postcardSize },
+          { label: labels.status, value: t.postcardStatus },
+        ];
+        return (
+          <div
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
+            onClick={() => setOpenPostcardIdx(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+          >
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setOpenPostcardIdx(null); }}
+              aria-label={labels.close}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
+            >
+              ×
+            </button>
+            <div
+              className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
+                <div className="w-full flex flex-col items-center">
+                  <img
+                    src={p.src}
+                    alt={`${title} — ${labels.front}`}
+                    className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
+                  />
+                  <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.front}</p>
+                </div>
+                <div className="w-full flex flex-col items-center">
+                  <img
+                    src={postcardBack}
+                    alt={`${title} — ${labels.back}`}
+                    className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
+                  />
+                  <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.back}</p>
+                </div>
+              </div>
+              <div className="md:col-span-4 flex flex-col justify-center md:py-8">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{t.postcardsTitle}</p>
+                <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
+                  {title}
+                </h2>
+                <dl className="space-y-5 mb-10">
+                  {rows.map((r) => (
+                    <div key={r.label} className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3">
+                      <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{r.label}</dt>
+                      <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="flex flex-col sm:flex-row gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => { setOpenPostcardIdx(null); openPriceForm(title); }}
+                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                  >
+                    {labels.cta}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
             </div>
           </div>
         );
