@@ -6,7 +6,7 @@ import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
 import w2 from "@/assets/work-02.jpeg";
 import w3 from "@/assets/work-03.jpeg";
-import w4 from "@/assets/work-04.jpeg";
+import w4 from "@/assets/work-04.png";
 import w5 from "@/assets/work-05.jpg";
 import w6 from "@/assets/work-06.jpeg";
 import w7 from "@/assets/work-07.jpeg";
