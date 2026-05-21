@@ -311,7 +311,7 @@ function Index() {
               {t.heroLead}
             </p>
             <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#paintings" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.heroCta}
               </a>
               <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
