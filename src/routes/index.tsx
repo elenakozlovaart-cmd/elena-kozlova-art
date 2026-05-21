@@ -582,7 +582,7 @@ function Index() {
                     {labels.cta}
                   </button>
                   <a
-                    href="https://t.me/ElenaKozlova_Art"
+                    href="https://t.me/ElenaKozlovaArt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
@@ -666,7 +666,7 @@ function Index() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2.5">
                       <a
-                        href="https://t.me/ElenaKozlova_Art"
+                        href="https://t.me/ElenaKozlovaArt"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center text-[10px] tracking-[0.25em] uppercase rounded-full px-6 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
@@ -886,7 +886,7 @@ function Index() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://t.me/ElenaKozlova_Art"
+                href="https://t.me/ElenaKozlovaArt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
