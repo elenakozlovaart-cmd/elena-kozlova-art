@@ -3,11 +3,13 @@ import { useState, useEffect, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import hero from "@/assets/hero.jpeg";
 import postcardsTile from "@/assets/postcards-tile.png";
+import paintingsTile from "@/assets/paintings-tile.png";
+
 import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
 import w2 from "@/assets/work-02.jpeg";
 import w3 from "@/assets/work-03.jpeg";
-import w4 from "@/assets/work-04.png";
+import w4 from "@/assets/work-04.jpeg";
 import w5 from "@/assets/work-05.jpg";
 import w6 from "@/assets/work-06.jpeg";
 import w7 from "@/assets/work-07.jpeg";
@@ -350,7 +352,7 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
             {[
-              { id: "paintings", title: t.paintingsTitle, img: w4 },
+              { id: "paintings", title: t.paintingsTitle, img: paintingsTile },
               { id: "postcards", title: t.postcardsTitle, img: postcardsTile as string | null },
             ].map((cat) => (
               <a
