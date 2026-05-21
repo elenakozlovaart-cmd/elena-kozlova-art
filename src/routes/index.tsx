@@ -19,6 +19,29 @@ import w13 from "@/assets/work-13.png";
 import w14 from "@/assets/work-14.png";
 import w15 from "@/assets/work-15.png";
 import w16 from "@/assets/work-16.png";
+import world01 from "@/assets/world-01.jpeg";
+import world02 from "@/assets/world-02.jpg";
+import world03 from "@/assets/world-03.jpg";
+import world04 from "@/assets/world-04.jpg";
+import world05 from "@/assets/world-05.jpg";
+import world06 from "@/assets/world-06.jpg";
+import world07 from "@/assets/world-07.jpg";
+import world08 from "@/assets/world-08.jpg";
+import world09 from "@/assets/world-09.jpg";
+import world10 from "@/assets/world-10.jpg";
+
+const worldPhotos = [
+  { src: world01, ru: "Художник у работ в выставочном зале", en: "Artist with her works in the exhibition hall" },
+  { src: world07, ru: "Пленэр на Площади Республики, Ереван", en: "Plein air at Republic Square, Yerevan" },
+  { src: world06, ru: "Пленэр в Дилижане, Армения", en: "Plein air in Dilijan, Armenia" },
+  { src: world10, ru: "Пленэр на Байкале", en: "Plein air at Lake Baikal" },
+  { src: world03, ru: "Работа на пленэре в парке", en: "Working en plein air in the park" },
+  { src: world08, ru: "Пленэр у воды, Москва", en: "Plein air by the water, Moscow" },
+  { src: world05, ru: "Палитра и акварель в работе", en: "Palette and watercolour in progress" },
+  { src: world09, ru: "Этюд деревни — процесс и палитра", en: "Village study — process and palette" },
+  { src: world04, ru: "Создание акварели в мастерской", en: "Creating a watercolour in the studio" },
+  { src: world02, ru: "У художественной галереи", en: "At the art gallery" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -120,6 +143,9 @@ function Index() {
           "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
         ],
         aboutCta: "Запросить доступные работы",
+        worldKicker: "Мир художника",
+        worldTitle: "Мир художника",
+        worldBody: "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
         seriesKicker: "Серии работ",
         seriesTitle: "Серии",
         series: [
@@ -187,6 +213,9 @@ function Index() {
           "Her works are held in private collections across Europe and Russia.",
         ],
         aboutCta: "Inquire about available works",
+        worldKicker: "Artist's World",
+        worldTitle: "Artist's World",
+        worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
         seriesKicker: "Series",
         seriesTitle: "Series",
         series: [
@@ -699,6 +728,32 @@ function Index() {
         </div>
       </section>
 
+      {/* ARTIST'S WORLD */}
+      <section className="py-24 md:py-32 border-t border-border/50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-20">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worldKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worldTitle}</h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 md:pt-4">
+              <p className="text-[15px] leading-[1.85] text-foreground/70">{t.worldBody}</p>
+            </div>
+          </div>
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 [column-fill:_balance]">
+            {worldPhotos.map((p, i) => (
+              <figure key={i} className="mb-3 md:mb-4 break-inside-avoid overflow-hidden bg-secondary rounded-sm">
+                <img
+                  src={p.src}
+                  alt={lang === "ru" ? p.ru : p.en}
+                  loading="lazy"
+                  className="w-full h-auto object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03]"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CV */}
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
@@ -810,8 +865,8 @@ function Index() {
               <a href={mailto} className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 elenakozlova77@yandex.ru
               </a>
-              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                @ElenaKozlovaArt
+              <a href="https://t.me/ElenaKozlova_Art" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                @ElenaKozlova_Art
               </a>
             </div>
             <a href={mailto} className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
