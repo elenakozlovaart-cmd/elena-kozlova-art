@@ -146,18 +146,12 @@ function Index() {
         worldKicker: "Мир художника",
         worldTitle: "Мир художника",
         worldBody: "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
-        seriesKicker: "Серии работ",
-        seriesTitle: "Серии",
-        series: [
-          { title: "Армения", desc: "Акварельные впечатления от света, гор, архитектуры и древних мест." },
-          { title: "Пейзажи внутреннего состояния", desc: "Пейзаж как способ передать тишину, память и настроение." },
-          { title: "Фигуративные этюды", desc: "Наблюдение за человеком, жестом, позой и состоянием." },
-          { title: "Город и память", desc: "Городские пространства, в которых важны свет, ритм и личное воспоминание." },
-          { title: "Пленэрные наблюдения", desc: "Работы, созданные из непосредственного контакта с местом." },
-        ],
         worksKicker: "Работы",
         worksTitle: "Галерея",
         worksIntro: "Подборка недавних акварелей.\nКаждая работа уникальна и существует в единственном экземпляре.",
+        paintingsTitle: "Картины",
+        postcardsTitle: "Открытки",
+        postcardsEmpty: "Раздел скоро будет дополнен.",
         cardMedium: "Акварель на бумаге",
         cardCta: "Запросить стоимость",
         cvKicker: "Биография",
@@ -216,18 +210,12 @@ function Index() {
         worldKicker: "Artist's World",
         worldTitle: "Artist's World",
         worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
-        seriesKicker: "Series",
-        seriesTitle: "Series",
-        series: [
-          { title: "Armenia", desc: "Watercolour impressions of light, mountains, architecture and ancient places." },
-          { title: "Landscapes of inner states", desc: "Landscape as a way to convey silence, memory and mood." },
-          { title: "Figurative studies", desc: "Observation of the human figure, gesture, posture and state." },
-          { title: "City and memory", desc: "Urban spaces where light, rhythm and personal recollection matter." },
-          { title: "Plein air observations", desc: "Works born from direct contact with a place." },
-        ],
         worksKicker: "Works",
         worksTitle: "Selected",
         worksIntro: "A selection of recent works in watercolour.\nEach piece is unique and created as an original.",
+        paintingsTitle: "Paintings",
+        postcardsTitle: "Postcards",
+        postcardsEmpty: "This section will be updated soon.",
         cardMedium: "Watercolour on paper",
         cardCta: "Inquire",
         cvKicker: "Biography",
@@ -283,7 +271,7 @@ function Index() {
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
           <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
-            <a href="#works" className="hover:text-foreground transition-colors">{t.nav.works}</a>
+            <a href="#paintings" className="hover:text-foreground transition-colors">{t.nav.works}</a>
             <a href="#about" className="hover:text-foreground transition-colors">{t.nav.about}</a>
             <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
@@ -318,7 +306,7 @@ function Index() {
               {t.heroLead}
             </p>
             <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a href="#paintings" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.heroCta}
               </a>
               <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
@@ -356,42 +344,64 @@ function Index() {
       </section>
 
 
-      {/* SERIES */}
+      {/* CATEGORY TILES */}
       <section className="py-24 md:py-32 border-t border-border/50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-20">
-            <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.seriesKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.seriesTitle}</h2>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
-            {t.series.map((s, i) => (
-              <div key={i} className="group border-t border-border pt-6">
-                <h3 style={serif} className="text-2xl md:text-3xl italic font-light leading-tight mb-4">
-                  {s.title}
-                </h3>
-                <p className="text-[14px] leading-[1.75] text-foreground/65">
-                  {s.desc}
-                </p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
+            {[
+              { id: "paintings", title: t.paintingsTitle, img: w4 },
+              { id: "postcards", title: t.postcardsTitle, img: null as string | null },
+            ].map((cat) => (
+              <a
+                key={cat.id}
+                href={`#${cat.id}`}
+                className="group block rounded-3xl overflow-hidden bg-[#f1e6e5] border border-border/40 hover:border-foreground/20 transition-colors"
+              >
+                <div className="aspect-[4/3] relative overflow-hidden bg-[#e8dcdb]">
+                  {cat.img ? (
+                    <img
+                      src={cat.img}
+                      alt={cat.title}
+                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <div
+                      aria-hidden
+                      className="w-full h-full"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #f1e6e5 0%, #e8dcdb 50%, #dcc9c9 100%)",
+                      }}
+                    />
+                  )}
+                </div>
+                <div className="px-6 py-5 flex items-center justify-between">
+                  <span style={serif} className="text-2xl md:text-3xl italic font-light text-[#6b5557]">
+                    {cat.title}
+                  </span>
+                  <span className="text-[11px] tracking-[0.3em] uppercase text-foreground/50 group-hover:text-foreground/80 transition-colors">
+                    →
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* WORKS */}
-      <section id="works" className="py-24 md:py-32 border-t border-border/50">
+      {/* PAINTINGS */}
+      <section id="paintings" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-12 gap-8 mb-20 md:mb-28">
             <div className="md:col-span-5">
               <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worksTitle}</h2>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.paintingsTitle}</h2>
             </div>
             <div className="md:col-span-5 md:col-start-8 md:pt-4">
               <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
             </div>
           </div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
             {works.map((w, i) => {
@@ -455,6 +465,25 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* POSTCARDS */}
+      <section id="postcards" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-12">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.postcardsTitle}</h2>
+            </div>
+          </div>
+          <div className="rounded-3xl border border-border/50 bg-[#f7efee] px-8 py-16 md:py-24 text-center">
+            <p style={serif} className="text-2xl md:text-3xl italic font-light text-foreground/70">
+              {t.postcardsEmpty}
+            </p>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* ARTWORK MODAL */}
       {openIdx !== null && (() => {
