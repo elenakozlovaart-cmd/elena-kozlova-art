@@ -109,6 +109,7 @@ function Index() {
   const [lang, setLang] = useState<Lang>("ru");
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
+  const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
   const [priceForm, setPriceForm] = useState<{ open: boolean; artwork: string }>({ open: false, artwork: "" });
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
