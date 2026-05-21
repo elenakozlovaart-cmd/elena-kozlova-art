@@ -577,6 +577,7 @@ function Index() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
                   {postcards.map((p, i) => {
                     const title = lang === "ru" ? p.ru : p.en;
+                    const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
                     return (
                       <figure key={i} className="group">
                         <button
@@ -604,8 +605,8 @@ function Index() {
                             </p>
                           </div>
                           <div className="col-span-4 flex flex-col items-end gap-2 text-right">
-                            <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/80">
-                              {t.postcardStatus}
+                            <span className={`text-[10px] tracking-[0.25em] uppercase ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                              {statusText}
                             </span>
                             <button
                               type="button"
