@@ -721,19 +721,33 @@ function Index() {
             >
               <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
                 <div className="w-full flex flex-col items-center">
-                  <img
-                    src={p.src}
-                    alt={`${title} — ${labels.front}`}
-                    className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ images: postcardImages, index: 0 })}
+                    className="block cursor-zoom-in"
+                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                  >
+                    <img
+                      src={p.src}
+                      alt={`${title} — ${labels.front}`}
+                      className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
+                    />
+                  </button>
                   <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.front}</p>
                 </div>
                 <div className="w-full flex flex-col items-center">
-                  <img
-                    src={postcardBack}
-                    alt={`${title} — ${labels.back}`}
-                    className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ images: postcardImages, index: 1 })}
+                    className="block cursor-zoom-in"
+                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                  >
+                    <img
+                      src={postcardBack}
+                      alt={`${title} — ${labels.back}`}
+                      className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
+                    />
+                  </button>
                   <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.back}</p>
                 </div>
               </div>
