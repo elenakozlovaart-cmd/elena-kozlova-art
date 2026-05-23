@@ -618,30 +618,45 @@ function Index() {
                             </span>
                           </div>
                         </button>
-                        <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
-                          <div className="col-span-8">
+                        <figcaption className="mt-6">
+                          <div className="flex items-baseline justify-between gap-4">
                             <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
                               <button type="button" onClick={() => setOpenPostcardIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
                                 {title}
                               </button>
                             </h3>
-                            <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
+                            <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
+                              1 000 руб.
+                            </span>
+                          </div>
+                          <div className="mt-2 flex items-start justify-between gap-4">
+                            <p className="text-[12px] tracking-[0.1em] text-foreground/55">
                               {t.postcardMedium} · {t.postcardSize}
                             </p>
-                          </div>
-                          <div className="col-span-4 flex flex-col items-end gap-2 text-right">
-                            <span className={`text-[10px] tracking-[0.25em] uppercase ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                            <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
                               {statusText}
                             </span>
+                          </div>
+                          <div className="mt-5 flex gap-3">
                             <a
                               href={TG_LINK}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="w-[120px] shrink-0 inline-flex items-center justify-center gap-1.5 text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                              className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
                             >
                               {lang === "ru" ? "Написать" : "Message"}
-                              <Send className="w-3 h-3" strokeWidth={2} />
+                              <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                            </a>
+                            <a
+                              href={MAX_LINK}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                            >
+                              {lang === "ru" ? "Написать" : "Message"}
+                              <MaxIcon className="w-4 h-4" />
                             </a>
                           </div>
                         </figcaption>
