@@ -212,7 +212,8 @@ function Index() {
         aboutKicker: "О художнике",
         aboutBody: [
           "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
-          "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.  \n\n Работы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.\n",
+          "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
+          "Работы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.",
         ],
         aboutCta: "Сотрудничество в Telegram",
         worldKicker: "Мир художника",
@@ -284,9 +285,9 @@ function Index() {
         heroCta2: "Meet the artist",
         aboutKicker: "About the artist",
         aboutBody: [
-          "Elena Kozlova is a contemporary watercolour artist whose practice explores the relationship between perception and inner experience. Her work moves between landscape and figurative study, treating both as spaces of observation and reflection.",
-          "Working primarily with watercolour, she focuses on light, movement and the subtle tension of form. Each piece is approached as a singular work — responsive, immediate, and materially sensitive.",
-          "Her works are held in private collections across Europe and Russia.",
+          "In her practice, Elena Kozlova turns to watercolor as a medium that captures fleeting states — light, movement, and the inner tension of form.",
+          "Her works exist on the border between observation and experience: a landscape becomes a reflection of inner perception, while the figure becomes a way to explore plasticity and presence.",
+          "Elena Kozlova's works can become part of both private and public spaces — from intimate interiors to restaurants, hotels, and gallery areas. Watercolor does not overwhelm a space; it creates a point of silence, light, and living presence within it. Individual selection of works and collaboration with designers, architects, and space owners are possible.",
         ],
         aboutCta: "Collaboration on Telegram",
         worldKicker: "Artist's World",
