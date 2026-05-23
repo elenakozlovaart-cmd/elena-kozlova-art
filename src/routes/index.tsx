@@ -1113,9 +1113,14 @@ function Index() {
                 @ElenaKozlova_Art
               </a>
             </div>
-            <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
-              {t.footerCta}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+                {t.footerCta}
+              </a>
+              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+                {t.footerCtaMax}
+              </a>
+            </div>
           </div>
         </div>
         <div className="border-t border-border/40">
