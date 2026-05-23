@@ -1023,14 +1023,24 @@ function Index() {
           <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
             {t.tgBody}
           </p>
-          <a
-            href="https://t.me/ElenaKozlova_Art"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-          >
-            {t.tgCta}
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://t.me/ElenaKozlovaArt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+            >
+              {t.tgCta}
+            </a>
+            <a
+              href={MAX_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+            >
+              {t.tgCtaMax}
+            </a>
+          </div>
         </div>
       </section>
 
