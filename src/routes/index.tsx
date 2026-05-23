@@ -162,20 +162,12 @@ function Index() {
     scrollWorld(1);
   };
 
-  const openPriceForm = (artwork: string = "") => {
-    setFormFields({ name: "", email: "", contact: "", artwork, comment: "" });
-    setFormState("idle");
-    setPriceForm({ open: true, artwork });
-  };
-  const closePriceForm = () => setPriceForm({ open: false, artwork: "" });
-
   useEffect(() => {
-    const anyOpen = openIdx !== null || priceForm.open || openCategory !== null || openPostcardIdx !== null;
+    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
-      if (priceForm.open) closePriceForm();
-      else if (openPostcardIdx !== null) setOpenPostcardIdx(null);
+      if (openPostcardIdx !== null) setOpenPostcardIdx(null);
       else if (openIdx !== null) setOpenIdx(null);
       else setOpenCategory(null);
     };
@@ -186,26 +178,8 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, priceForm.open, openCategory, openPostcardIdx]);
+  }, [openIdx, openCategory, openPostcardIdx]);
 
-  const submitPriceForm = async (e: FormEvent) => {
-    e.preventDefault();
-    setFormState("sending");
-    try {
-      const { error } = await supabase.from("price_requests").insert({
-        name: formFields.name.trim(),
-        email: formFields.email.trim(),
-        contact: formFields.contact.trim() || null,
-        artwork: formFields.artwork.trim() || null,
-        comment: formFields.comment.trim() || null,
-        language: lang,
-      });
-      if (error) throw error;
-      setFormState("success");
-    } catch {
-      setFormState("error");
-    }
-  };
 
   const t = lang === "ru"
     ? {
