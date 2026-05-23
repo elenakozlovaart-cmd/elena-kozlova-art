@@ -332,7 +332,7 @@ function Index() {
         acqCta: "Message on Telegram",
         acqCtaMax: "Message on MAX",
         tgKicker: "Follow new works",
-        tgBody: "On Telegram, Elena shares new watercolors, fragments of the creative process, exhibitions and available works.",
+        tgBody: "New works, the process of creating watercolors, plein air sessions, exhibitions, and events from the artist’s creative practice can be seen in the artist’s personal blog.",
         tgCta: "Follow on Telegram",
         tgCtaMax: "Follow on MAX",
         aboutCtaMax: "Collaboration on MAX",
