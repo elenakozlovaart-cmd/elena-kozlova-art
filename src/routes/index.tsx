@@ -623,13 +623,16 @@ function Index() {
                             <span className={`text-[10px] tracking-[0.25em] uppercase ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
                               {statusText}
                             </span>
-                            <button
-                              type="button"
-                              onClick={(e) => { e.stopPropagation(); openPriceForm(title); }}
-                              className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                            <a
+                              href={TG_LINK}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-[120px] shrink-0 inline-flex items-center justify-center gap-1.5 text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
                             >
-                              {t.cardCta}
-                            </button>
+                              {lang === "ru" ? "Написать" : "Message"}
+                              <Send className="w-3 h-3" strokeWidth={2} />
+                            </a>
                           </div>
                         </figcaption>
                       </figure>
