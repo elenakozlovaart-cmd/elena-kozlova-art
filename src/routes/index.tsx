@@ -136,6 +136,7 @@ function Index() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
 
 
   const worldScrollRef = useRef<HTMLDivElement>(null);
