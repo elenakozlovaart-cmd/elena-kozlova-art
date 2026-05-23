@@ -272,7 +272,7 @@ function Index() {
           "Работы находятся в частных коллекциях в России и Европе.",
         ],
         footerContactLabel: "Связь",
-        footerCta: "Написать",
+        footerCta: "Написать в Telegram",
         rights: "Все права защищены",
       }
     : {
