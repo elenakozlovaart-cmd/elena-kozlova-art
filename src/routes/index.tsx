@@ -223,7 +223,7 @@ function Index() {
         postcardFrontLabel: "Лицевая сторона",
         postcardBackLabel: "Обратная сторона",
         cardMedium: "Акварель на бумаге",
-        cardCta: "Запросить стоимость",
+        cardCta: "Написать в ТГ",
         cvKicker: "Биография",
         cvTitle: "Избранные выставки",
         cvSolo: "Персональные выставки",
