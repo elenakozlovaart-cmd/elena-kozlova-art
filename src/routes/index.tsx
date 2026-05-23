@@ -4,8 +4,18 @@ import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
-    <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
-    <path d="M6.5 16.5V7.5h2L12 12l3.5-4.5h2v9h-2v-5.6L12 15l-3.5-4.1v5.6h-2z" fill="#fff" />
+    <defs>
+      <radialGradient id="maxBrandGrad" cx="28%" cy="82%" r="110%">
+        <stop offset="0%" stopColor="#3BB0FF" />
+        <stop offset="45%" stopColor="#5B5BF5" />
+        <stop offset="100%" stopColor="#A855F7" />
+      </radialGradient>
+    </defs>
+    <circle cx="12" cy="12" r="11" fill="url(#maxBrandGrad)" />
+    <path
+      d="M12.4 6.2c-3.1 0-5.6 2.4-5.6 5.4 0 1.6.7 3 1.9 4v2.9c0 .3.3.4.5.3l2.1-1.7c.4.1.8.1 1.1.1 3.1 0 5.6-2.4 5.6-5.4 0-3.1-2.5-5.6-5.6-5.6z"
+      fill="#fff"
+    />
   </svg>
 );
 
