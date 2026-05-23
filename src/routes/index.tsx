@@ -136,6 +136,7 @@ function Index() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
 
 
   const worldScrollRef = useRef<HTMLDivElement>(null);
@@ -173,9 +174,18 @@ function Index() {
   };
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null;
+    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null || lightbox !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
+      if (lightbox) {
+        if (e.key === "Escape") setLightbox(null);
+        else if (e.key === "ArrowLeft" && lightbox.images.length > 1) {
+          setLightbox({ ...lightbox, index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length });
+        } else if (e.key === "ArrowRight" && lightbox.images.length > 1) {
+          setLightbox({ ...lightbox, index: (lightbox.index + 1) % lightbox.images.length });
+        }
+        return;
+      }
       if (e.key !== "Escape") return;
       if (openPostcardIdx !== null) setOpenPostcardIdx(null);
       else if (openIdx !== null) setOpenIdx(null);
@@ -188,7 +198,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, openCategory, openPostcardIdx]);
+  }, [openIdx, openCategory, openPostcardIdx, lightbox]);
 
 
   const t = lang === "ru"
@@ -675,13 +685,19 @@ function Index() {
         const p = postcards[openPostcardIdx];
         const title = lang === "ru" ? p.ru : p.en;
         const labels = lang === "ru"
-          ? { tech: "Техника", size: "Размер", status: "Статус", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
-          : { tech: "Technique", size: "Size", status: "Status", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
+          ? { tech: "Техника", size: "Размер", status: "Статус", price: "Цена", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
+          : { tech: "Technique", size: "Size", status: "Status", price: "Price", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
         const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
+        const priceText = lang === "ru" ? "1 000 руб." : "1,000 RUB";
         const rows = [
           { label: labels.tech, value: t.postcardMedium },
           { label: labels.size, value: t.postcardSize },
           { label: labels.status, value: statusText },
+          { label: labels.price, value: priceText },
+        ];
+        const postcardImages = [
+          { src: p.src, alt: `${title} — ${labels.front}` },
+          { src: postcardBack, alt: `${title} — ${labels.back}` },
         ];
         return (
           <div
@@ -705,19 +721,33 @@ function Index() {
             >
               <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
                 <div className="w-full flex flex-col items-center">
-                  <img
-                    src={p.src}
-                    alt={`${title} — ${labels.front}`}
-                    className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ images: postcardImages, index: 0 })}
+                    className="block cursor-zoom-in"
+                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                  >
+                    <img
+                      src={p.src}
+                      alt={`${title} — ${labels.front}`}
+                      className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
+                    />
+                  </button>
                   <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.front}</p>
                 </div>
                 <div className="w-full flex flex-col items-center">
-                  <img
-                    src={postcardBack}
-                    alt={`${title} — ${labels.back}`}
-                    className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ images: postcardImages, index: 1 })}
+                    className="block cursor-zoom-in"
+                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                  >
+                    <img
+                      src={postcardBack}
+                      alt={`${title} — ${labels.back}`}
+                      className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
+                    />
+                  </button>
                   <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.back}</p>
                 </div>
               </div>
@@ -769,14 +799,16 @@ function Index() {
         const w = works[openIdx];
         const info = w[lang];
         const labels = lang === "ru"
-          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
-          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", price: "Цена", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", price: "Price", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
+        const { title: artTitle, price: artPrice } = splitTitlePrice(info.t);
         const rows: { label: string; value: string }[] = [
           { label: labels.cat, value: info.c },
           { label: labels.tech, value: info.m },
           { label: labels.size, value: info.s },
           { label: labels.year, value: info.y },
           { label: labels.status, value: info.st },
+          ...(artPrice ? [{ label: labels.price, value: artPrice }] : []),
         ];
         return (
           <div
@@ -799,16 +831,23 @@ function Index() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="md:col-span-8 flex items-center justify-center">
-                <img
-                  src={w.src}
-                  alt={info.t}
-                  className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
-                />
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ images: [{ src: w.src, alt: artTitle }], index: 0 })}
+                  className="block cursor-zoom-in"
+                  aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                >
+                  <img
+                    src={w.src}
+                    alt={artTitle}
+                    className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                  />
+                </button>
               </div>
               <div className="md:col-span-4 flex flex-col justify-center md:py-8">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
                 <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
-                  {info.t}
+                  {artTitle}
                 </h2>
                 <dl className="space-y-5 mb-10">
                   {rows.slice(1).map((r) => (
@@ -1064,6 +1103,58 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      {/* LIGHTBOX */}
+      {lightbox && (() => {
+        const current = lightbox.images[lightbox.index];
+        const hasMany = lightbox.images.length > 1;
+        const go = (delta: number) =>
+          setLightbox({ ...lightbox, index: (lightbox.index + delta + lightbox.images.length) % lightbox.images.length });
+        return (
+          <div
+            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
+            onClick={() => setLightbox(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={current.alt}
+          >
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+              aria-label={lang === "ru" ? "Закрыть" : "Close"}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors text-3xl leading-none font-light"
+            >
+              ×
+            </button>
+            {hasMany && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); go(-1); }}
+                  aria-label={lang === "ru" ? "Предыдущее" : "Previous"}
+                  className="fixed left-3 md:left-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); go(1); }}
+                  aria-label={lang === "ru" ? "Следующее" : "Next"}
+                  className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+              </>
+            )}
+            <img
+              src={current.src}
+              alt={current.alt}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[95vw] max-h-[95vh] w-auto h-auto object-contain select-none"
+            />
+          </div>
+        );
+      })()}
     </div>
   );
 }
