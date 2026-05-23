@@ -831,16 +831,23 @@ function Index() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="md:col-span-8 flex items-center justify-center">
-                <img
-                  src={w.src}
-                  alt={info.t}
-                  className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
-                />
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ images: [{ src: w.src, alt: artTitle }], index: 0 })}
+                  className="block cursor-zoom-in"
+                  aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                >
+                  <img
+                    src={w.src}
+                    alt={artTitle}
+                    className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                  />
+                </button>
               </div>
               <div className="md:col-span-4 flex flex-col justify-center md:py-8">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
                 <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
-                  {info.t}
+                  {artTitle}
                 </h2>
                 <dl className="space-y-5 mb-10">
                   {rows.slice(1).map((r) => (
