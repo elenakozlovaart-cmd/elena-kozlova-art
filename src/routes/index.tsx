@@ -1112,7 +1112,7 @@ function Index() {
           setLightbox({ ...lightbox, index: (lightbox.index + delta + lightbox.images.length) % lightbox.images.length });
         return (
           <div
-            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
+            className="fixed inset-0 z-[200] bg-[#efe8de]/95 backdrop-blur-sm flex items-center justify-center"
             onClick={() => setLightbox(null)}
             role="dialog"
             aria-modal="true"
@@ -1122,7 +1122,7 @@ function Index() {
               type="button"
               onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
               aria-label={lang === "ru" ? "Закрыть" : "Close"}
-              className="fixed top-5 right-5 md:top-8 md:right-8 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors text-3xl leading-none font-light"
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/80 hover:text-[#1a1a1a] transition-colors text-3xl leading-none font-light"
             >
               ×
             </button>
@@ -1132,7 +1132,7 @@ function Index() {
                   type="button"
                   onClick={(e) => { e.stopPropagation(); go(-1); }}
                   aria-label={lang === "ru" ? "Предыдущее" : "Previous"}
-                  className="fixed left-3 md:left-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  className="fixed left-3 md:left-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
                 >
                   <ChevronLeft className="w-8 h-8" />
                 </button>
@@ -1140,7 +1140,7 @@ function Index() {
                   type="button"
                   onClick={(e) => { e.stopPropagation(); go(1); }}
                   aria-label={lang === "ru" ? "Следующее" : "Next"}
-                  className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
                 >
                   <ChevronRight className="w-8 h-8" />
                 </button>
@@ -1150,7 +1150,7 @@ function Index() {
               src={current.src}
               alt={current.alt}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-[95vw] max-h-[95vh] w-auto h-auto object-contain select-none"
+              className="max-w-[92vw] max-h-[92vh] w-auto h-auto object-contain select-none bg-white p-1 ring-1 ring-black/5 shadow-[0_20px_60px_-20px_rgba(60,40,30,0.35)]"
             />
           </div>
         );
