@@ -126,9 +126,7 @@ function Index() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
-  const [priceForm, setPriceForm] = useState<{ open: boolean; artwork: string }>({ open: false, artwork: "" });
-  const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [formFields, setFormFields] = useState({ name: "", email: "", contact: "", artwork: "", comment: "" });
+
 
   const worldScrollRef = useRef<HTMLDivElement>(null);
   const dragState = useRef<{ down: boolean; startX: number; startScroll: number; moved: boolean }>({ down: false, startX: 0, startScroll: 0, moved: false });
