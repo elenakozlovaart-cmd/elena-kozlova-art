@@ -1,7 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useRef, type FormEvent } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight, Send } from "lucide-react";
+
+const MaxIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
+    <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+    <path d="M6.5 16.5V7.5h2L12 12l3.5-4.5h2v9h-2v-5.6L12 15l-3.5-4.1v5.6h-2z" fill="#fff" />
+  </svg>
+);
+
+const TG_LINK = "https://t.me/ElenaKozlovaArt";
+const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
+
+// Split a title like "Дилижан        10 000 руб." into [title, price]
+const splitTitlePrice = (t: string): { title: string; price: string | null } => {
+  const m = t.match(/^(.*?)\s{2,}([\d\s.,]+\s*руб\.?)\s*$/);
+  if (m) return { title: m[1].trim().replace(/\.$/, ""), price: m[2].trim() };
+  return { title: t, price: null };
+};
 import hero from "@/assets/hero.jpeg";
 import postcardsTile from "@/assets/postcards-tile.png";
 import paintingsTile from "@/assets/paintings-tile.png";
