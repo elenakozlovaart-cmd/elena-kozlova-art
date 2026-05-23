@@ -174,9 +174,18 @@ function Index() {
   };
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null;
+    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null || lightbox !== null;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
+      if (lightbox) {
+        if (e.key === "Escape") setLightbox(null);
+        else if (e.key === "ArrowLeft" && lightbox.images.length > 1) {
+          setLightbox({ ...lightbox, index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length });
+        } else if (e.key === "ArrowRight" && lightbox.images.length > 1) {
+          setLightbox({ ...lightbox, index: (lightbox.index + 1) % lightbox.images.length });
+        }
+        return;
+      }
       if (e.key !== "Escape") return;
       if (openPostcardIdx !== null) setOpenPostcardIdx(null);
       else if (openIdx !== null) setOpenIdx(null);
@@ -189,7 +198,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, openCategory, openPostcardIdx]);
+  }, [openIdx, openCategory, openPostcardIdx, lightbox]);
 
 
   const t = lang === "ru"
