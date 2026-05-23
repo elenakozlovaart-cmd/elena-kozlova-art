@@ -214,7 +214,7 @@ function Index() {
           "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
           "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия. \n\nРаботы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.",
         ],
-        aboutCta: "Сотрудничество",
+        aboutCta: "Сотрудничество в Telegram",
         worldKicker: "Мир художника",
         worldTitle: "Мир художника",
         worldBody: "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
@@ -256,9 +256,13 @@ function Index() {
         ],
         acqNote: "Можно обсудить оформление, доставку, резерв работы и возможность создания похожей акварели по индивидуальному запросу.",
         acqCta: "Написать в Telegram",
+        acqCtaMax: "Написать в MAX",
         tgKicker: "Следить за новыми работами",
         tgBody: "Новые работы, процесс создания акварелей, пленэры, выставки и события художественной практики, можно увидеть в личном блоге художника.",
-        tgCta: "Подписаться на Telegram",
+        tgCta: "Подписаться в Telegram",
+        tgCtaMax: "Подписаться в MAX",
+        aboutCtaMax: "Сотрудничество в MAX",
+        footerCtaMax: "Написать в MAX",
         footerName: "Елена Козлова",
         footerTagline: "современный художник, работающий в технике акварели",
         footerBio: "Практика Елены Козловой сосредоточена на изображении пейзажей внутренних состояний и фигуративных этюдов. В её работах акварель выступает как средство фиксации эмоциональных и пластических наблюдений, соединяя спонтанность и точность.",
@@ -268,7 +272,7 @@ function Index() {
           "Работы находятся в частных коллекциях в России и Европе.",
         ],
         footerContactLabel: "Связь",
-        footerCta: "Написать",
+        footerCta: "Написать в Telegram",
         rights: "Все права защищены",
       }
     : {
@@ -284,7 +288,7 @@ function Index() {
           "Working primarily with watercolour, she focuses on light, movement and the subtle tension of form. Each piece is approached as a singular work — responsive, immediate, and materially sensitive.",
           "Her works are held in private collections across Europe and Russia.",
         ],
-        aboutCta: "Collaboration",
+        aboutCta: "Collaboration on Telegram",
         worldKicker: "Artist's World",
         worldTitle: "Artist's World",
         worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
@@ -326,9 +330,13 @@ function Index() {
         ],
         acqNote: "We can discuss framing, shipping, reserving a work, and the possibility of creating a similar watercolour as a personal commission.",
         acqCta: "Message on Telegram",
+        acqCtaMax: "Message on MAX",
         tgKicker: "Follow new works",
         tgBody: "On Telegram, Elena shares new watercolors, fragments of the creative process, exhibitions and available works.",
         tgCta: "Follow on Telegram",
+        tgCtaMax: "Follow on MAX",
+        aboutCtaMax: "Collaboration on MAX",
+        footerCtaMax: "Message on MAX",
         footerName: "Elena Kozlova",
         footerTagline: "contemporary watercolour artist",
         footerBio: "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
@@ -338,7 +346,7 @@ function Index() {
           "Works are held in private collections across Russia and Europe.",
         ],
         footerContactLabel: "For inquiries, commissions and collaborations",
-        footerCta: "Contact",
+        footerCta: "Message on Telegram",
         rights: "All rights reserved",
       };
 
@@ -908,9 +916,14 @@ function Index() {
             <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
-              {t.aboutCta}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3 mt-12">
+              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+                {t.aboutCta}
+              </a>
+              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+                {t.aboutCtaMax}
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -1010,14 +1023,24 @@ function Index() {
           <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
             {t.tgBody}
           </p>
-          <a
-            href="https://t.me/ElenaKozlova_Art"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-          >
-            {t.tgCta}
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://t.me/ElenaKozlovaArt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+            >
+              {t.tgCta}
+            </a>
+            <a
+              href={MAX_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+            >
+              {t.tgCtaMax}
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1060,10 +1083,9 @@ function Index() {
                 href={MAX_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
               >
-                {lang === "ru" ? "Написать в MAX" : "Message on MAX"}
-                <MaxIcon className="w-4 h-4" />
+                {t.acqCtaMax}
               </a>
             </div>
           </div>
@@ -1091,9 +1113,14 @@ function Index() {
                 @ElenaKozlova_Art
               </a>
             </div>
-            <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
-              {t.footerCta}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+                {t.footerCta}
+              </a>
+              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+                {t.footerCtaMax}
+              </a>
+            </div>
           </div>
         </div>
         <div className="border-t border-border/40">
