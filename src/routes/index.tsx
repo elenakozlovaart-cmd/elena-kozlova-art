@@ -531,31 +531,58 @@ function Index() {
                             </span>
                           </div>
                         </button>
-                        <figcaption className="mt-6 grid grid-cols-12 gap-4 items-start">
-                          <div className="col-span-8">
-                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
-                              <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
-                                {info.t}
-                              </button>
-                            </h3>
-                            <p className="mt-2 text-[12px] tracking-[0.1em] text-foreground/55">
-                              {info.m || t.cardMedium} · {info.s} · {info.y}
-                            </p>
-                          </div>
-                          <div className="col-span-4 flex flex-col items-end gap-2 text-right">
-                            <span className={`text-[10px] tracking-[0.25em] uppercase ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
-                              {info.st}
-                            </span>
-                            {!sold && (
-                              <button
-                                type="button"
-                                onClick={(e) => { e.stopPropagation(); openPriceForm(info.t); }}
-                                className="w-[120px] shrink-0 text-center text-[10px] leading-[1.4] tracking-[0.2em] uppercase rounded-full px-3 py-2 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
-                              >
-                                {t.cardCta}
-                              </button>
-                            )}
-                          </div>
+                        <figcaption className="mt-6">
+                          {(() => {
+                            const { title: ttl, price } = splitTitlePrice(info.t);
+                            return (
+                              <>
+                                <div className="flex items-baseline justify-between gap-4">
+                                  <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                                    <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                                      {ttl}
+                                    </button>
+                                  </h3>
+                                  {price && (
+                                    <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
+                                      {price}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="mt-2 flex items-start justify-between gap-4">
+                                  <p className="text-[12px] tracking-[0.1em] text-foreground/55">
+                                    {info.m || t.cardMedium} · {info.s} · {info.y}
+                                  </p>
+                                  <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                                    {info.st}
+                                  </span>
+                                </div>
+                                {!sold && (
+                                  <div className="mt-5 flex gap-3">
+                                    <a
+                                      href={TG_LINK}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                                    >
+                                      {lang === "ru" ? "Написать" : "Message"}
+                                      <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                                    </a>
+                                    <a
+                                      href={MAX_LINK}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                                    >
+                                      {lang === "ru" ? "Написать" : "Message"}
+                                      <MaxIcon className="w-4 h-4" />
+                                    </a>
+                                  </div>
+                                )}
+                              </>
+                            );
+                          })()}
                         </figcaption>
                       </figure>
                     );
