@@ -310,7 +310,7 @@ function Index() {
         acqTitle: "How to acquire a work",
         acqSteps: [
           { n: "01", title: "Choose a work", desc: "Browse available watercolours in the “Works” section." },
-          { n: "02", title: "Click “Inquire”", desc: "Send a request for the work you are interested in." },
+          { n: "02", title: "Click “Message”", desc: "Send a request for the work you are interested in via Telegram or MAX." },
           { n: "03", title: "Discuss the details", desc: "Elena will reply about availability, price, framing and shipping." },
           { n: "04", title: "Confirm purchase or reserve", desc: "The work can be purchased, reserved, or discussed as a personal commission." },
         ],
