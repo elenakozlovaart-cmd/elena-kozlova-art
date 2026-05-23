@@ -992,13 +992,15 @@ function Index() {
               >
                 {t.acqCta}
               </a>
-              <button
-                type="button"
-                onClick={() => openPriceForm("")}
-                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+              <a
+                href={MAX_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
               >
-                {lang === "ru" ? "Запросить стоимость" : "Request price"}
-              </button>
+                {lang === "ru" ? "Написать в MAX" : "Message on MAX"}
+                <MaxIcon className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
