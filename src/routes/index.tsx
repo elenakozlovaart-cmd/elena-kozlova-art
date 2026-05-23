@@ -916,9 +916,14 @@ function Index() {
             <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block mt-12 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
-              {t.aboutCta}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3 mt-12">
+              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+                {t.aboutCta}
+              </a>
+              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+                {t.aboutCtaMax}
+              </a>
+            </div>
           </div>
         </div>
       </section>
