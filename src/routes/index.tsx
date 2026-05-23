@@ -799,14 +799,16 @@ function Index() {
         const w = works[openIdx];
         const info = w[lang];
         const labels = lang === "ru"
-          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
-          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
+          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", price: "Цена", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
+          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", price: "Price", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
+        const { title: artTitle, price: artPrice } = splitTitlePrice(info.t);
         const rows: { label: string; value: string }[] = [
           { label: labels.cat, value: info.c },
           { label: labels.tech, value: info.m },
           { label: labels.size, value: info.s },
           { label: labels.year, value: info.y },
           { label: labels.status, value: info.st },
+          ...(artPrice ? [{ label: labels.price, value: artPrice }] : []),
         ];
         return (
           <div
