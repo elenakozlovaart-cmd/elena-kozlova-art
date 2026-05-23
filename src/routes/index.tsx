@@ -800,20 +800,23 @@ function Index() {
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2.5">
-                  <button
-                    type="button"
-                    onClick={() => { setOpenIdx(null); openPriceForm(info.t); }}
-                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                  >
-                    {labels.cta}
-                  </button>
                   <a
-                    href="https://t.me/ElenaKozlovaArt"
+                    href={TG_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center whitespace-nowrap text-center text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
                   >
-                    {labels.ask}
+                    {lang === "ru" ? "Написать" : "Message"}
+                    <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                  </a>
+                  <a
+                    href={MAX_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                  >
+                    {lang === "ru" ? "Написать" : "Message"}
+                    <MaxIcon className="w-4 h-4" />
                   </a>
                 </div>
               </div>
