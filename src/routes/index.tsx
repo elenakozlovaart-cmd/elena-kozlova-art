@@ -330,9 +330,13 @@ function Index() {
         ],
         acqNote: "We can discuss framing, shipping, reserving a work, and the possibility of creating a similar watercolour as a personal commission.",
         acqCta: "Message on Telegram",
+        acqCtaMax: "Message on MAX",
         tgKicker: "Follow new works",
         tgBody: "On Telegram, Elena shares new watercolors, fragments of the creative process, exhibitions and available works.",
         tgCta: "Follow on Telegram",
+        tgCtaMax: "Follow on MAX",
+        aboutCtaMax: "Collaboration on MAX",
+        footerCtaMax: "Message on MAX",
         footerName: "Elena Kozlova",
         footerTagline: "contemporary watercolour artist",
         footerBio: "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
@@ -342,7 +346,7 @@ function Index() {
           "Works are held in private collections across Russia and Europe.",
         ],
         footerContactLabel: "For inquiries, commissions and collaborations",
-        footerCta: "Contact",
+        footerCta: "Message on Telegram",
         rights: "All rights reserved",
       };
 
