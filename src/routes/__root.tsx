@@ -72,24 +72,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Image Harmony dynamically displays uploaded images on a website based on specific filenames for different sections." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Image Harmony dynamically displays uploaded images on a website based on specific filenames for different sections." },
+      { title: "Елена Козлова — художник-акварелист" },
+      { name: "description", content: "Официальный сайт художника Елены Козловой. Акварельные работы, открытки, выставки, пленэры, сотрудничество и приобретение работ." },
+      { property: "og:title", content: "Елена Козлова — художник-акварелист" },
+      { property: "og:description", content: "Акварельные работы Елены Козловой: картины, открытки, выставки, пленэры и сотрудничество для частных и общественных интерьеров." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Image Harmony dynamically displays uploaded images on a website based on specific filenames for different sections." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4467d99f-1879-4705-ad59-fa83aef7176e/id-preview-62d32108--12dbb2fa-b531-410f-9b02-2cac22bba435.lovable.app-1779179829258.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4467d99f-1879-4705-ad59-fa83aef7176e/id-preview-62d32108--12dbb2fa-b531-410f-9b02-2cac22bba435.lovable.app-1779179829258.png" },
+      { property: "og:url", content: "https://elenakozlovaart.ru/" },
+      { property: "og:image", content: "https://elenakozlovaart.ru/og-image.jpg" },
+      { property: "og:locale", content: "ru_RU" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Елена Козлова — художник-акварелист" },
+      { name: "twitter:description", content: "Акварельные работы Елены Козловой: картины, открытки, выставки, пленэры и сотрудничество для частных и общественных интерьеров." },
+      { name: "twitter:image", content: "https://elenakozlovaart.ru/og-image.jpg" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: "https://elenakozlovaart.ru/" },
     ],
   }),
   shellComponent: RootShell,
@@ -100,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <head>
         <HeadContent />
       </head>
