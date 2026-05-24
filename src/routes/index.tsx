@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
@@ -1133,12 +1134,12 @@ function Index() {
       </footer>
 
       {/* LIGHTBOX */}
-      {lightbox && (() => {
+      {lightbox && typeof document !== "undefined" && (() => {
         const current = lightbox.images[lightbox.index];
         const hasMany = lightbox.images.length > 1;
         const go = (delta: number) =>
           setLightbox({ ...lightbox, index: (lightbox.index + delta + lightbox.images.length) % lightbox.images.length });
-        return (
+        return createPortal(
           <div
             className="fixed inset-0 z-[200] bg-[#efe8de]/95 backdrop-blur-sm flex items-center justify-center"
             onClick={() => setLightbox(null)}
@@ -1178,9 +1179,11 @@ function Index() {
               src={current.src}
               alt={current.alt}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-[92vw] max-h-[92vh] w-auto h-auto object-contain select-none bg-white p-1 ring-1 ring-black/5 shadow-[0_20px_60px_-20px_rgba(60,40,30,0.35)]"
+              style={{ maxWidth: "90vw", maxHeight: "90vh", width: "auto", height: "auto", objectFit: "contain" }}
+              className="select-none bg-white p-1 ring-1 ring-black/5 shadow-[0_20px_60px_-20px_rgba(60,40,30,0.35)]"
             />
-          </div>
+          </div>,
+          document.body,
         );
       })()}
     </div>
