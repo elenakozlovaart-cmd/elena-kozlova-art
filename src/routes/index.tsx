@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
