@@ -1179,8 +1179,8 @@ function Index() {
               src={current.src}
               alt={current.alt}
               onClick={(e) => e.stopPropagation()}
-              style={{ maxWidth: "90vw", maxHeight: "90vh", width: "auto", height: "auto", objectFit: "contain" }}
-              className="select-none bg-white p-1 ring-1 ring-black/5 shadow-[0_20px_60px_-20px_rgba(60,40,30,0.35)]"
+              style={{ width: "95vw", height: "90vh", maxWidth: "95vw", maxHeight: "90vh", objectFit: "contain" }}
+              className="select-none drop-shadow-[0_20px_60px_rgba(60,40,30,0.35)]"
             />
           </div>,
           document.body,
