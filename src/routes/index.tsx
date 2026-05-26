@@ -1196,6 +1196,7 @@ function Index() {
           document.body,
         );
       })()}
+      <ImageDebugOverlay />
     </div>
   );
 }
