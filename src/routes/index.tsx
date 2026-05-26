@@ -759,6 +759,8 @@ function Index() {
                     <img
                       src={postcardBack}
                       alt={`${title} — ${labels.back}`}
+                      loading="lazy"
+                      decoding="async"
                       className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
                     />
                   </button>
