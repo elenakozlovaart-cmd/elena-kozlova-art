@@ -915,7 +915,7 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5 md:col-start-1">
             <div className="md:sticky md:top-32">
-              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} className="w-full h-auto object-cover" />
+              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:pt-16">
