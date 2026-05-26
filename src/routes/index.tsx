@@ -742,6 +742,8 @@ function Index() {
                     <img
                       src={p.src}
                       alt={`${title} — ${labels.front}`}
+                      loading="lazy"
+                      decoding="async"
                       className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
                     />
                   </button>
