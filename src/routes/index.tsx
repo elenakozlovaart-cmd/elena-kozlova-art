@@ -466,7 +466,7 @@ function Index() {
                     <img
                       src={cat.img}
                       alt={cat.title}
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
                       className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
                     />
@@ -556,7 +556,7 @@ function Index() {
                           aria-label={info.t}
                           className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
                         >
-                          <img src={w.src} alt={info.t} loading="lazy" decoding="async" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <img src={w.src} alt={info.t} loading="eager" decoding="async" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                             <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                               {splitTitlePrice(info.t).title}
@@ -633,7 +633,7 @@ function Index() {
                           aria-label={title}
                           className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
                         >
-                          <img src={p.src} alt={title} loading="lazy" decoding="async" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <img src={p.src} alt={title} loading="eager" decoding="async" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                             <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                               {title}
@@ -742,7 +742,7 @@ function Index() {
                     <img
                       src={p.src}
                       alt={`${title} — ${labels.front}`}
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
                       className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
                     />
@@ -759,7 +759,7 @@ function Index() {
                     <img
                       src={postcardBack}
                       alt={`${title} — ${labels.back}`}
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
                       className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
                     />
@@ -856,7 +856,7 @@ function Index() {
                   <img
                     src={w.src}
                     alt={artTitle}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
                   />
@@ -915,7 +915,7 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5 md:col-start-1">
             <div className="md:sticky md:top-32">
-              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} loading="eager" decoding="async" className="w-full h-auto object-cover" />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:pt-16">
@@ -970,7 +970,7 @@ function Index() {
                   <img
                     src={p.src}
                     alt={lang === "ru" ? p.ru : p.en}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     draggable={false}
                     className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03] pointer-events-none"
