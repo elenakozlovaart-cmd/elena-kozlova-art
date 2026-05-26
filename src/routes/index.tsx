@@ -30,8 +30,8 @@ const splitTitlePrice = (t: string): { title: string; price: string | null } => 
   return { title: t, price: null };
 };
 import hero from "@/assets/hero.jpeg";
-import postcardsTile from "@/assets/postcards-tile.png";
-import paintingsTile from "@/assets/paintings-tile.png";
+import postcardsTile from "@/assets/postcards-tile.jpg";
+import paintingsTile from "@/assets/paintings-tile.jpg";
 
 import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
@@ -46,10 +46,10 @@ import w9 from "@/assets/work-09.jpg";
 import w10 from "@/assets/work-10.jpg";
 import w11 from "@/assets/work-11.jpg";
 import w12 from "@/assets/work-12.jpg";
-import w13 from "@/assets/work-13.png";
-import w14 from "@/assets/work-14.png";
-import w15 from "@/assets/work-15.png";
-import w16 from "@/assets/work-16.png";
+import w13 from "@/assets/work-13.jpg";
+import w14 from "@/assets/work-14.jpg";
+import w15 from "@/assets/work-15.jpg";
+import w16 from "@/assets/work-16.jpg";
 import world01 from "@/assets/world-01.jpeg";
 import world02 from "@/assets/world-02.jpg";
 import world03 from "@/assets/world-03.jpg";
