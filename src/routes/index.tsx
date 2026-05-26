@@ -856,6 +856,8 @@ function Index() {
                   <img
                     src={w.src}
                     alt={artTitle}
+                    loading="lazy"
+                    decoding="async"
                     className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
                   />
                 </button>
