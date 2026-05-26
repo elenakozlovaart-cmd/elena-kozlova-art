@@ -30,8 +30,8 @@ const splitTitlePrice = (t: string): { title: string; price: string | null } => 
   return { title: t, price: null };
 };
 import hero from "@/assets/hero.jpeg";
-import postcardsTile from "@/assets/postcards-tile.png";
-import paintingsTile from "@/assets/paintings-tile.png";
+import postcardsTile from "@/assets/postcards-tile.jpg";
+import paintingsTile from "@/assets/paintings-tile.jpg";
 
 import portrait from "@/assets/artist-portrait.jpg";
 import w1 from "@/assets/work-01.jpeg";
@@ -46,10 +46,10 @@ import w9 from "@/assets/work-09.jpg";
 import w10 from "@/assets/work-10.jpg";
 import w11 from "@/assets/work-11.jpg";
 import w12 from "@/assets/work-12.jpg";
-import w13 from "@/assets/work-13.png";
-import w14 from "@/assets/work-14.png";
-import w15 from "@/assets/work-15.png";
-import w16 from "@/assets/work-16.png";
+import w13 from "@/assets/work-13.jpg";
+import w14 from "@/assets/work-14.jpg";
+import w15 from "@/assets/work-15.jpg";
+import w16 from "@/assets/work-16.jpg";
 import world01 from "@/assets/world-01.jpeg";
 import world02 from "@/assets/world-02.jpg";
 import world03 from "@/assets/world-03.jpg";
@@ -466,6 +466,8 @@ function Index() {
                     <img
                       src={cat.img}
                       alt={cat.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
                     />
                   ) : (
@@ -740,6 +742,8 @@ function Index() {
                     <img
                       src={p.src}
                       alt={`${title} — ${labels.front}`}
+                      loading="lazy"
+                      decoding="async"
                       className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
                     />
                   </button>
@@ -755,6 +759,8 @@ function Index() {
                     <img
                       src={postcardBack}
                       alt={`${title} — ${labels.back}`}
+                      loading="lazy"
+                      decoding="async"
                       className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
                     />
                   </button>
@@ -850,6 +856,8 @@ function Index() {
                   <img
                     src={w.src}
                     alt={artTitle}
+                    loading="lazy"
+                    decoding="async"
                     className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
                   />
                 </button>
@@ -907,7 +915,7 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5 md:col-start-1">
             <div className="md:sticky md:top-32">
-              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} className="w-full h-auto object-cover" />
+              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:pt-16">
@@ -963,6 +971,7 @@ function Index() {
                     src={p.src}
                     alt={lang === "ru" ? p.ru : p.en}
                     loading="lazy"
+                    decoding="async"
                     draggable={false}
                     className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03] pointer-events-none"
                   />
