@@ -971,6 +971,7 @@ function Index() {
                     src={p.src}
                     alt={lang === "ru" ? p.ru : p.en}
                     loading="lazy"
+                    decoding="async"
                     draggable={false}
                     className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03] pointer-events-none"
                   />
