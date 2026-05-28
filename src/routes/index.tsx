@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Send } from "lucide-react";
-import ImageDebugOverlay from "@/components/ImageDebugOverlay";
 
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
@@ -1196,7 +1195,6 @@ function Index() {
           document.body,
         );
       })()}
-      <ImageDebugOverlay />
     </div>
   );
 }
