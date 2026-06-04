@@ -23,12 +23,8 @@ const MaxIcon = ({ className }: { className?: string }) => (
 const TG_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
 
-// Split a title like "Дилижан        10 000 руб." into [title, price]
-const splitTitlePrice = (t: string): { title: string; price: string | null } => {
-  const m = t.match(/^(.*?)\s{2,}([\d\s.,]+\s*(?:руб\.?|€))\s*$/);
-  if (m) return { title: m[1].trim().replace(/\.$/, ""), price: m[2].trim() };
-  return { title: t, price: null };
-};
+const formatPrice = (price: { rub: number; eur: number }, lang: "ru" | "en"): string =>
+  lang === "ru" ? `${price.rub.toLocaleString("ru-RU")} руб.` : `${price.eur} €`;
 import hero from "@/assets/hero.jpeg";
 import postcardsTile from "@/assets/postcards-tile.jpg";
 import paintingsTile from "@/assets/paintings-tile.jpg";
@@ -114,22 +110,22 @@ export const Route = createFileRoute("/")({
 type Lang = "ru" | "en";
 
 const works = [
-  { src: w1, ru: { c: "Армения", t: "Дилижан           10000 руб.", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Туман укрывает горные склоны Дилижана — воздух будто растворяет очертания деревьев, оставляя только дыхание леса." }, en: { c: "Armenia", t: "Dilijan                  100 €", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Mist drapes the slopes of Dilijan — the air dissolves the contours of trees, leaving only the breath of the forest." } },
-  { src: w2, ru: { c: "Армения", t: "Нораванк             10000 руб.", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тёплый камень древнего монастыря, выросший из охристых скал. Свет здесь хранит память столетий." }, en: { c: "Armenia", t: "Noravank                  100 €", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Warm stone of the ancient monastery rising from ochre cliffs. The light here holds the memory of centuries." } },
-  { src: w3, ru: { c: "Армения", t: "Озеро Севан        10 000 руб.", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Прозрачная синь высокогорного озера, где небо и вода говорят на одном языке тишины." }, en: { c: "Armenia", t: "Lake Sevan                  100 €", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The transparent blue of a highland lake, where sky and water share one language of stillness." } },
-  { src: w4, ru: { c: "Армения", t: "Ереван. Площадь Республики.                        10 000 руб.", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Розовый туф города оживает в мягком evening light — архитектура дышит, отражаясь в движении прохожих." }, en: { c: "Armenia", t: "Yerevan, Republic Square                  100 €", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The pink tuff of the city comes alive in the soft evening light — architecture breathes through the motion of passers-by." } },
-  { src: w5, ru: { c: "Армения", t: "Гюмри                             10 000 руб.", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тихие улицы Гюмри, где время движется неспешно, а каждый дом хранит свой собственный сюжет." }, en: { c: "Armenia", t: "Gyumri                  100 €", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Quiet streets of Gyumri, where time moves slowly and each house keeps its own quiet story." } },
-  { src: w6, ru: { c: "Родина-мать", t: "Родина-мать I                           10 000 руб.\n", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Монументальный силуэт, растворённый в воздушной перспективе — величие, переданное лёгкостью акварели." }, en: { c: "Motherland", t: "Motherland I                  100 €", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A monumental silhouette dissolved into aerial perspective — grandeur conveyed through the lightness of watercolour." } },
-  { src: w7, ru: { c: "Родина-мать", t: "Родина-мать II                                         10 000 руб.\n", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Продолжение размышления о памяти и пространстве: фигура и небо сливаются в единое состояние." }, en: { c: "Motherland", t: "Motherland II                  100 €", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A continuation of a reflection on memory and space: figure and sky merge into a single state." } },
-  { src: w8, ru: { c: "Городская лирика", t: "Сквозь дождь                               15 000 руб.", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Город сквозь стеклянную пелену дождя — отражения и движение размывают границы между улицей и сном." }, en: { c: "Urban lyrics", t: "Through the Rain                  150 €", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A city seen through a glassy veil of rain — reflections and movement blur the line between street and dream." } },
-  { src: w9, ru: { c: "Байкал", t: "Деревня на Ольхоне. Байкал                                    10 000 руб.\n", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Деревянные дома на ветреном острове — простая жизнь у большой воды, написанная в единой тёплой палитре." }, en: { c: "Baikal", t: "Village on Olkhon. Baikal                  100 €", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Wooden houses on a windswept island — quiet life beside the great water, painted in a single warm palette." } },
-  { src: w10, ru: { c: "Байкал", t: "Ступа Просветления на острове Огой. Байкал                                     10 000 руб.", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Белая ступа над озером — точка покоя в широте байкальского пейзажа, где горизонт становится молитвой." }, en: { c: "Baikal", t: "Stupa of Enlightenment on Ogoy Island. Baikal                  100 €", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "A white stupa above the lake — a point of stillness in the vastness of Baikal, where the horizon turns into prayer." } },
-  { src: w11, ru: { c: "Байкал", t: "Байкал. Корабли                        10 000 руб.\n", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Силуэты кораблей у берега — пауза между плаванием и тишиной, между водой и небом." }, en: { c: "Baikal", t: "Baikal. Ships                  100 €", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Silhouettes of ships at the shore — a pause between voyage and silence, between water and sky." } },
-  { src: w12, ru: { c: "Байкал", t: "Ольхон. Шаманка                                     10 000 руб.\n", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Скала Шаманка — древний образ Байкала, написанный почти иконографично: камень, ветер и свет." }, en: { c: "Baikal", t: "Olkhon. Shamanka                  100 €", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Shamanka Rock — an ancient image of Baikal rendered almost iconographically: stone, wind and light." } },
-  { src: w13, ru: { c: "Круглая серия", t: "Огни города                                                              15 000 руб.\n", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Ночные огни, собранные в круг — городская мелодия, увиденная издалека и сведённая к чистому свету." }, en: { c: "Circular series", t: "City Lights                  150 €", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Night lights gathered into a circle — an urban melody seen from afar and distilled into pure light." } },
-  { src: w14, ru: { c: "Круглая серия", t: "Чайка над водой                         10 000 руб.\n", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Лёгкое движение крыла над водной гладью — мгновение, остановленное прозрачным мазком." }, en: { c: "Circular series", t: "Gull Above Water                  100 €", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "The light motion of a wing above still water — an instant held by a single transparent stroke." } },
-  { src: w15, ru: { c: "Круглая серия", t: "Полёт                                                       10 000 руб.\n", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Птица в свободном пространстве воздуха — образ внутренней лёгкости и тишины." }, en: { c: "Circular series", t: "Flight                  100 €", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A bird in the open space of air — an image of inner lightness and stillness." } },
-  { src: w16, ru: { c: "Круглая серия", t: "Москва на закате                      10 000 руб.\n", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Тёплый закатный свет ложится на знакомые силуэты — город становится мягким, почти музыкальным." }, en: { c: "Circular series", t: "Moscow at Sunset                  100 €", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Warm sunset light falls on familiar silhouettes — the city becomes soft, almost musical." } },
+  { src: w1, price: { rub: 10000, eur: 100 }, ru: { c: "Армения", t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Туман укрывает горные склоны Дилижана — воздух будто растворяет очертания деревьев, оставляя только дыхание леса." }, en: { c: "Armenia", t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Mist drapes the slopes of Dilijan — the air dissolves the contours of trees, leaving only the breath of the forest." } },
+  { src: w2, price: { rub: 10000, eur: 100 }, ru: { c: "Армения", t: "Нораванк", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тёплый камень древнего монастыря, выросший из охристых скал. Свет здесь хранит память столетий." }, en: { c: "Armenia", t: "Noravank", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Warm stone of the ancient monastery rising from ochre cliffs. The light here holds the memory of centuries." } },
+  { src: w3, price: { rub: 10000, eur: 100 }, ru: { c: "Армения", t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Прозрачная синь высокогорного озера, где небо и вода говорят на одном языке тишины." }, en: { c: "Armenia", t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The transparent blue of a highland lake, where sky and water share one language of stillness." } },
+  { src: w4, price: { rub: 10000, eur: 100 }, ru: { c: "Армения", t: "Ереван. Площадь Республики", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Розовый туф города оживает в мягком evening light — архитектура дышит, отражаясь в движении прохожих." }, en: { c: "Armenia", t: "Yerevan, Republic Square", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The pink tuff of the city comes alive in the soft evening light — architecture breathes through the motion of passers-by." } },
+  { src: w5, price: { rub: 10000, eur: 100 }, ru: { c: "Армения", t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тихие улицы Гюмри, где время движется неспешно, а каждый дом хранит свой собственный сюжет." }, en: { c: "Armenia", t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Quiet streets of Gyumri, where time moves slowly and each house keeps its own quiet story." } },
+  { src: w6, price: { rub: 10000, eur: 100 }, ru: { c: "Родина-мать", t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Монументальный силуэт, растворённый в воздушной перспективе — величие, переданное лёгкостью акварели." }, en: { c: "Motherland", t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A monumental silhouette dissolved into aerial perspective — grandeur conveyed through the lightness of watercolour." } },
+  { src: w7, price: { rub: 10000, eur: 100 }, ru: { c: "Родина-мать", t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Продолжение размышления о памяти и пространстве: фигура и небо сливаются в единое состояние." }, en: { c: "Motherland", t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A continuation of a reflection on memory and space: figure and sky merge into a single state." } },
+  { src: w8, price: { rub: 15000, eur: 150 }, ru: { c: "Городская лирика", t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Город сквозь стеклянную пелену дождя — отражения и движение размывают границы между улицей и сном." }, en: { c: "Urban lyrics", t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A city seen through a glassy veil of rain — reflections and movement blur the line between street and dream." } },
+  { src: w9, price: { rub: 10000, eur: 100 }, ru: { c: "Байкал", t: "Деревня на Ольхоне. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Деревянные дома на ветреном острове — простая жизнь у большой воды, написанная в единой тёплой палитре." }, en: { c: "Baikal", t: "Village on Olkhon. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Wooden houses on a windswept island — quiet life beside the great water, painted in a single warm palette." } },
+  { src: w10, price: { rub: 10000, eur: 100 }, ru: { c: "Байкал", t: "Ступа Просветления на острове Огой. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Белая ступа над озером — точка покоя в широте байкальского пейзажа, где горизонт становится молитвой." }, en: { c: "Baikal", t: "Stupa of Enlightenment on Ogoy Island. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "A white stupa above the lake — a point of stillness in the vastness of Baikal, where the horizon turns into prayer." } },
+  { src: w11, price: { rub: 10000, eur: 100 }, ru: { c: "Байкал", t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Силуэты кораблей у берега — пауза между плаванием и тишиной, между водой и небом." }, en: { c: "Baikal", t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Silhouettes of ships at the shore — a pause between voyage and silence, between water and sky." } },
+  { src: w12, price: { rub: 10000, eur: 100 }, ru: { c: "Байкал", t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Скала Шаманка — древний образ Байкала, написанный почти иконографично: камень, ветер и свет." }, en: { c: "Baikal", t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Shamanka Rock — an ancient image of Baikal rendered almost iconographically: stone, wind and light." } },
+  { src: w13, price: { rub: 15000, eur: 150 }, ru: { c: "Круглая серия", t: "Огни города", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Ночные огни, собранные в круг — городская мелодия, увиденная издалека и сведённая к чистому свету." }, en: { c: "Circular series", t: "City Lights", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Night lights gathered into a circle — an urban melody seen from afar and distilled into pure light." } },
+  { src: w14, price: { rub: 10000, eur: 100 }, ru: { c: "Круглая серия", t: "Чайка над водой", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Лёгкое движение крыла над водной гладью — мгновение, остановленное прозрачным мазком." }, en: { c: "Circular series", t: "Gull Above Water", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "The light motion of a wing above still water — an instant held by a single transparent stroke." } },
+  { src: w15, price: { rub: 10000, eur: 100 }, ru: { c: "Круглая серия", t: "Полёт", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Птица в свободном пространстве воздуха — образ внутренней лёгкости и тишины." }, en: { c: "Circular series", t: "Flight", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A bird in the open space of air — an image of inner lightness and stillness." } },
+  { src: w16, price: { rub: 10000, eur: 100 }, ru: { c: "Круглая серия", t: "Москва на закате", s: "d 50 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Тёплый закатный свет ложится на знакомые силуэты — город становится мягким, почти музыкальным." }, en: { c: "Circular series", t: "Moscow at Sunset", s: "d 50 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Warm sunset light falls on familiar silhouettes — the city becomes soft, almost musical." } },
 ];
 
 function Index() {
@@ -559,62 +555,53 @@ function Index() {
                           <img src={w.src} alt={info.t} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                             <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
-                              {splitTitlePrice(info.t).title}
+                              {info.t}
                             </span>
                           </div>
                         </button>
                         <figcaption className="mt-6">
-                          {(() => {
-                            const { title: ttl, price } = splitTitlePrice(info.t);
-                            return (
-                              <>
-                                <div className="flex items-baseline justify-between gap-4">
-                                  <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
-                                    <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
-                                      {ttl}
-                                    </button>
-                                  </h3>
-                                  {price && (
-                                    <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
-                                      {price}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="mt-2 flex items-start justify-between gap-4">
-                                  <p className="text-[12px] tracking-[0.1em] text-foreground/55">
-                                    {info.m || t.cardMedium} · {info.s} · {info.y}
-                                  </p>
-                                  <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
-                                    {info.st}
-                                  </span>
-                                </div>
-                                {!sold && (
-                                  <div className="mt-5 flex gap-3">
-                                    <a
-                                      href={TG_LINK}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                                    >
-                                      {lang === "ru" ? "Написать" : "Message"}
-                                      <Send className="w-3.5 h-3.5" strokeWidth={2} />
-                                    </a>
-                                    <a
-                                      href={MAX_LINK}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                                    >
-                                      {lang === "ru" ? "Написать" : "Message"}
-                                      <MaxIcon className="w-4 h-4" />
-                                    </a>
-                                  </div>
-                                )}
-                              </>
-                            );
-                          })()}
+                          <div className="flex items-baseline justify-between gap-4">
+                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
+                              <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
+                                {info.t}
+                              </button>
+                            </h3>
+                            <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
+                              {formatPrice(w.price, lang)}
+                            </span>
+                          </div>
+                          <div className="mt-2 flex items-start justify-between gap-4">
+                            <p className="text-[12px] tracking-[0.1em] text-foreground/55">
+                              {info.m || t.cardMedium} · {info.s} · {info.y}
+                            </p>
+                            <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
+                              {info.st}
+                            </span>
+                          </div>
+                          {!sold && (
+                            <div className="mt-5 flex gap-3">
+                              <a
+                                href={TG_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                              >
+                                {lang === "ru" ? "Написать" : "Message"}
+                                <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                              </a>
+                              <a
+                                href={MAX_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                              >
+                                {lang === "ru" ? "Написать" : "Message"}
+                                <MaxIcon className="w-4 h-4" />
+                              </a>
+                            </div>
+                          )}
                         </figcaption>
                       </figure>
                     );
@@ -817,14 +804,13 @@ function Index() {
         const labels = lang === "ru"
           ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", price: "Цена", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
           : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", price: "Price", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
-        const { title: artTitle, price: artPrice } = splitTitlePrice(info.t);
         const rows: { label: string; value: string }[] = [
           { label: labels.cat, value: info.c },
           { label: labels.tech, value: info.m },
           { label: labels.size, value: info.s },
           { label: labels.year, value: info.y },
           { label: labels.status, value: info.st },
-          ...(artPrice ? [{ label: labels.price, value: artPrice }] : []),
+          { label: labels.price, value: formatPrice(w.price, lang) },
         ];
         return (
           <div
@@ -849,13 +835,13 @@ function Index() {
               <div className="md:col-span-8 flex items-center justify-center">
                 <button
                   type="button"
-                  onClick={() => setLightbox({ images: [{ src: w.src, alt: artTitle }], index: 0 })}
+                  onClick={() => setLightbox({ images: [{ src: w.src, alt: info.t }], index: 0 })}
                   className="block cursor-zoom-in"
                   aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
                 >
                   <img
                     src={w.src}
-                    alt={artTitle}
+                    alt={info.t}
                     loading="eager"
                     decoding="async"
                     className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
@@ -865,7 +851,7 @@ function Index() {
               <div className="md:col-span-4 flex flex-col justify-center md:py-8">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
                 <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
-                  {artTitle}
+                  {info.t}
                 </h2>
                 <dl className="space-y-5 mb-10">
                   {rows.slice(1).map((r) => (
