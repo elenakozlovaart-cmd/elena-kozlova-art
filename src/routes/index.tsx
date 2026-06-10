@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, Send } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Instagram } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
@@ -22,6 +22,7 @@ const MaxIcon = ({ className }: { className?: string }) => (
 
 const TG_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
+const IG_LINK = "https://instagram.com/elenakozlovaart";
 
 const formatPrice = (price: { rub: number; eur: number }, lang: "ru" | "en"): string =>
   lang === "ru" ? `${price.rub.toLocaleString("ru-RU")} руб.` : `${price.eur} €`;
@@ -251,7 +252,8 @@ function Index() {
         acqCta: "Написать в Telegram",
         acqCtaMax: "Написать в MAX",
         tgKicker: "Следить за новыми работами",
-        tgBody: "Новые работы, процесс создания акварелей, пленэры, выставки и события художественной практики, можно увидеть в личном блоге художника.",
+        tgBody: "Новые работы, процесс создания акварелей, пленэры, выставки и события художественной практики, можно увидеть в личных каналах художника.",
+        igCta: "Подписаться в Instagram",
         tgCta: "Подписаться в Telegram",
         tgCtaMax: "Подписаться в MAX",
         aboutCtaMax: "Сотрудничество в MAX",
@@ -325,7 +327,8 @@ function Index() {
         acqCta: "Message on Telegram",
         acqCtaMax: "Message on MAX",
         tgKicker: "Follow new works",
-        tgBody: "New works, the process of creating watercolors, plein air sessions, exhibitions, and events from the artist’s creative practice can be seen in the artist’s personal blog.",
+        tgBody: "New works, the process of creating watercolors, plein air sessions, exhibitions, and events from the artist’s creative practice can be seen in the artist’s personal channels.",
+        igCta: "Follow on Instagram",
         tgCta: "Follow on Telegram",
         tgCtaMax: "Follow on MAX",
         aboutCtaMax: "Collaboration on MAX",
@@ -361,20 +364,31 @@ function Index() {
             <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
           </div>
-          <div className="flex items-center gap-1 text-[11px] tracking-[0.2em]">
-            <button
-              onClick={() => setLang("ru")}
-              className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}
+          <div className="flex items-center gap-4 text-[11px] tracking-[0.2em]">
+            <a
+              href={IG_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-foreground/60 hover:text-foreground transition-colors"
             >
-              RU
-            </button>
-            <span className="text-foreground/30">/</span>
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}
-            >
-              EN
-            </button>
+              <Instagram className="w-4 h-4" />
+            </a>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setLang("ru")}
+                className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}
+              >
+                RU
+              </button>
+              <span className="text-foreground/30">/</span>
+              <button
+                onClick={() => setLang("en")}
+                className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -1017,10 +1031,18 @@ function Index() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://t.me/ElenaKozlovaArt"
+              href={IG_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+            >
+              {t.igCta}
+            </a>
+            <a
+              href="https://t.me/ElenaKozlovaArt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
             >
               {t.tgCta}
             </a>
@@ -1100,6 +1122,9 @@ function Index() {
             <div className="space-y-4 mb-10">
               <a href={mailto} className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 elenakozlova77@yandex.ru
+              </a>
+              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                @elenakozlovaart
               </a>
               <a href="https://t.me/ElenaKozlova_Art" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 @ElenaKozlova_Art
