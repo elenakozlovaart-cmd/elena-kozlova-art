@@ -20,7 +20,9 @@ const MaxIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const TG_LINK = "https://t.me/ElenaKozlovaArt";
+// Два разных TG-аккаунта: канал-блог (подписка) — с «_», личные сообщения (заказы) — без
+const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
+const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
 const IG_LINK = "https://instagram.com/elenakozlovaart";
 
@@ -375,7 +377,7 @@ function Index() {
               <Instagram className="w-4 h-4" />
             </a>
             <a
-              href="https://t.me/ElenaKozlova_Art"
+              href={TG_CHANNEL_LINK}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
@@ -599,7 +601,7 @@ function Index() {
                           {!sold && (
                             <div className="mt-5 flex gap-3">
                               <a
-                                href={TG_LINK}
+                                href={TG_DM_LINK}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
@@ -666,7 +668,7 @@ function Index() {
                           </div>
                           <div className="mt-5 flex gap-3">
                             <a
-                              href={TG_LINK}
+                              href={TG_DM_LINK}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
@@ -787,7 +789,7 @@ function Index() {
                 </dl>
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <a
-                    href={TG_LINK}
+                    href={TG_DM_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
@@ -887,7 +889,7 @@ function Index() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <a
-                    href={TG_LINK}
+                    href={TG_DM_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
@@ -931,7 +933,7 @@ function Index() {
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
             <div className="flex flex-col sm:flex-row gap-3 mt-12">
-              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a href={TG_DM_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.aboutCta}
               </a>
               <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
@@ -1048,7 +1050,7 @@ function Index() {
               {t.igCta}
             </a>
             <a
-              href="https://t.me/ElenaKozlovaArt"
+              href={TG_CHANNEL_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
@@ -1095,7 +1097,7 @@ function Index() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="https://t.me/ElenaKozlovaArt"
+                href={TG_DM_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
@@ -1135,12 +1137,12 @@ function Index() {
               <a href={IG_LINK} target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 @elenakozlovaart
               </a>
-              <a href="https://t.me/ElenaKozlova_Art" target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
                 @ElenaKozlova_Art
               </a>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <a href="https://t.me/ElenaKozlovaArt" target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a href={TG_DM_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.footerCta}
               </a>
               <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
