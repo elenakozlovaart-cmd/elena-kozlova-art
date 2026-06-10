@@ -374,6 +374,15 @@ function Index() {
             >
               <Instagram className="w-4 h-4" />
             </a>
+            <a
+              href="https://t.me/ElenaKozlova_Art"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              className="text-foreground/60 hover:text-foreground transition-colors"
+            >
+              <Send className="w-4 h-4" />
+            </a>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setLang("ru")}
