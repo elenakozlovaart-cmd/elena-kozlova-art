@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, Send, Instagram } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Instagram, Mail } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
@@ -24,7 +24,9 @@ const MaxIcon = ({ className }: { className?: string }) => (
 const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
+// Два IG-аккаунта: личный/творческий @elenakozlovaart (подписка) и каталожный @kozlova_gallery (низ воронки)
 const IG_LINK = "https://instagram.com/elenakozlovaart";
+const IG_CATALOG_LINK = "https://instagram.com/kozlova_gallery";
 
 const formatPrice = (price: { rub: number; eur: number }, lang: "ru" | "en"): string =>
   lang === "ru" ? `${price.rub.toLocaleString("ru-RU")} руб.` : `${price.eur} €`;
@@ -217,6 +219,12 @@ function Index() {
         worksKicker: "Работы",
         worksTitle: "Галерея",
         worksIntro: "Подборка недавних акварелей.\nКаждая работа уникальна и существует в единственном экземпляре.",
+        catalogKicker: "Полный каталог",
+        catalogTitle: "Больше работ",
+        catalogBody: "На сайте — подборка. Все работы в наличии собраны в каталоге Instagram. Если удобнее — пришлю PDF-каталог с ценами в Telegram или MAX.",
+        catalogCtaIg: "Все работы — Instagram",
+        catalogCtaTg: "PDF-каталог в Telegram",
+        catalogCtaMax: "PDF-каталог в MAX",
         paintingsTitle: "Картины",
         postcardsTitle: "Открытки",
         postcardsEmpty: "Раздел скоро будет дополнен.",
@@ -292,6 +300,12 @@ function Index() {
         worksKicker: "Works",
         worksTitle: "Selected",
         worksIntro: "A selection of recent works in watercolour.\nEach piece is unique and created as an original.",
+        catalogKicker: "Full catalogue",
+        catalogTitle: "More works",
+        catalogBody: "What you see here is a selection. The full set of available works lives on Instagram. If it’s easier — I can send you a PDF catalogue with prices on Telegram or MAX.",
+        catalogCtaIg: "All works — Instagram",
+        catalogCtaTg: "PDF catalogue on Telegram",
+        catalogCtaMax: "PDF catalogue on MAX",
         paintingsTitle: "Paintings",
         postcardsTitle: "Postcards",
         postcardsEmpty: "This section will be updated soon.",
@@ -549,6 +563,7 @@ function Index() {
               </div>
 
               {openCategory === "paintings" ? (
+                <>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
                   {works.map((w, i) => {
                     const layouts = [
@@ -627,6 +642,44 @@ function Index() {
                     );
                   })}
                 </div>
+                {/* Полный каталог — CTA блок под сеткой работ */}
+                <div className="mt-32 md:mt-40 pt-20 md:pt-24 border-t border-border/40">
+                  <div className="max-w-3xl mx-auto text-center px-4">
+                    <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.catalogKicker}</p>
+                    <h3 style={serif} className="text-4xl md:text-5xl font-light leading-[1.1] mb-8">{t.catalogTitle}</h3>
+                    <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/75 mb-12 max-w-2xl mx-auto">{t.catalogBody}</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <a
+                        href={IG_CATALOG_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                      >
+                        <Instagram className="w-4 h-4" strokeWidth={1.75} />
+                        {t.catalogCtaIg}
+                      </a>
+                      <a
+                        href={TG_DM_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                      >
+                        <Send className="w-4 h-4" strokeWidth={1.75} />
+                        {t.catalogCtaTg}
+                      </a>
+                      <a
+                        href={MAX_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                      >
+                        <MaxIcon className="w-4 h-4" />
+                        {t.catalogCtaMax}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                </>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
                   {postcards.map((p, i) => {
@@ -1131,14 +1184,17 @@ function Index() {
           <div className="md:col-span-4 md:col-start-9">
             <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.footerContactLabel}</p>
             <div className="space-y-4 mb-10">
-              <a href={mailto} className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                elenakozlova77@yandex.ru
+              <a href={mailto} className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                <Mail className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">elenakozlova77@yandex.ru</span>
               </a>
-              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                @elenakozlovaart
+              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                <Instagram className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">@elenakozlovaart</span>
               </a>
-              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" className="block text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                @ElenaKozlova_Art
+              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
+                <Send className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">@ElenaKozlova_Art</span>
               </a>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
