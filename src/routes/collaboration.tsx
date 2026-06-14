@@ -84,7 +84,7 @@ function CollaborationPage() {
       ],
 
       processKicker: "Как работаем",
-      processTitle: "Простой процесс",
+      processTitle: "От идеи до работы в интерьере",
       process: [
         { n: "01", title: "Расскажите про пространство", desc: "Пара фото, размер стены, какое ощущение хотите. В Telegram, MAX или на почту." },
         { n: "02", title: "Подбираю", desc: "3–5 работ под формат и стилистику пространства. Присылаю на согласование с предварительной ценой." },
@@ -131,7 +131,7 @@ function CollaborationPage() {
       ],
 
       processKicker: "How it works",
-      processTitle: "A simple process",
+      processTitle: "From idea to artwork in the space",
       process: [
         { n: "01", title: "Tell me about the space", desc: "A couple of photos, wall size, the feeling you’re after. On Telegram, MAX or email." },
         { n: "02", title: "I put together a selection", desc: "3–5 works that fit the format and the mood, sent over for approval with a preliminary quote." },
