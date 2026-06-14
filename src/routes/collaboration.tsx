@@ -88,7 +88,7 @@ function CollaborationPage() {
       process: [
         { n: "01", title: "Расскажите про пространство", desc: "Пара фото, размер стены, какое ощущение хотите. В Telegram, MAX или на почту." },
         { n: "02", title: "Подбираю", desc: "3–5 работ под формат и стилистику пространства. Присылаю на согласование с предварительной ценой." },
-        { n: "03", title: "Согласуем и привезу", desc: "Оформление в раме — по желанию. Доставка по Москве и регионам." },
+        { n: "03", title: "Согласуем оформление и доставку", desc: "Оформление в раме (по желанию) и доставка по Москве или регионам — за счёт покупателя." },
       ],
 
       ctaKicker: "Связь",
@@ -135,7 +135,7 @@ function CollaborationPage() {
       process: [
         { n: "01", title: "Tell me about the space", desc: "A couple of photos, wall size, the feeling you’re after. On Telegram, MAX or email." },
         { n: "02", title: "I put together a selection", desc: "3–5 works that fit the format and the mood, sent over for approval with a preliminary quote." },
-        { n: "03", title: "We agree and I deliver", desc: "Framing on request. Delivery across Moscow and the regions." },
+        { n: "03", title: "Framing and delivery", desc: "Framing (on request) and delivery within Moscow or the regions — at the buyer’s expense." },
       ],
 
       ctaKicker: "Get in touch",

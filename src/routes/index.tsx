@@ -212,7 +212,7 @@ function Index() {
           "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
           "Работы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.",
         ],
-        aboutCta: "Сотрудничество в Telegram",
+        aboutCta: "Сотрудничество",
         worldKicker: "Мир художника",
         worldTitle: "Мир художника",
         worldBody: "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
@@ -266,7 +266,6 @@ function Index() {
         igCta: "Подписаться в Instagram",
         tgCta: "Подписаться в Telegram",
         tgCtaMax: "Подписаться в MAX",
-        aboutCtaMax: "Сотрудничество в MAX",
         footerCtaMax: "Написать в MAX",
         footerName: "Елена Козлова",
         footerTagline: "современный художник, работающий в технике акварели",
@@ -293,7 +292,7 @@ function Index() {
           "Her works exist on the border between observation and experience: a landscape becomes a reflection of inner perception, while the figure becomes a way to explore plasticity and presence.",
           "Elena Kozlova's works can become part of both private and public spaces — from intimate interiors to restaurants, hotels, and gallery areas. Watercolor does not overwhelm a space; it creates a point of silence, light, and living presence within it. Individual selection of works and collaboration with designers, architects, and space owners are possible.",
         ],
-        aboutCta: "Collaboration on Telegram",
+        aboutCta: "Collaboration",
         worldKicker: "Artist's World",
         worldTitle: "Artist's World",
         worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
@@ -347,7 +346,6 @@ function Index() {
         igCta: "Follow on Instagram",
         tgCta: "Follow on Telegram",
         tgCtaMax: "Follow on MAX",
-        aboutCtaMax: "Collaboration on MAX",
         footerCtaMax: "Message on MAX",
         footerName: "Elena Kozlova",
         footerTagline: "contemporary watercolour artist",
@@ -1017,12 +1015,9 @@ function Index() {
               {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
             </div>
             <div className="flex flex-col sm:flex-row gap-3 mt-12">
-              <a href={TG_DM_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <Link to="/collaboration" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
                 {t.aboutCta}
-              </a>
-              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
-                {t.aboutCtaMax}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
