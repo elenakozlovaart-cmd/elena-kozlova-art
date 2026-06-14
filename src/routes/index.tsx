@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Send, Instagram, Mail } from "lucide-react";
@@ -200,7 +200,7 @@ function Index() {
 
   const t = lang === "ru"
     ? {
-        nav: { works: "Работы", about: "О художнике", cv: "Выставки", contact: "Контакты" },
+        nav: { works: "Работы", about: "О художнике", cv: "Выставки", collab: "Сотрудничество", contact: "Контакты" },
         heroKicker: "Художник-акварелист",
         heroName: "Елена\nКозлова",
         heroLead: "Елена работает с темами света, памяти, путешествий и внутренних состояний, создавая атмосферные акварели, в которых важны прозрачность, воздух и ощущение момента.",
@@ -281,7 +281,7 @@ function Index() {
         rights: "Все права защищены",
       }
     : {
-        nav: { works: "Works", about: "About", cv: "Exhibitions", contact: "Contact" },
+        nav: { works: "Works", about: "About", cv: "Exhibitions", collab: "Collaboration", contact: "Contact" },
         heroKicker: "Watercolour artist",
         heroName: "Elena\nKozlova",
         heroLead: "Contemporary watercolour artist. Elena works with themes of light, memory, journeys and inner states, creating atmospheric watercolours where transparency, air and the feeling of the moment matter.",
@@ -378,6 +378,7 @@ function Index() {
             <a href="#works" className="hover:text-foreground transition-colors">{t.nav.works}</a>
             <a href="#about" className="hover:text-foreground transition-colors">{t.nav.about}</a>
             <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
+            <Link to="/collaboration" className="hover:text-foreground transition-colors">{t.nav.collab}</Link>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
           </div>
           <div className="flex items-center gap-4 text-[11px] tracking-[0.2em]">
