@@ -42,6 +42,7 @@ import w4 from "@/assets/work-04.jpeg";
 import w5 from "@/assets/work-05.jpg";
 import w6 from "@/assets/work-06.jpeg";
 import w7 from "@/assets/work-07.jpeg";
+import w6Collage from "@/assets/work-06-collage.jpg";
 import w8 from "@/assets/work-08.jpeg";
 import w9 from "@/assets/work-09.jpg";
 import w10 from "@/assets/work-10.jpg";
@@ -115,8 +116,7 @@ const works = [
   { src: w3, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Прозрачная синь высокогорного озера, где небо и вода говорят на одном языке тишины." }, en: { c: "Armenia", t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The transparent blue of a highland lake, where sky and water share one language of stillness." } },
   { src: w4, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Ереван. Площадь Республики", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Розовый туф города оживает в мягком evening light — архитектура дышит, отражаясь в движении прохожих." }, en: { c: "Armenia", t: "Yerevan, Republic Square", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The pink tuff of the city comes alive in the soft evening light — architecture breathes through the motion of passers-by." } },
   { src: w5, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тихие улицы Гюмри, где время движется неспешно, а каждый дом хранит свой собственный сюжет." }, en: { c: "Armenia", t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Quiet streets of Gyumri, where time moves slowly and each house keeps its own quiet story." } },
-  { src: w6, price: { rub: 15000, eur: 150 }, ru: { c: "Родина-мать", t: "Родина-мать I", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Монументальный силуэт, растворённый в воздушной перспективе — величие, переданное лёгкостью акварели." }, en: { c: "Motherland", t: "Motherland I", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A monumental silhouette dissolved into aerial perspective — grandeur conveyed through the lightness of watercolour." } },
-  { src: w7, price: { rub: 15000, eur: 150 }, ru: { c: "Родина-мать", t: "Родина-мать II", s: "40 × 60 см", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Продолжение размышления о памяти и пространстве: фигура и небо сливаются в единое состояние." }, en: { c: "Motherland", t: "Motherland II", s: "40 × 60 cm", y: "2025", st: "Available", m: "Watercolour on paper", d: "A continuation of a reflection on memory and space: figure and sky merge into a single state." } },
+  { src: w6Collage, price: { rub: 30000, eur: 300 }, diptych: [{ src: w6, labelRu: "I", labelEn: "I" }, { src: w7, labelRu: "II", labelEn: "II" }], ru: { c: "Родина-мать", t: "Родина-мать (диптих)", s: "40 × 60 см × 2", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Диптих: монументальный силуэт и его продолжение — размышление о памяти и пространстве, переданное лёгкостью акварели. Продаётся только парой." }, en: { c: "Motherland", t: "Motherland (diptych)", s: "40 × 60 cm × 2", y: "2025", st: "Available", m: "Watercolour on paper", d: "A diptych: a monumental silhouette and its continuation — a reflection on memory and space conveyed through the lightness of watercolour. Sold only as a pair." } },
   { src: w8, price: { rub: 18000, eur: 180 }, ru: { c: "Городская лирика", t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Город сквозь стеклянную пелену дождя — отражения и движение размывают границы между улицей и сном." }, en: { c: "Urban lyrics", t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A city seen through a glassy veil of rain — reflections and movement blur the line between street and dream." } },
   { src: w9, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Деревня на Ольхоне. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Деревянные дома на ветреном острове — простая жизнь у большой воды, написанная в единой тёплой палитре." }, en: { c: "Baikal", t: "Village on Olkhon. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Wooden houses on a windswept island — quiet life beside the great water, painted in a single warm palette." } },
   { src: w10, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Ступа Просветления на острове Огой. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Белая ступа над озером — точка покоя в широте байкальского пейзажа, где горизонт становится молитвой." }, en: { c: "Baikal", t: "Stupa of Enlightenment on Ogoy Island. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "A white stupa above the lake — a point of stillness in the vastness of Baikal, where the horizon turns into prayer." } },
@@ -273,7 +273,7 @@ function Index() {
         footerBio: "Практика Елены Козловой сосредоточена на изображении пейзажей внутренних состояний и фигуративных этюдов. В её работах акварель выступает как средство фиксации эмоциональных и пластических наблюдений, соединяя спонтанность и точность.",
         footerMeta: [
           "Член Союза акварелистов России.",
-          "Участница групповых выставок в Москве, Санкт-Петербурге и Подмосковье (2021–2026).",
+          "Участница групповых выставок в Москве, Санкт-Петербурге и Подмосковье (2016–2026).",
           "Работы находятся в частных коллекциях в России и Европе.",
         ],
         footerContactLabel: "Связь",
@@ -354,7 +354,7 @@ function Index() {
         footerBio: "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
         footerMeta: [
           "Member of the Russian Watercolour Society.",
-          "Participant in group exhibitions in Moscow, Saint Petersburg and the Moscow region (2021–2026).",
+          "Participant in group exhibitions in Moscow, Saint Petersburg and the Moscow region (2016–2026).",
           "Works are held in private collections across Russia and Europe.",
         ],
         footerContactLabel: "For inquiries, commissions and collaborations",
@@ -905,21 +905,51 @@ function Index() {
               className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="md:col-span-8 flex items-center justify-center">
-                <button
-                  type="button"
-                  onClick={() => setLightbox({ images: [{ src: w.src, alt: info.t }], index: 0 })}
-                  className="block cursor-zoom-in"
-                  aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
-                >
-                  <img
-                    src={w.src}
-                    alt={info.t}
-                    loading="eager"
-                    decoding="async"
-                    className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
-                  />
-                </button>
+              <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
+                {w.diptych ? (
+                  (() => {
+                    const diptychImages = w.diptych.map((d) => ({
+                      src: d.src,
+                      alt: `${info.t} — ${lang === "ru" ? d.labelRu : d.labelEn}`,
+                    }));
+                    return w.diptych.map((d, i) => (
+                      <div key={i} className="w-full flex flex-col items-center">
+                        <button
+                          type="button"
+                          onClick={() => setLightbox({ images: diptychImages, index: i })}
+                          className="block cursor-zoom-in"
+                          aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                        >
+                          <img
+                            src={d.src}
+                            alt={diptychImages[i].alt}
+                            loading="eager"
+                            decoding="async"
+                            className="max-w-full max-h-[55vh] w-auto h-auto object-contain"
+                          />
+                        </button>
+                        <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                          {lang === "ru" ? d.labelRu : d.labelEn}
+                        </p>
+                      </div>
+                    ));
+                  })()
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ images: [{ src: w.src, alt: info.t }], index: 0 })}
+                    className="block cursor-zoom-in"
+                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                  >
+                    <img
+                      src={w.src}
+                      alt={info.t}
+                      loading="eager"
+                      decoding="async"
+                      className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                    />
+                  </button>
+                )}
               </div>
               <div className="md:col-span-4 flex flex-col justify-center md:py-8">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
