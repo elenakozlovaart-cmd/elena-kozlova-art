@@ -173,15 +173,15 @@ function CollaborationPage() {
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/"
               aria-label={t.navHome}
-              className="text-foreground/70 hover:text-foreground transition-colors p-1 -ml-1"
+              className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1 -ml-1 flex-shrink-0"
             >
               <ChevronLeft className="w-5 h-5" strokeWidth={1.75} />
             </Link>
-            <Link to="/" className="text-[11px] tracking-[0.35em] uppercase hover:text-foreground/70 transition-colors truncate">
+            <Link to="/" className="text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] uppercase hover:text-foreground/70 transition-colors whitespace-nowrap">
               {t.navName}
             </Link>
           </div>
