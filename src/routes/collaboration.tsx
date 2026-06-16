@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Send, Instagram, Mail } from "lucide-react";
+import { Send, Instagram, Mail, Menu, X } from "lucide-react";
 
 import buketnayaElena from "@/assets/spaces/buketnaya-elena.png";
 import buketnayaFacade from "@/assets/spaces/buketnaya-facade.png";
@@ -40,18 +40,47 @@ export const Route = createFileRoute("/collaboration")({
   component: CollaborationPage,
   head: () => ({
     meta: [
-      { title: "Сотрудничество — Елена Козлова" },
-      { name: "description", content: "Авторская акварель для интерьеров кафе, ресторанов, отелей и офисов. Кейс «Букетной» и серии работ под разные пространства." },
+      { title: "Сотрудничество — Елена Козлова, художник-акварелист" },
+      { name: "description", content: "Авторская акварель Елены Козловой для интерьеров кафе, ресторанов, отелей и офисов. Кейс магазина «Букетная» (Троицк), серии работ под разные пространства — премиум-лобби, рестораны, минималистичные кафе, pet-friendly заведения." },
+      { property: "og:title", content: "Сотрудничество — Елена Козлова" },
+      { property: "og:description", content: "Акварель в интерьеры кафе, ресторанов и отелей. Реализованный кейс и подборки под разные пространства." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://elenakozlovaart.ru/collaboration" },
     ],
   }),
 });
 
+const LANG_STORAGE_KEY = "elena-kozlova-lang";
+
 function CollaborationPage() {
   const [lang, setLang] = useState<"ru" | "en">("ru");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+      if (stored === "ru" || stored === "en") setLang(stored);
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+    } catch {}
     document.title = lang === "ru" ? "Сотрудничество — Елена Козлова" : "Collaboration — Elena Kozlova";
   }, [lang]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [mobileMenuOpen]);
 
   const translations = {
     ru: {
@@ -164,7 +193,7 @@ function CollaborationPage() {
             <Link to="/" className="hover:text-foreground transition-colors">{t.navHome}</Link>
             <span className="text-foreground">{t.navCollab}</span>
           </div>
-          <div className="flex items-center gap-4 text-[11px] tracking-[0.2em]">
+          <div className="hidden md:flex items-center gap-4 text-[11px] tracking-[0.2em]">
             <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
               <Instagram className="w-4 h-4" />
             </a>
@@ -177,8 +206,52 @@ function CollaborationPage() {
               <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
+            className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1"
+          >
+            <Menu className="w-6 h-6" strokeWidth={1.5} />
+          </button>
         </div>
       </nav>
+
+      {/* MOBILE MENU OVERLAY */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
+          <div className="flex items-center justify-between px-6 h-16 border-b border-border/30">
+            <span className="text-[11px] tracking-[0.35em] uppercase">{t.navName}</span>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label={lang === "ru" ? "Закрыть меню" : "Close menu"}
+              className="text-foreground/70 hover:text-foreground transition-colors p-1"
+            >
+              <X className="w-6 h-6" strokeWidth={1.5} />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center gap-8 px-6">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.navHome}</Link>
+            <span style={serif} className="text-3xl font-light text-foreground/40">{t.navCollab}</span>
+          </div>
+          <div className="border-t border-border/30 px-6 py-6 flex items-center justify-between">
+            <div className="flex items-center gap-5">
+              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-foreground/60 hover:text-foreground transition-colors">
+                <Send className="w-5 h-5" />
+              </a>
+            </div>
+            <div className="flex items-center gap-1 text-[11px] tracking-[0.2em]">
+              <button onClick={() => setLang("ru")} className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>RU</button>
+              <span className="text-foreground/30">/</span>
+              <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section className="pt-32 md:pt-36 pb-20 md:pb-28">
@@ -230,7 +303,7 @@ function CollaborationPage() {
             {t.mockups.map((m, i) => (
               <figure key={i}>
                 <div className="overflow-hidden bg-secondary">
-                  <img src={m.src} alt={m.label} loading="lazy" decoding="async" className="w-full h-auto object-cover aspect-[4/3]" />
+                  <img src={m.src} alt={lang === "ru" ? `Акварель в интерьере — ${m.label}, пример размещения работ Елены Козловой` : `Watercolour in interior — ${m.label}, placement example of Elena Kozlova’s works`} loading="lazy" decoding="async" className="w-full h-auto object-cover aspect-[4/3]" />
                 </div>
                 <figcaption className="mt-5 text-[12px] tracking-[0.25em] uppercase text-foreground/65">{m.label}</figcaption>
               </figure>

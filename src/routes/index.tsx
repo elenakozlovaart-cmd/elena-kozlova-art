@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, Send, Instagram, Mail } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Instagram, Mail, Menu, X } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
@@ -30,6 +30,16 @@ const IG_CATALOG_LINK = "https://instagram.com/kozlova_gallery";
 
 const formatPrice = (price: { rub: number; eur: number }, lang: "ru" | "en"): string =>
   lang === "ru" ? `${price.rub.toLocaleString("ru-RU")} руб.` : `${price.eur} €`;
+
+const getWorkAlt = (info: { t: string; c: string; s: string; y: string }, lang: "ru" | "en"): string =>
+  lang === "ru"
+    ? `Акварель «${info.t}» — ${info.c}, ${info.s}, ${info.y}, художник Елена Козлова`
+    : `Watercolour "${info.t}" — ${info.c}, ${info.s}, ${info.y}, by artist Elena Kozlova`;
+
+const getPostcardAlt = (title: string, lang: "ru" | "en"): string =>
+  lang === "ru"
+    ? `Авторская акварельная открытка «${title}» — Елена Козлова, 10 × 15 см`
+    : `Artist watercolour postcard "${title}" — Elena Kozlova, 10 × 15 cm`;
 import hero from "@/assets/hero.jpeg";
 import postcardsTile from "@/assets/postcards-tile.jpg";
 import paintingsTile from "@/assets/paintings-tile.jpg";
@@ -128,8 +138,24 @@ const works = [
   { src: w16, price: { rub: 12000, eur: 120 }, ru: { c: "Круглая серия", t: "Москва на закате", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Тёплый закатный свет ложится на знакомые силуэты — город становится мягким, почти музыкальным." }, en: { c: "Circular series", t: "Moscow at Sunset", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Warm sunset light falls on familiar silhouettes — the city becomes soft, almost musical." } },
 ];
 
+const LANG_STORAGE_KEY = "elena-kozlova-lang";
+
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+      if (stored === "ru" || stored === "en") setLang(stored);
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+    } catch {}
+  }, [lang]);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
@@ -171,9 +197,10 @@ function Index() {
   };
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null || lightbox !== null;
+    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null || lightbox !== null || mobileMenuOpen;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
+      if (mobileMenuOpen && e.key === "Escape") { setMobileMenuOpen(false); return; }
       if (lightbox) {
         if (e.key === "Escape") setLightbox(null);
         else if (e.key === "ArrowLeft" && lightbox.images.length > 1) {
@@ -195,7 +222,7 @@ function Index() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [openIdx, openCategory, openPostcardIdx, lightbox]);
+  }, [openIdx, openCategory, openPostcardIdx, lightbox, mobileMenuOpen]);
 
 
   const t = lang === "ru"
@@ -379,7 +406,7 @@ function Index() {
             <Link to="/collaboration" className="hover:text-foreground transition-colors">{t.nav.collab}</Link>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
           </div>
-          <div className="flex items-center gap-4 text-[11px] tracking-[0.2em]">
+          <div className="hidden md:flex items-center gap-4 text-[11px] tracking-[0.2em]">
             <a
               href={IG_LINK}
               target="_blank"
@@ -414,8 +441,55 @@ function Index() {
               </button>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
+            className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1"
+          >
+            <Menu className="w-6 h-6" strokeWidth={1.5} />
+          </button>
         </div>
       </nav>
+
+      {/* MOBILE MENU OVERLAY */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
+          <div className="flex items-center justify-between px-6 h-16 border-b border-border/30">
+            <span className="text-[11px] tracking-[0.35em] uppercase">{lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}</span>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label={lang === "ru" ? "Закрыть меню" : "Close menu"}
+              className="text-foreground/70 hover:text-foreground transition-colors p-1"
+            >
+              <X className="w-6 h-6" strokeWidth={1.5} />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center gap-8 px-6">
+            <a href="#works" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.works}</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.about}</a>
+            <a href="#cv" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.cv}</a>
+            <Link to="/collaboration" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.collab}</Link>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.contact}</a>
+          </div>
+          <div className="border-t border-border/30 px-6 py-6 flex items-center justify-between">
+            <div className="flex items-center gap-5">
+              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-foreground/60 hover:text-foreground transition-colors">
+                <Send className="w-5 h-5" />
+              </a>
+            </div>
+            <div className="flex items-center gap-1 text-[11px] tracking-[0.2em]">
+              <button onClick={() => setLang("ru")} className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>RU</button>
+              <span className="text-foreground/30">/</span>
+              <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section id="top" className="pt-28 md:pt-20">
@@ -449,7 +523,7 @@ function Index() {
                 maskComposite: "intersect",
               }}
             >
-              <img src={hero} alt="Elena Kozlova" className="w-full h-full object-cover" />
+              <img src={hero} alt={lang === "ru" ? "Художник-акварелист Елена Козлова" : "Watercolour artist Elena Kozlova"} className="w-full h-full object-cover" />
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
@@ -586,7 +660,7 @@ function Index() {
                           aria-label={info.t}
                           className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
                         >
-                          <img src={w.src} alt={info.t} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <img src={w.src} alt={getWorkAlt(info, lang)} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                             <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                               {info.t}
@@ -692,7 +766,7 @@ function Index() {
                           aria-label={title}
                           className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
                         >
-                          <img src={p.src} alt={title} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
+                          <img src={p.src} alt={getPostcardAlt(title, lang)} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
                           <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
                             <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
                               {title}
@@ -936,13 +1010,13 @@ function Index() {
                 ) : (
                   <button
                     type="button"
-                    onClick={() => setLightbox({ images: [{ src: w.src, alt: info.t }], index: 0 })}
+                    onClick={() => setLightbox({ images: [{ src: w.src, alt: getWorkAlt(info, lang) }], index: 0 })}
                     className="block cursor-zoom-in"
                     aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
                   >
                     <img
                       src={w.src}
-                      alt={info.t}
+                      alt={getWorkAlt(info, lang)}
                       loading="eager"
                       decoding="async"
                       className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
@@ -1003,7 +1077,7 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5 md:col-start-1">
             <div className="md:sticky md:top-32">
-              <img src={portrait} alt={lang === "ru" ? "Елена Козлова в студии" : "Elena Kozlova"} loading="eager" decoding="async" className="w-full h-auto object-cover" />
+              <img src={portrait} alt={lang === "ru" ? "Художник Елена Козлова в студии" : "Artist Elena Kozlova in the studio"} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:pt-16">
@@ -1055,7 +1129,7 @@ function Index() {
                   <img
                     src={p.src}
                     alt={lang === "ru" ? p.ru : p.en}
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                     draggable={false}
                     className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03] pointer-events-none"
