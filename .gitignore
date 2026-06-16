@@ -32,3 +32,4 @@ dist-ssr
 *.sln
 *.sw?
 server-node.mjs
+src/assets/spaces/_originals/

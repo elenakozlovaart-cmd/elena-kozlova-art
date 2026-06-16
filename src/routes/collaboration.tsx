@@ -2,14 +2,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Send, Instagram, Mail, ChevronLeft } from "lucide-react";
 
-import buketnayaElena from "@/assets/spaces/buketnaya-elena.png";
-import buketnayaFacade from "@/assets/spaces/buketnaya-facade.png";
-import buketnayaWall from "@/assets/spaces/buketnaya-wall.png";
-import buketnayaBear from "@/assets/spaces/buketnaya-bear.jpg";
-import mockupArmenia from "@/assets/spaces/mockup-armenia.png";
-import mockupUsadby from "@/assets/spaces/mockup-usadby.png";
-import mockupCircles from "@/assets/spaces/mockup-circles.png";
-import mockupVet from "@/assets/spaces/mockup-vet.png";
+import buketnayaElena from "@/assets/spaces/buketnaya-elena-1600w.jpg";
+import buketnayaElenaSmall from "@/assets/spaces/buketnaya-elena-800w.jpg";
+import buketnayaFacade from "@/assets/spaces/buketnaya-facade-1600w.jpg";
+import buketnayaFacadeSmall from "@/assets/spaces/buketnaya-facade-800w.jpg";
+import buketnayaWall from "@/assets/spaces/buketnaya-wall-1600w.jpg";
+import buketnayaWallSmall from "@/assets/spaces/buketnaya-wall-800w.jpg";
+import buketnayaBear from "@/assets/spaces/buketnaya-bear-1600w.jpg";
+import buketnayaBearSmall from "@/assets/spaces/buketnaya-bear-800w.jpg";
+import mockupArmenia from "@/assets/spaces/mockup-armenia-1600w.jpg";
+import mockupArmeniaSmall from "@/assets/spaces/mockup-armenia-800w.jpg";
+import mockupUsadby from "@/assets/spaces/mockup-usadby-1600w.jpg";
+import mockupUsadbySmall from "@/assets/spaces/mockup-usadby-800w.jpg";
+import mockupCircles from "@/assets/spaces/mockup-circles-1600w.jpg";
+import mockupCirclesSmall from "@/assets/spaces/mockup-circles-800w.jpg";
+import mockupVet from "@/assets/spaces/mockup-vet-1600w.jpg";
+import mockupVetSmall from "@/assets/spaces/mockup-vet-800w.jpg";
 
 const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
@@ -93,10 +101,10 @@ function CollaborationPage() {
       mockupsTitle: "Серии под разные пространства",
       mockupsBody: "Несколько примеров, как авторские серии работают в реальных интерьерах. Под ваше пространство соберу подборку отдельно.",
       mockups: [
-        { src: mockupArmenia, label: "Премиум-лобби отеля" },
-        { src: mockupUsadby, label: "Ресторан русской кухни" },
-        { src: mockupCircles, label: "Лобби или кафе с видом" },
-        { src: mockupVet, label: "Ветклиника, груминг, кафе" },
+        { src: mockupArmenia, srcSmall: mockupArmeniaSmall, label: "Премиум-лобби отеля" },
+        { src: mockupUsadby, srcSmall: mockupUsadbySmall, label: "Ресторан русской кухни" },
+        { src: mockupCircles, srcSmall: mockupCirclesSmall, label: "Лобби или кафе с видом" },
+        { src: mockupVet, srcSmall: mockupVetSmall, label: "Ветклиника, груминг, кафе" },
       ],
 
       processKicker: "Как работаем",
@@ -140,10 +148,10 @@ function CollaborationPage() {
       mockupsTitle: "Series for different spaces",
       mockupsBody: "A few examples of how author series work in real interiors. For your specific space I’ll put together a selection separately.",
       mockups: [
-        { src: mockupArmenia, label: "Premium hotel lobby" },
-        { src: mockupUsadby, label: "Russian cuisine restaurant" },
-        { src: mockupCircles, label: "Lobby or café with a view" },
-        { src: mockupVet, label: "Vet clinic, grooming, café" },
+        { src: mockupArmenia, srcSmall: mockupArmeniaSmall, label: "Premium hotel lobby" },
+        { src: mockupUsadby, srcSmall: mockupUsadbySmall, label: "Russian cuisine restaurant" },
+        { src: mockupCircles, srcSmall: mockupCirclesSmall, label: "Lobby or café with a view" },
+        { src: mockupVet, srcSmall: mockupVetSmall, label: "Vet clinic, grooming, café" },
       ],
 
       processKicker: "How it works",
@@ -232,12 +240,12 @@ function CollaborationPage() {
           </div>
           <div className="space-y-4 md:space-y-6 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <img src={buketnayaElena} alt={t.caseAlt1} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
-              <img src={buketnayaFacade} alt={t.caseAlt2} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
-              <img src={buketnayaBear} alt={t.caseAlt4} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
+              <img src={buketnayaElena} srcSet={`${buketnayaElenaSmall} 800w, ${buketnayaElena} 1600w`} sizes="(max-width: 768px) 100vw, 400px" alt={t.caseAlt1} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
+              <img src={buketnayaFacade} srcSet={`${buketnayaFacadeSmall} 800w, ${buketnayaFacade} 1600w`} sizes="(max-width: 768px) 100vw, 400px" alt={t.caseAlt2} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
+              <img src={buketnayaBear} srcSet={`${buketnayaBearSmall} 800w, ${buketnayaBear} 1600w`} sizes="(max-width: 768px) 100vw, 400px" alt={t.caseAlt4} loading="lazy" decoding="async" className="w-full h-full object-cover aspect-[3/4] block" />
             </div>
             <div>
-              <img src={buketnayaWall} alt={t.caseAlt3} loading="lazy" decoding="async" className="w-full h-auto block" />
+              <img src={buketnayaWall} srcSet={`${buketnayaWallSmall} 800w, ${buketnayaWall} 1600w`} sizes="(max-width: 768px) 100vw, 1024px" alt={t.caseAlt3} loading="lazy" decoding="async" className="w-full h-auto block" />
             </div>
           </div>
         </div>
@@ -255,7 +263,7 @@ function CollaborationPage() {
             {t.mockups.map((m, i) => (
               <figure key={i}>
                 <div className="overflow-hidden bg-secondary">
-                  <img src={m.src} alt={lang === "ru" ? `Акварель в интерьере — ${m.label}, пример размещения работ Елены Козловой` : `Watercolour in interior — ${m.label}, placement example of Elena Kozlova’s works`} loading="lazy" decoding="async" className="w-full h-auto object-cover aspect-[4/3]" />
+                  <img src={m.src} srcSet={`${m.srcSmall} 800w, ${m.src} 1600w`} sizes="(max-width: 768px) 100vw, 600px" alt={lang === "ru" ? `Акварель в интерьере — ${m.label}, пример размещения работ Елены Козловой` : `Watercolour in interior — ${m.label}, placement example of Elena Kozlova’s works`} loading="lazy" decoding="async" className="w-full h-auto object-cover aspect-[4/3]" />
                 </div>
                 <figcaption className="mt-5 text-[12px] tracking-[0.25em] uppercase text-foreground/65">{m.label}</figcaption>
               </figure>
