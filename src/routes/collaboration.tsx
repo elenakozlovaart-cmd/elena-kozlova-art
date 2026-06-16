@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Send, Instagram, Mail, Menu, X } from "lucide-react";
+import { Send, Instagram, Mail, ChevronLeft } from "lucide-react";
 
 import buketnayaElena from "@/assets/spaces/buketnaya-elena.png";
 import buketnayaFacade from "@/assets/spaces/buketnaya-facade.png";
@@ -54,7 +54,6 @@ const LANG_STORAGE_KEY = "elena-kozlova-lang";
 
 function CollaborationPage() {
   const [lang, setLang] = useState<"ru" | "en">("ru");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -69,18 +68,6 @@ function CollaborationPage() {
     } catch {}
     document.title = lang === "ru" ? "Сотрудничество — Елена Козлова" : "Collaboration — Elena Kozlova";
   }, [lang]);
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileMenuOpen(false); };
-    window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [mobileMenuOpen]);
 
   const translations = {
     ru: {
@@ -185,15 +172,24 @@ function CollaborationPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
-          <Link to="/" className="text-[11px] tracking-[0.35em] uppercase hover:text-foreground/70 transition-colors">
-            {t.navName}
-          </Link>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <Link
+              to="/"
+              aria-label={t.navHome}
+              className="text-foreground/70 hover:text-foreground transition-colors p-1 -ml-1"
+            >
+              <ChevronLeft className="w-5 h-5" strokeWidth={1.75} />
+            </Link>
+            <Link to="/" className="text-[11px] tracking-[0.35em] uppercase hover:text-foreground/70 transition-colors truncate">
+              {t.navName}
+            </Link>
+          </div>
           <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70 md:mr-8 lg:mr-12">
             <Link to="/" className="hover:text-foreground transition-colors">{t.navHome}</Link>
             <span className="text-foreground">{t.navCollab}</span>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-[11px] tracking-[0.2em]">
+          <div className="flex items-center gap-3 md:gap-4 text-[11px] tracking-[0.2em]">
             <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
               <Instagram className="w-4 h-4" />
             </a>
@@ -206,52 +202,8 @@ function CollaborationPage() {
               <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
-            className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1"
-          >
-            <Menu className="w-6 h-6" strokeWidth={1.5} />
-          </button>
         </div>
       </nav>
-
-      {/* MOBILE MENU OVERLAY */}
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
-          <div className="flex items-center justify-between px-6 h-16 border-b border-border/30">
-            <span className="text-[11px] tracking-[0.35em] uppercase">{t.navName}</span>
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label={lang === "ru" ? "Закрыть меню" : "Close menu"}
-              className="text-foreground/70 hover:text-foreground transition-colors p-1"
-            >
-              <X className="w-6 h-6" strokeWidth={1.5} />
-            </button>
-          </div>
-          <div className="flex-1 flex flex-col justify-center items-center gap-8 px-6">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.navHome}</Link>
-            <span style={serif} className="text-3xl font-light text-foreground/40">{t.navCollab}</span>
-          </div>
-          <div className="border-t border-border/30 px-6 py-6 flex items-center justify-between">
-            <div className="flex items-center gap-5">
-              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-foreground/60 hover:text-foreground transition-colors">
-                <Send className="w-5 h-5" />
-              </a>
-            </div>
-            <div className="flex items-center gap-1 text-[11px] tracking-[0.2em]">
-              <button onClick={() => setLang("ru")} className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>RU</button>
-              <span className="text-foreground/30">/</span>
-              <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* HERO */}
       <section className="pt-32 md:pt-36 pb-20 md:pb-28">

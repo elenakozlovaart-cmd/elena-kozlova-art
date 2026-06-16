@@ -406,7 +406,7 @@ function Index() {
             <Link to="/collaboration" className="hover:text-foreground transition-colors">{t.nav.collab}</Link>
             <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-[11px] tracking-[0.2em]">
+          <div className="flex items-center gap-3 md:gap-4 text-[11px] tracking-[0.2em]">
             <a
               href={IG_LINK}
               target="_blank"
@@ -440,15 +440,15 @@ function Index() {
                 EN
               </button>
             </div>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
+              className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1 ml-1"
+            >
+              <Menu className="w-6 h-6" strokeWidth={1.5} />
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
-            className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1"
-          >
-            <Menu className="w-6 h-6" strokeWidth={1.5} />
-          </button>
         </div>
       </nav>
 
@@ -472,21 +472,6 @@ function Index() {
             <a href="#cv" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.cv}</a>
             <Link to="/collaboration" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.collab}</Link>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.contact}</a>
-          </div>
-          <div className="border-t border-border/30 px-6 py-6 flex items-center justify-between">
-            <div className="flex items-center gap-5">
-              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/60 hover:text-foreground transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="text-foreground/60 hover:text-foreground transition-colors">
-                <Send className="w-5 h-5" />
-              </a>
-            </div>
-            <div className="flex items-center gap-1 text-[11px] tracking-[0.2em]">
-              <button onClick={() => setLang("ru")} className={`px-2 py-1 transition-colors ${lang === "ru" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>RU</button>
-              <span className="text-foreground/30">/</span>
-              <button onClick={() => setLang("en")} className={`px-2 py-1 transition-colors ${lang === "en" ? "text-foreground" : "text-foreground/40 hover:text-foreground/70"}`}>EN</button>
-            </div>
           </div>
         </div>
       )}
