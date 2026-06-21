@@ -33,3 +33,4 @@ dist-ssr
 *.sw?
 server-node.mjs
 src/assets/spaces/_originals/
+src/assets/_originals/

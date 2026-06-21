@@ -89,6 +89,60 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: "https://elenakozlovaart.ru/" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Елена Козлова",
+            alternateName: "Elena Kozlova",
+            jobTitle: "Художник-акварелист",
+            description:
+              "Художник-акварелист из Москвы (Троицк), резидент Союза акварелистов России. Пишет акварельные пейзажи, пленэры, путешествия, анималистику. Работы в наличии для интерьеров кафе, ресторанов, отелей.",
+            url: "https://elenakozlovaart.ru",
+            image: "https://elenakozlovaart.ru/og-image.jpg",
+            email: "elenakozlova77@yandex.ru",
+            sameAs: [
+              "https://instagram.com/elenakozlovaart",
+              "https://instagram.com/kozlova_gallery",
+              "https://t.me/ElenaKozlova_Art",
+            ],
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Москва, Троицк",
+              addressCountry: "RU",
+            },
+            memberOf: {
+              "@type": "Organization",
+              name: "Союз акварелистов России",
+            },
+            knowsAbout: [
+              "акварель",
+              "watercolour",
+              "пленэр",
+              "пейзаж",
+              "анималистика",
+              "акварельная живопись",
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            url: "https://elenakozlovaart.ru",
+            name: "Елена Козлова — художник-акварелист",
+            alternateName: "Elena Kozlova — Watercolour Artist",
+            inLanguage: ["ru", "en"],
+            author: {
+              "@type": "Person",
+              name: "Елена Козлова",
+              url: "https://elenakozlovaart.ru",
+            },
+          },
+        ]),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
