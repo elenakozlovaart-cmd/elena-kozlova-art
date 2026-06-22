@@ -28,18 +28,10 @@ const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jY
 const IG_LINK = "https://instagram.com/elenakozlovaart";
 const IG_CATALOG_LINK = "https://instagram.com/kozlova_gallery";
 
-const formatPrice = (price: { rub: number; eur: number }, lang: "ru" | "en"): string =>
-  lang === "ru" ? `${price.rub.toLocaleString("ru-RU")} руб.` : `${price.eur} €`;
-
-const getWorkAlt = (info: { t: string; c: string; s: string; y: string }, lang: "ru" | "en"): string =>
-  lang === "ru"
-    ? `Акварель «${info.t}» — ${info.c}, ${info.s}, ${info.y}, художник Елена Козлова`
-    : `Watercolour "${info.t}" — ${info.c}, ${info.s}, ${info.y}, by artist Elena Kozlova`;
-
-const getPostcardAlt = (title: string, lang: "ru" | "en"): string =>
-  lang === "ru"
-    ? `Авторская акварельная открытка «${title}» — Елена Козлова, 10 × 15 см`
-    : `Artist watercolour postcard "${title}" — Elena Kozlova, 10 × 15 cm`;
+import { works, getWorkAlt, formatPrice } from "@/data/works";
+import { postcards, postcardBack, postcardBack800, getPostcardAlt } from "@/data/postcards";
+import { worldPhotos } from "@/data/world";
+import { makeSrcSet, type Lang } from "@/lib/img";
 // Импорты пар 1600w/800w: srcSet для адаптивной загрузки.
 // 1600w — для десктопа и retina, 800w — для мобильных. Оригиналы в _originals/.
 import hero from "@/assets/hero-1600w.jpg";
@@ -52,113 +44,6 @@ import paintingsTile800 from "@/assets/paintings-tile-800w.jpg";
 import portrait from "@/assets/artist-portrait-1600w.jpg";
 import portrait800 from "@/assets/artist-portrait-800w.jpg";
 
-import w1 from "@/assets/work-01-1600w.jpg";
-import w1_800 from "@/assets/work-01-800w.jpg";
-import w2 from "@/assets/work-02-1600w.jpg";
-import w2_800 from "@/assets/work-02-800w.jpg";
-import w3 from "@/assets/work-03-1600w.jpg";
-import w3_800 from "@/assets/work-03-800w.jpg";
-import w4 from "@/assets/work-04-1600w.jpg";
-import w4_800 from "@/assets/work-04-800w.jpg";
-import w5 from "@/assets/work-05-1600w.jpg";
-import w5_800 from "@/assets/work-05-800w.jpg";
-import w6 from "@/assets/work-06-1600w.jpg";
-import w6_800 from "@/assets/work-06-800w.jpg";
-import w7 from "@/assets/work-07-1600w.jpg";
-import w7_800 from "@/assets/work-07-800w.jpg";
-import w6Collage from "@/assets/work-06-collage-1600w.jpg";
-import w6Collage800 from "@/assets/work-06-collage-800w.jpg";
-import w8 from "@/assets/work-08-1600w.jpg";
-import w8_800 from "@/assets/work-08-800w.jpg";
-import w17 from "@/assets/work-17-1600w.jpg";
-import w17_800 from "@/assets/work-17-800w.jpg";
-import w9 from "@/assets/work-09-1600w.jpg";
-import w9_800 from "@/assets/work-09-800w.jpg";
-import w10 from "@/assets/work-10-1600w.jpg";
-import w10_800 from "@/assets/work-10-800w.jpg";
-import w11 from "@/assets/work-11-1600w.jpg";
-import w11_800 from "@/assets/work-11-800w.jpg";
-import w12 from "@/assets/work-12-1600w.jpg";
-import w12_800 from "@/assets/work-12-800w.jpg";
-import w13 from "@/assets/work-13-1600w.jpg";
-import w13_800 from "@/assets/work-13-800w.jpg";
-import w14 from "@/assets/work-14-1600w.jpg";
-import w14_800 from "@/assets/work-14-800w.jpg";
-import w15 from "@/assets/work-15-1600w.jpg";
-import w15_800 from "@/assets/work-15-800w.jpg";
-import w16 from "@/assets/work-16-1600w.jpg";
-import w16_800 from "@/assets/work-16-800w.jpg";
-
-import world01 from "@/assets/world-01-1600w.jpg";
-import world01_800 from "@/assets/world-01-800w.jpg";
-import world02 from "@/assets/world-02-1600w.jpg";
-import world02_800 from "@/assets/world-02-800w.jpg";
-import world03 from "@/assets/world-03-1600w.jpg";
-import world03_800 from "@/assets/world-03-800w.jpg";
-import world04 from "@/assets/world-04-1600w.jpg";
-import world04_800 from "@/assets/world-04-800w.jpg";
-import world05 from "@/assets/world-05-1600w.jpg";
-import world05_800 from "@/assets/world-05-800w.jpg";
-import world06 from "@/assets/world-06-1600w.jpg";
-import world06_800 from "@/assets/world-06-800w.jpg";
-import world07 from "@/assets/world-07-1600w.jpg";
-import world07_800 from "@/assets/world-07-800w.jpg";
-import world08 from "@/assets/world-08-1600w.jpg";
-import world08_800 from "@/assets/world-08-800w.jpg";
-import world09 from "@/assets/world-09-1600w.jpg";
-import world09_800 from "@/assets/world-09-800w.jpg";
-import world10 from "@/assets/world-10-1600w.jpg";
-import world10_800 from "@/assets/world-10-800w.jpg";
-
-import pc1 from "@/assets/postcard-01-1600w.jpg";
-import pc1_800 from "@/assets/postcard-01-800w.jpg";
-import pc2 from "@/assets/postcard-02-1600w.jpg";
-import pc2_800 from "@/assets/postcard-02-800w.jpg";
-import pc3 from "@/assets/postcard-03-1600w.jpg";
-import pc3_800 from "@/assets/postcard-03-800w.jpg";
-import pc4 from "@/assets/postcard-04-1600w.jpg";
-import pc4_800 from "@/assets/postcard-04-800w.jpg";
-import pc5 from "@/assets/postcard-05-1600w.jpg";
-import pc5_800 from "@/assets/postcard-05-800w.jpg";
-import pc6 from "@/assets/postcard-06-1600w.jpg";
-import pc6_800 from "@/assets/postcard-06-800w.jpg";
-import pc7 from "@/assets/postcard-07-1600w.jpg";
-import pc7_800 from "@/assets/postcard-07-800w.jpg";
-import pc8 from "@/assets/postcard-08-1600w.jpg";
-import pc8_800 from "@/assets/postcard-08-800w.jpg";
-import pc9 from "@/assets/postcard-09-1600w.jpg";
-import pc9_800 from "@/assets/postcard-09-800w.jpg";
-import postcardBack from "@/assets/postcard-back-1600w.jpg";
-import postcardBack800 from "@/assets/postcard-back-800w.jpg";
-
-// Helper: формирует srcSet для пары 800w/1600w.
-const makeSrcSet = (src1600: string, src800: string) => `${src800} 800w, ${src1600} 1600w`;
-
-const worldPhotos = [
-  { src: world01, src800: world01_800, ru: "Художник у работ в выставочном зале", en: "Artist with her works in the exhibition hall" },
-  { src: world07, src800: world07_800, ru: "Пленэр на Площади Республики, Ереван", en: "Plein air at Republic Square, Yerevan" },
-  { src: world06, src800: world06_800, ru: "Пленэр в Дилижане, Армения", en: "Plein air in Dilijan, Armenia" },
-  { src: world10, src800: world10_800, ru: "Пленэр на Байкале", en: "Plein air at Lake Baikal" },
-  { src: world03, src800: world03_800, ru: "Работа на пленэре в парке", en: "Working en plein air in the park" },
-  { src: world08, src800: world08_800, ru: "Пленэр у воды, Москва", en: "Plein air by the water, Moscow" },
-  { src: world05, src800: world05_800, ru: "Палитра и акварель в работе", en: "Palette and watercolour in progress" },
-  { src: world09, src800: world09_800, ru: "Этюд деревни — процесс и палитра", en: "Village study — process and palette" },
-  { src: world04, src800: world04_800, ru: "Создание акварели в мастерской", en: "Creating a watercolour in the studio" },
-  { src: world02, src800: world02_800, ru: "У художественной галереи", en: "At the art gallery" },
-];
-
-const postcards: { src: string; src800: string; ru: string; en: string; sold?: boolean }[] = [
-  { src: pc1, src800: pc1_800, ru: "Скворец", en: "Starling" },
-  { src: pc2, src800: pc2_800, ru: "Ласточка на цветущей ветке", en: "Swallow on a Blossoming Branch", sold: true },
-  { src: pc3, src800: pc3_800, ru: "Скворец на ветке", en: "Starling on a Branch" },
-  { src: pc4, src800: pc4_800, ru: "Верба", en: "Pussy Willow" },
-  { src: pc5, src800: pc5_800, ru: "Верба на закате", en: "Pussy Willow at Sunset" },
-  { src: pc6, src800: pc6_800, ru: "Скворец на берёзе", en: "Starling on a Birch" },
-  { src: pc7, src800: pc7_800, ru: "Японская белоглазка", en: "Japanese White-eye", sold: true },
-  { src: pc8, src800: pc8_800, ru: "Голубая верба", en: "Blue Pussy Willow" },
-  { src: pc9, src800: pc9_800, ru: "Синица и сакура", en: "Tit and Sakura" },
-];
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -168,27 +53,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-type Lang = "ru" | "en";
-
-const works = [
-  { src: w1, src800: w1_800, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Дилижан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Туман укрывает горные склоны Дилижана — воздух будто растворяет очертания деревьев, оставляя только дыхание леса." }, en: { c: "Armenia", t: "Dilijan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Mist drapes the slopes of Dilijan — the air dissolves the contours of trees, leaving only the breath of the forest." } },
-  { src: w2, src800: w2_800, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Нораванк", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тёплый камень древнего монастыря, выросший из охристых скал. Свет здесь хранит память столетий." }, en: { c: "Armenia", t: "Noravank", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Warm stone of the ancient monastery rising from ochre cliffs. The light here holds the memory of centuries." } },
-  { src: w3, src800: w3_800, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Озеро Севан", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Прозрачная синь высокогорного озера, где небо и вода говорят на одном языке тишины." }, en: { c: "Armenia", t: "Lake Sevan", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The transparent blue of a highland lake, where sky and water share one language of stillness." } },
-  { src: w4, src800: w4_800, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Ереван. Площадь Республики", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Розовый туф города оживает в мягком evening light — архитектура дышит, отражаясь в движении прохожих." }, en: { c: "Armenia", t: "Yerevan, Republic Square", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "The pink tuff of the city comes alive in the soft evening light — architecture breathes through the motion of passers-by." } },
-  { src: w5, src800: w5_800, price: { rub: 15000, eur: 150 }, ru: { c: "Армения", t: "Гюмри", s: "38 × 56 см", y: "2026", st: "В наличии", m: "Акварель на бумаге", d: "Тихие улицы Гюмри, где время движется неспешно, а каждый дом хранит свой собственный сюжет." }, en: { c: "Armenia", t: "Gyumri", s: "38 × 56 cm", y: "2026", st: "Available", m: "Watercolour on paper", d: "Quiet streets of Gyumri, where time moves slowly and each house keeps its own quiet story." } },
-  { src: w6Collage, src800: w6Collage800, price: { rub: 30000, eur: 300 }, diptych: [{ src: w6, src800: w6_800, labelRu: "I", labelEn: "I" }, { src: w7, src800: w7_800, labelRu: "II", labelEn: "II" }], ru: { c: "Родина-мать", t: "Родина-мать (диптих)", s: "40 × 60 см × 2", y: "2025", st: "В наличии", m: "Акварель на бумаге", d: "Диптих: монументальный силуэт и его продолжение — размышление о памяти и пространстве, переданное лёгкостью акварели. Продаётся только парой." }, en: { c: "Motherland", t: "Motherland (diptych)", s: "40 × 60 cm × 2", y: "2025", st: "Available", m: "Watercolour on paper", d: "A diptych: a monumental silhouette and its continuation — a reflection on memory and space conveyed through the lightness of watercolour. Sold only as a pair." } },
-  { src: w8, src800: w8_800, price: { rub: 18000, eur: 180 }, ru: { c: "Городская лирика", t: "Сквозь дождь", s: "60 × 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Город сквозь стеклянную пелену дождя — отражения и движение размывают границы между улицей и сном." }, en: { c: "Urban lyrics", t: "Through the Rain", s: "60 × 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A city seen through a glassy veil of rain — reflections and movement blur the line between street and dream." } },
-  { src: w17, src800: w17_800, price: { rub: 30000, eur: 300 }, ru: { c: "Городская лирика", t: "Тёплый след", s: "50 × 70 см", y: "2026", st: "В наличии", m: "Акварель, бумага на планшете", d: "Работа из серии «Сквозь дождь», построенной на эффекте капель на стекле и размытых огней города. Сердце, проведённое пальцем по запотевшему окну, становится тёплым следом чьего-то присутствия — коротким и хрупким, прежде чем его смоет дождь." }, en: { c: "Urban lyrics", t: "A Warm Trace", s: "50 × 70 cm", y: "2026", st: "Available", m: "Watercolour on paper on board", d: "Part of the \"Through the Rain\" series, built on the effect of raindrops on glass and the blurred lights of the city. A heart traced by a finger on a misted window becomes the warm trace of someone’s presence — brief and fragile, before the rain washes it away." } },
-  { src: w9, src800: w9_800, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Деревня на Ольхоне. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Деревянные дома на ветреном острове — простая жизнь у большой воды, написанная в единой тёплой палитре." }, en: { c: "Baikal", t: "Village on Olkhon. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Wooden houses on a windswept island — quiet life beside the great water, painted in a single warm palette." } },
-  { src: w10, src800: w10_800, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Ступа Просветления на острове Огой. Байкал", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Белая ступа над озером — точка покоя в широте байкальского пейзажа, где горизонт становится молитвой." }, en: { c: "Baikal", t: "Stupa of Enlightenment on Ogoy Island. Baikal", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "A white stupa above the lake — a point of stillness in the vastness of Baikal, where the horizon turns into prayer." } },
-  { src: w11, src800: w11_800, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Байкал. Корабли", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Силуэты кораблей у берега — пауза между плаванием и тишиной, между водой и небом." }, en: { c: "Baikal", t: "Baikal. Ships", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Silhouettes of ships at the shore — a pause between voyage and silence, between water and sky." } },
-  { src: w12, src800: w12_800, price: { rub: 15000, eur: 150 }, ru: { c: "Байкал", t: "Ольхон. Шаманка", s: "38 × 56 см", y: "2024", st: "В наличии", m: "Акварель на бумаге", d: "Скала Шаманка — древний образ Байкала, написанный почти иконографично: камень, ветер и свет." }, en: { c: "Baikal", t: "Olkhon. Shamanka", s: "38 × 56 cm", y: "2024", st: "Available", m: "Watercolour on paper", d: "Shamanka Rock — an ancient image of Baikal rendered almost iconographically: stone, wind and light." } },
-  { src: w13, src800: w13_800, price: { rub: 18000, eur: 180 }, ru: { c: "Круглая серия", t: "Огни города", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Ночные огни, собранные в круг — городская мелодия, увиденная издалека и сведённая к чистому свету." }, en: { c: "Circular series", t: "City Lights", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Night lights gathered into a circle — an urban melody seen from afar and distilled into pure light." } },
-  { src: w14, src800: w14_800, price: { rub: 12000, eur: 120 }, ru: { c: "Круглая серия", t: "Чайка над водой", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Лёгкое движение крыла над водной гладью — мгновение, остановленное прозрачным мазком." }, en: { c: "Circular series", t: "Gull Above Water", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "The light motion of a wing above still water — an instant held by a single transparent stroke." } },
-  { src: w15, src800: w15_800, price: { rub: 12000, eur: 120 }, ru: { c: "Круглая серия", t: "Полёт", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Птица в свободном пространстве воздуха — образ внутренней лёгкости и тишины." }, en: { c: "Circular series", t: "Flight", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "A bird in the open space of air — an image of inner lightness and stillness." } },
-  { src: w16, src800: w16_800, price: { rub: 12000, eur: 120 }, ru: { c: "Круглая серия", t: "Москва на закате", s: "d 40 см", y: "2025", st: "В наличии", m: "Акварель бумага на планшете, в раме", d: "Тёплый закатный свет ложится на знакомые силуэты — город становится мягким, почти музыкальным." }, en: { c: "Circular series", t: "Moscow at Sunset", s: "d 40 cm", y: "2025", st: "Available", m: "Watercolour on paper on board, framed", d: "Warm sunset light falls on familiar silhouettes — the city becomes soft, almost musical." } },
-];
 
 const LANG_STORAGE_KEY = "elena-kozlova-lang";
 
