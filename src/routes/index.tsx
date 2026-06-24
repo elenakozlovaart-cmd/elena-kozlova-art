@@ -31,7 +31,7 @@ const IG_CATALOG_LINK = "https://instagram.com/kozlova_gallery";
 import { works, getWorkAlt, formatPrice } from "@/data/works";
 import { postcards, postcardBack, postcardBack800, getPostcardAlt } from "@/data/postcards";
 import { worldPhotos } from "@/data/world";
-import { makeSrcSet, type Lang } from "@/lib/img";
+import { makeSrcSet, parseSizeCm, type Lang } from "@/lib/img";
 // Импорты пар 1600w/800w: srcSet для адаптивной загрузки.
 // 1600w — для десктопа и retina, 800w — для мобильных. Оригиналы в _originals/.
 import hero from "@/assets/hero-1600w.jpg";
@@ -540,23 +540,17 @@ function Index() {
 
               {openCategory === "paintings" ? (
                 <>
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20 md:gap-y-28">
+                <div className="flex flex-col md:flex-row md:flex-wrap md:items-start md:justify-center gap-x-10 gap-y-20 md:gap-y-28">
                   {works.map((w, i) => {
-                    const layouts = [
-                      "md:col-span-7",
-                      "md:col-span-5 md:mt-40",
-                      "md:col-span-5",
-                      "md:col-span-6 md:mt-24 md:col-start-7",
-                      "md:col-span-7",
-                      "md:col-span-5 md:mt-32",
-                      "md:col-span-6",
-                      "md:col-span-5 md:col-start-8 md:mt-20",
-                    ];
-                    const layout = layouts[i % layouts.length];
                     const info = w[lang];
+                    const { wCm } = parseSizeCm(info.s, w.vertical);
+                    // Ширина карточки на desktop пропорциональна физической ширине работы:
+                    // 70 см → ~48% контейнера, 38 см → ~26%. Вертикальные работы (vertical: true)
+                    // получают узкую колонку — их короткая сторона = wCm.
+                    const widthPct = (wCm / 70) * 48;
                     const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
                     return (
-                      <figure key={i} className={`group ${layout}`}>
+                      <figure key={i} className="group w-full md:[width:var(--card-w)]" style={{ ["--card-w" as string]: `${widthPct}%` }}>
                         <button
                           type="button"
                           onClick={() => setOpenIdx(i)}
