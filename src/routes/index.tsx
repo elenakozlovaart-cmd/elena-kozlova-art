@@ -646,16 +646,18 @@ function Index() {
       {/* SPACES PREVIEW */}
       <section className="py-20 md:py-24 border-t border-border/40 bg-secondary/30">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid md:grid-cols-12 gap-10 md:gap-12 mb-10 md:mb-12">
-            <div className="md:col-span-5">
+          <div className="mb-10 md:mb-12">
+            <div className="max-w-5xl mx-auto text-center">
               <h2
                 style={serif}
-                className="max-w-[10ch] text-[2.85rem] md:text-[4.75rem] lg:text-[5rem] font-light leading-[0.98] whitespace-pre-line"
+                className="text-5xl md:text-7xl font-light leading-none whitespace-pre-line"
               >
                 {t.collabIntroTitle}
               </h2>
             </div>
-            <div className="md:col-span-6 md:col-start-7 max-w-[42rem]">
+          </div>
+          <div className="grid md:grid-cols-12 gap-8 md:gap-12 mb-10 md:mb-12">
+            <div className="md:col-span-6 max-w-[42rem]">
               <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-5">
                 {t.collabIntroCaseKicker}
               </p>
