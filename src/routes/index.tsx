@@ -1,10 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Send, Instagram, Mail, Menu, X } from "lucide-react";
 
 const MaxIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
     <defs>
       <radialGradient id="maxBrandGrad" cx="28%" cy="82%" r="110%">
         <stop offset="0%" stopColor="#3BB0FF" />
@@ -43,12 +49,22 @@ import paintingsTile800 from "@/assets/paintings-tile-800w.jpg";
 
 import portrait from "@/assets/artist-portrait-1600w.jpg";
 import portrait800 from "@/assets/artist-portrait-800w.jpg";
+import coffeeBeansFacade from "@/assets/spaces/coffee-beans-facade-1600w.jpg";
+import coffeeBeansFacade800 from "@/assets/spaces/coffee-beans-facade-800w.jpg";
+import coffeeBeansInterior from "@/assets/spaces/coffee-beans-interior-1600w.jpg";
+import coffeeBeansInterior800 from "@/assets/spaces/coffee-beans-interior-800w.jpg";
+import coffeeBeansDetail from "@/assets/spaces/coffee-beans-detail-1600w.jpg";
+import coffeeBeansDetail800 from "@/assets/spaces/coffee-beans-detail-800w.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Елена Козлова — Художник-акварелист" },
-      { name: "description", content: "Современная акварельная живопись. Пейзажи внутренних состояний и фигуративные этюды." },
+      {
+        name: "description",
+        content:
+          "Современная акварельная живопись. Пейзажи внутренних состояний и фигуративные этюды.",
+      },
     ],
   }),
   component: Index,
@@ -75,11 +91,18 @@ function Index() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [openCategory, setOpenCategory] = useState<"paintings" | "postcards" | null>(null);
   const [openPostcardIdx, setOpenPostcardIdx] = useState<number | null>(null);
-  const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
-
+  const [lightbox, setLightbox] = useState<{
+    images: { src: string; alt: string }[];
+    index: number;
+  } | null>(null);
 
   const worldScrollRef = useRef<HTMLDivElement>(null);
-  const dragState = useRef<{ down: boolean; startX: number; startScroll: number; moved: boolean }>({ down: false, startX: 0, startScroll: 0, moved: false });
+  const dragState = useRef<{ down: boolean; startX: number; startScroll: number; moved: boolean }>({
+    down: false,
+    startX: 0,
+    startScroll: 0,
+    moved: false,
+  });
 
   const scrollWorld = (dir: 1 | -1) => {
     const el = worldScrollRef.current;
@@ -105,22 +128,38 @@ function Index() {
   };
   const onWorldPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     dragState.current.down = false;
-    try { worldScrollRef.current?.releasePointerCapture(e.pointerId); } catch {}
+    try {
+      worldScrollRef.current?.releasePointerCapture(e.pointerId);
+    } catch {}
   };
   const onWorldCardClick = (e: React.MouseEvent) => {
-    if (dragState.current.moved) { e.preventDefault(); return; }
+    if (dragState.current.moved) {
+      e.preventDefault();
+      return;
+    }
     scrollWorld(1);
   };
 
   useEffect(() => {
-    const anyOpen = openIdx !== null || openCategory !== null || openPostcardIdx !== null || lightbox !== null || mobileMenuOpen;
+    const anyOpen =
+      openIdx !== null ||
+      openCategory !== null ||
+      openPostcardIdx !== null ||
+      lightbox !== null ||
+      mobileMenuOpen;
     if (!anyOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (mobileMenuOpen && e.key === "Escape") { setMobileMenuOpen(false); return; }
+      if (mobileMenuOpen && e.key === "Escape") {
+        setMobileMenuOpen(false);
+        return;
+      }
       if (lightbox) {
         if (e.key === "Escape") setLightbox(null);
         else if (e.key === "ArrowLeft" && lightbox.images.length > 1) {
-          setLightbox({ ...lightbox, index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length });
+          setLightbox({
+            ...lightbox,
+            index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length,
+          });
         } else if (e.key === "ArrowRight" && lightbox.images.length > 1) {
           setLightbox({ ...lightbox, index: (lightbox.index + 1) % lightbox.images.length });
         }
@@ -140,168 +179,258 @@ function Index() {
     };
   }, [openIdx, openCategory, openPostcardIdx, lightbox, mobileMenuOpen]);
 
-
-  const t = lang === "ru"
-    ? {
-        nav: { works: "Работы", about: "О художнике", cv: "Выставки", collab: "Сотрудничество", contact: "Контакты" },
-        heroKicker: "Художник-акварелист",
-        heroName: "Елена\nКозлова",
-        heroLead: "Елена работает с темами света, памяти, путешествий и внутренних состояний, создавая атмосферные акварели, в которых важны прозрачность, воздух и ощущение момента.",
-        heroCta: "Смотреть работы",
-        heroCta2: "Познакомиться с художником",
-        aboutKicker: "О художнике",
-        aboutBody: [
-          "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
-          "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
-          "Работы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.",
-        ],
-        aboutCta: "Сотрудничество",
-        worldKicker: "Мир художника",
-        worldTitle: "Мир художника",
-        worldBody: "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
-        worksKicker: "Работы",
-        worksTitle: "Галерея",
-        worksIntro: "Подборка недавних акварелей.\nКаждая работа уникальна и существует в единственном экземпляре.",
-        catalogKicker: "Полный каталог",
-        catalogTitle: "Больше работ",
-        catalogBody: "На сайте — подборка. Все работы в наличии собраны в каталоге Instagram. Если удобнее — пришлю PDF-каталог с ценами в Telegram или MAX.",
-        catalogCtaIg: "Все работы — Instagram",
-        catalogCtaTg: "PDF-каталог в Telegram",
-        catalogCtaMax: "PDF-каталог в MAX",
-        paintingsTitle: "Картины",
-        postcardsTitle: "Открытки",
-        postcardsEmpty: "Раздел скоро будет дополнен.",
-        postcardsIntro: "Авторская открытка — это маленькая акварельная работа в единственном экземпляре. Она создана вручную на хлопковой бумаге, имеет оформленную оборотную сторону и передаётся с подходящим конвертом. Такую открытку можно отправить близкому человеку или сохранить как самостоятельную работу художника. Размер открытки — 10×15 см.",
-        postcardMedium: "Акварель",
-        postcardStatus: "В наличии",
-        postcardSize: "10×15 см",
-        postcardFrontLabel: "Лицевая сторона",
-        postcardBackLabel: "Обратная сторона",
-        cardMedium: "Акварель на бумаге",
-        cardCta: "Запросить стоимость",
-        cvKicker: "Биография",
-        cvTitle: "Избранные выставки",
-        cvSolo: "Персональные выставки",
-        cvGroup: "Групповые выставки",
-        cvPlein: "Пленэры",
-        cvSoloItems: ["2019 — Персональная выставка, Дом учёных, Троицк (Москва)"],
-        cvGroupItems: [
-          "2025 — Акварельный фестиваль «Яблоневый сад», Лобня",
-          "2025 — Троицкий музей им. Лялько, Троицк (Москва)",
-          "2024 — Коллективная выставка «Моё лето», галерея современного искусства Molbert, Санкт-Петербург",
-          "2023 — Выставка Троицкого отделения Союза художников Подмосковья, Дом учёных, Троицк",
-          "2023 — Коллективная выставка «Фестиваль цветов», Троицкая открытая галерея, Москва",
-        ],
-        cvPleinItems: ["2024 — остров Ольхон, Байкал", "2026 — художественный тур по Армении"],
-        acqKicker: "Приобретение",
-        acqTitle: "Как приобрести работу",
-        acqSteps: [
-          { n: "01", title: "Выберите работу", desc: "Посмотрите доступные акварели в разделе «Работы»." },
-          { n: "02", title: "Нажмите «Написать»", desc: "Отправьте запрос по понравившейся работе в Telegram или MAX." },
-          { n: "03", title: "Уточните детали", desc: "Елена ответит по наличию, стоимости, оформлению и доставке." },
-          { n: "04", title: "Согласуйте покупку или резерв", desc: "Работу можно приобрести, зарезервировать или обсудить индивидуальный запрос." },
-        ],
-        acqNote: "Можно обсудить оформление, доставку, резерв работы и возможность создания похожей акварели по индивидуальному запросу.",
-        acqCta: "Написать в Telegram",
-        acqCtaMax: "Написать в MAX",
-        tgKicker: "Следить за новыми работами",
-        tgBody: "Новые работы, процесс создания акварелей, пленэры, выставки и события художественной практики, можно увидеть в личных каналах художника.",
-        igCta: "Подписаться в Instagram",
-        tgCta: "Подписаться в Telegram",
-        tgCtaMax: "Подписаться в MAX",
-        footerCtaMax: "Написать в MAX",
-        footerName: "Елена Козлова",
-        footerTagline: "современный художник, работающий в технике акварели",
-        footerBio: "Практика Елены Козловой сосредоточена на изображении пейзажей внутренних состояний и фигуративных этюдов. В её работах акварель выступает как средство фиксации эмоциональных и пластических наблюдений, соединяя спонтанность и точность.",
-        footerMeta: [
-          "Член Союза акварелистов России.",
-          "Участница групповых выставок в Москве, Санкт-Петербурге и Подмосковье (2016–2026).",
-          "Работы находятся в частных коллекциях в России и Европе.",
-        ],
-        footerContactLabel: "Связь",
-        footerCta: "Написать в Telegram",
-        rights: "Все права защищены",
-      }
-    : {
-        nav: { works: "Works", about: "About", cv: "Exhibitions", collab: "Collaboration", contact: "Contact" },
-        heroKicker: "Watercolour artist",
-        heroName: "Elena\nKozlova",
-        heroLead: "Contemporary watercolour artist. Elena works with themes of light, memory, journeys and inner states, creating atmospheric watercolours where transparency, air and the feeling of the moment matter.",
-        heroCta: "View works",
-        heroCta2: "Meet the artist",
-        aboutKicker: "About the artist",
-        aboutBody: [
-          "In her practice, Elena Kozlova turns to watercolor as a medium that captures fleeting states — light, movement, and the inner tension of form.",
-          "Her works exist on the border between observation and experience: a landscape becomes a reflection of inner perception, while the figure becomes a way to explore plasticity and presence.",
-          "Elena Kozlova's works can become part of both private and public spaces — from intimate interiors to restaurants, hotels, and gallery areas. Watercolor does not overwhelm a space; it creates a point of silence, light, and living presence within it. Individual selection of works and collaboration with designers, architects, and space owners are possible.",
-        ],
-        aboutCta: "Collaboration",
-        worldKicker: "Artist's World",
-        worldTitle: "Artist's World",
-        worldBody: "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
-        worksKicker: "Works",
-        worksTitle: "Selected",
-        worksIntro: "A selection of recent works in watercolour.\nEach piece is unique and created as an original.",
-        catalogKicker: "Full catalogue",
-        catalogTitle: "More works",
-        catalogBody: "What you see here is a selection. The full set of available works lives on Instagram. If it’s easier — I can send you a PDF catalogue with prices on Telegram or MAX.",
-        catalogCtaIg: "All works — Instagram",
-        catalogCtaTg: "PDF catalogue on Telegram",
-        catalogCtaMax: "PDF catalogue on MAX",
-        paintingsTitle: "Paintings",
-        postcardsTitle: "Postcards",
-        postcardsEmpty: "This section will be updated soon.",
-        postcardsIntro: "An artist postcard is a small watercolor work created as a unique piece. It is hand-painted on cotton paper, has a designed reverse side and comes with a matching envelope. It can be sent to someone close or kept as an independent artwork by the artist. Postcard size — 10×15 cm.",
-        postcardMedium: "Watercolor",
-        postcardStatus: "Available",
-        postcardSize: "10×15 cm",
-        postcardFrontLabel: "Front",
-        postcardBackLabel: "Reverse",
-        cardMedium: "Watercolour on paper",
-        cardCta: "Inquire",
-        cvKicker: "Biography",
-        cvTitle: "Selected Exhibitions",
-        cvSolo: "Solo exhibition",
-        cvGroup: "Group exhibitions",
-        cvPlein: "Plein air",
-        cvSoloItems: ["2019 — House of Scientists, Troitsk (Moscow)"],
-        cvGroupItems: [
-          "2025 — Watercolour Festival “Yablonevy Sad”, Lobnya",
-          "2025 — Lyalka Museum, Troitsk (Moscow)",
-          "2024 — “My Summer”, Molbert Contemporary Gallery, Saint Petersburg",
-          "2023 — Union of Artists of Moscow Region, Troitsk",
-          "2023 — “Flower Festival”, Troitsk Open Gallery",
-        ],
-        cvPleinItems: ["2024 — Olkhon Island, Lake Baikal", "2026 — Armenia (art tour)"],
-        acqKicker: "Acquisition",
-        acqTitle: "How to acquire a work",
-        acqSteps: [
-          { n: "01", title: "Choose a work", desc: "Browse available watercolours in the “Works” section." },
-          { n: "02", title: "Click “Message”", desc: "Send a request for the work you are interested in via Telegram or MAX." },
-          { n: "03", title: "Discuss the details", desc: "Elena will reply about availability, price, framing and shipping." },
-          { n: "04", title: "Confirm purchase or reserve", desc: "The work can be purchased, reserved, or discussed as a personal commission." },
-        ],
-        acqNote: "We can discuss framing, shipping, reserving a work, and the possibility of creating a similar watercolour as a personal commission.",
-        acqCta: "Message on Telegram",
-        acqCtaMax: "Message on MAX",
-        tgKicker: "Follow new works",
-        tgBody: "New works, the process of creating watercolors, plein air sessions, exhibitions, and events from the artist’s creative practice can be seen in the artist’s personal channels.",
-        igCta: "Follow on Instagram",
-        tgCta: "Follow on Telegram",
-        tgCtaMax: "Follow on MAX",
-        footerCtaMax: "Message on MAX",
-        footerName: "Elena Kozlova",
-        footerTagline: "contemporary watercolour artist",
-        footerBio: "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
-        footerMeta: [
-          "Member of the Russian Watercolour Society.",
-          "Participant in group exhibitions in Moscow, Saint Petersburg and the Moscow region (2016–2026).",
-          "Works are held in private collections across Russia and Europe.",
-        ],
-        footerContactLabel: "For inquiries, commissions and collaborations",
-        footerCta: "Message on Telegram",
-        rights: "All rights reserved",
-      };
+  const t =
+    lang === "ru"
+      ? {
+          nav: {
+            works: "Работы",
+            about: "О художнике",
+            cv: "Выставки",
+            collab: "Сотрудничество",
+            contact: "Контакты",
+          },
+          heroKicker: "Художник-акварелист",
+          heroName: "Елена\nКозлова",
+          heroLead:
+            "Работы Елены Козловой созданы для внимательного, спокойного взгляда. В частных и общественных интерьерах они не перегружают пространство, а мягко собирают его атмосферу светом, ритмом и паузой.",
+          heroTrust: [
+            "Член Союза акварелистов России",
+            "Работы в частных коллекциях",
+            "Подбор для интерьеров и общественных пространств",
+          ],
+          heroCta: "Смотреть работы",
+          heroCta2: "Познакомиться с художником",
+          collabIntroTitle: "Акварель для пространств,\nв которых важна атмосфера",
+          collabIntroCaseKicker: "Реализованный проект",
+          collabIntroCaseTitle: "«Кофе в зёрнах»",
+          collabIntroAddress: "Москва, Троицк, Солнечная улица, 9",
+          collabIntroBody:
+            "В кафе «Кофе в зёрнах» работа из серии анималистики с изображением лисы естественно вошла в пространство и визуально, и по смыслу. Образ лисы перекликается с айдентикой кафе, поэтому акварель воспринимается здесь не как случайный декоративный акцент, а как живая и органичная деталь. В таких пространствах работа не перегружает интерьер, а помогает ему стать более собранным, теплым и запоминающимся.",
+          collabIntroCta: "О сотрудничестве",
+          collabIntroAltFacade: "Фасад кафе «Кофе в зёрнах»",
+          collabIntroAltInterior: "Акварель с лисой в интерьере кафе «Кофе в зёрнах»",
+          collabIntroAltDetail: "Деталь пространства кафе «Кофе в зёрнах» с логотипом лисы",
+          aboutKicker: "О художнике",
+          aboutBody: [
+            "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
+            "Её работы находятся на границе между наблюдением и переживанием: пейзаж становится отражением внутреннего опыта, а фигура — способом исследования пластики и присутствия.",
+            "Работы Елены Козловой могут стать частью частных и общественных пространств — от камерных интерьеров до ресторанов, отелей и галерейных зон. Акварель в интерьере не перегружает пространство, а создаёт в нём точку тишины, света и живого присутствия. Возможны индивидуальный подбор работ и сотрудничество с дизайнерами, архитекторами и владельцами пространств.",
+          ],
+          aboutCta: "Сотрудничество",
+          worldKicker: "Мир художника",
+          worldTitle: "Мир художника",
+          worldBody:
+            "В этом разделе собраны фотографии с пленэров, рабочего процесса и выставок. Пленэр — это прямой контакт с местом: светом, воздухом, архитектурой и природой. В процессе работы важны прозрачность цвета, движение воды, случайность пятна и постепенное проявление образа на бумаге. Выставки становятся пространством встречи работы со зрителем: здесь акварель выходит из мастерской и начинает жить в диалоге с людьми.",
+          worksKicker: "Работы",
+          worksTitle: "Галерея",
+          worksIntro:
+            "Подборка недавних акварелей.\nКаждая работа уникальна и существует в единственном экземпляре.",
+          catalogKicker: "Полный каталог",
+          catalogTitle: "Больше работ",
+          catalogBody:
+            "На сайте — подборка. Все работы в наличии собраны в каталоге Instagram. Если удобнее — пришлю PDF-каталог с ценами в Telegram или MAX.",
+          catalogCtaIg: "Все работы — Instagram",
+          catalogCtaTg: "PDF-каталог в Telegram",
+          catalogCtaMax: "PDF-каталог в MAX",
+          paintingsTitle: "Картины",
+          postcardsTitle: "Открытки",
+          postcardsEmpty: "Раздел скоро будет дополнен.",
+          postcardsIntro:
+            "Авторская открытка — это маленькая акварельная работа в единственном экземпляре. Она создана вручную на хлопковой бумаге, имеет оформленную оборотную сторону и передаётся с подходящим конвертом. Такую открытку можно отправить близкому человеку или сохранить как самостоятельную работу художника. Размер открытки — 10×15 см.",
+          postcardMedium: "Акварель",
+          postcardStatus: "В наличии",
+          postcardSize: "10×15 см",
+          postcardFrontLabel: "Лицевая сторона",
+          postcardBackLabel: "Обратная сторона",
+          cardMedium: "Акварель на бумаге",
+          cardCta: "Запросить стоимость",
+          cvKicker: "Биография",
+          cvTitle: "Избранные выставки",
+          cvSolo: "Персональные выставки",
+          cvGroup: "Групповые выставки",
+          cvPlein: "Пленэры",
+          cvSoloItems: ["2019 — Персональная выставка, Дом учёных, Троицк (Москва)"],
+          cvGroupItems: [
+            "2025 — Акварельный фестиваль «Яблоневый сад», Лобня",
+            "2025 — Троицкий музей им. Лялько, Троицк (Москва)",
+            "2024 — Коллективная выставка «Моё лето», галерея современного искусства Molbert, Санкт-Петербург",
+            "2023 — Выставка Троицкого отделения Союза художников Подмосковья, Дом учёных, Троицк",
+            "2023 — Коллективная выставка «Фестиваль цветов», Троицкая открытая галерея, Москва",
+          ],
+          cvPleinItems: ["2024 — остров Ольхон, Байкал", "2026 — художественный тур по Армении"],
+          acqKicker: "Приобретение",
+          acqTitle: "Как приобрести работу",
+          acqSteps: [
+            {
+              n: "01",
+              title: "Выберите работу",
+              desc: "Посмотрите доступные акварели в разделе «Работы».",
+            },
+            {
+              n: "02",
+              title: "Нажмите «Написать»",
+              desc: "Отправьте запрос по понравившейся работе в Telegram или MAX.",
+            },
+            {
+              n: "03",
+              title: "Уточните детали",
+              desc: "Елена ответит по наличию, стоимости, оформлению и доставке.",
+            },
+            {
+              n: "04",
+              title: "Согласуйте покупку или резерв",
+              desc: "Работу можно приобрести, зарезервировать или обсудить индивидуальный запрос.",
+            },
+          ],
+          acqNote:
+            "Можно обсудить оформление, доставку, резерв работы и возможность создания похожей акварели по индивидуальному запросу.",
+          acqCta: "Написать в Telegram",
+          acqCtaMax: "Написать в MAX",
+          tgKicker: "Следить за новыми работами",
+          tgBody:
+            "Новые работы, процесс создания акварелей, пленэры, выставки и события художественной практики, можно увидеть в личных каналах художника.",
+          igCta: "Подписаться в Instagram",
+          tgCta: "Подписаться в Telegram",
+          tgCtaMax: "Подписаться в MAX",
+          footerCtaMax: "Написать в MAX",
+          footerName: "Елена Козлова",
+          footerTagline: "современный художник, работающий в технике акварели",
+          footerBio:
+            "Практика Елены Козловой сосредоточена на изображении пейзажей внутренних состояний и фигуративных этюдов. В её работах акварель выступает как средство фиксации эмоциональных и пластических наблюдений, соединяя спонтанность и точность.",
+          footerMeta: [
+            "Член Союза акварелистов России.",
+            "Участница групповых выставок в Москве, Санкт-Петербурге и Подмосковье (2016–2026).",
+            "Работы находятся в частных коллекциях в России и Европе.",
+          ],
+          footerContactLabel: "Связь",
+          footerCta: "Написать в Telegram",
+          rights: "Все права защищены",
+        }
+      : {
+          nav: {
+            works: "Works",
+            about: "About",
+            cv: "Exhibitions",
+            collab: "Collaboration",
+            contact: "Contact",
+          },
+          heroKicker: "Watercolour artist",
+          heroName: "Elena\nKozlova",
+          heroLead:
+            "Elena Kozlova's works are made for a calm, attentive gaze. In private and public interiors, they do not overwhelm the space, but gently gather its atmosphere through light, rhythm, and pause.",
+          heroTrust: [
+            "Member of the Russian Watercolour Society",
+            "Works in private collections",
+            "Selection for interiors and public spaces",
+          ],
+          heroCta: "View works",
+          heroCta2: "Meet the artist",
+          collabIntroTitle: "Watercolour for spaces\nwhere atmosphere matters",
+          collabIntroCaseKicker: "Completed project",
+          collabIntroCaseTitle: "“Kofe v Zernakh”",
+          collabIntroAddress: "Moscow, Troitsk, Solnechnaya Street, 9",
+          collabIntroBody:
+            "At the cafe “Kofe v Zernakh”, a fox painting from Elena's animal series naturally entered the space both visually and conceptually. The fox echoes the cafe's identity, so the watercolour reads not as accidental decor, but as a living and organic part of the place. In spaces like this, a work does not overwhelm the interior; it helps it feel more cohesive, warm, and memorable.",
+          collabIntroCta: "About collaboration",
+          collabIntroAltFacade: "Facade of the cafe “Kofe v Zernakh”",
+          collabIntroAltInterior: "Fox watercolour in the interior of the cafe “Kofe v Zernakh”",
+          collabIntroAltDetail: "Detail from the cafe “Kofe v Zernakh” with the fox logo",
+          aboutKicker: "About the artist",
+          aboutBody: [
+            "In her practice, Elena Kozlova turns to watercolor as a medium that captures fleeting states — light, movement, and the inner tension of form.",
+            "Her works exist on the border between observation and experience: a landscape becomes a reflection of inner perception, while the figure becomes a way to explore plasticity and presence.",
+            "Elena Kozlova's works can become part of both private and public spaces — from intimate interiors to restaurants, hotels, and gallery areas. Watercolor does not overwhelm a space; it creates a point of silence, light, and living presence within it. Individual selection of works and collaboration with designers, architects, and space owners are possible.",
+          ],
+          aboutCta: "Collaboration",
+          worldKicker: "Artist's World",
+          worldTitle: "Artist's World",
+          worldBody:
+            "This section brings together photos from plein air sessions, the working process and exhibitions. Plein air is a direct encounter with a place: its light, air, architecture and nature. In the working process, transparent color, the movement of water, the unpredictability of the watercolor stain and the gradual appearance of the image on paper are especially important. Exhibitions become a meeting space between the artwork and the viewer: here watercolor leaves the studio and begins to live in dialogue with people.",
+          worksKicker: "Works",
+          worksTitle: "Selected",
+          worksIntro:
+            "A selection of recent works in watercolour.\nEach piece is unique and created as an original.",
+          catalogKicker: "Full catalogue",
+          catalogTitle: "More works",
+          catalogBody:
+            "What you see here is a selection. The full set of available works lives on Instagram. If it’s easier — I can send you a PDF catalogue with prices on Telegram or MAX.",
+          catalogCtaIg: "All works — Instagram",
+          catalogCtaTg: "PDF catalogue on Telegram",
+          catalogCtaMax: "PDF catalogue on MAX",
+          paintingsTitle: "Paintings",
+          postcardsTitle: "Postcards",
+          postcardsEmpty: "This section will be updated soon.",
+          postcardsIntro:
+            "An artist postcard is a small watercolor work created as a unique piece. It is hand-painted on cotton paper, has a designed reverse side and comes with a matching envelope. It can be sent to someone close or kept as an independent artwork by the artist. Postcard size — 10×15 cm.",
+          postcardMedium: "Watercolor",
+          postcardStatus: "Available",
+          postcardSize: "10×15 cm",
+          postcardFrontLabel: "Front",
+          postcardBackLabel: "Reverse",
+          cardMedium: "Watercolour on paper",
+          cardCta: "Inquire",
+          cvKicker: "Biography",
+          cvTitle: "Selected Exhibitions",
+          cvSolo: "Solo exhibition",
+          cvGroup: "Group exhibitions",
+          cvPlein: "Plein air",
+          cvSoloItems: ["2019 — House of Scientists, Troitsk (Moscow)"],
+          cvGroupItems: [
+            "2025 — Watercolour Festival “Yablonevy Sad”, Lobnya",
+            "2025 — Lyalka Museum, Troitsk (Moscow)",
+            "2024 — “My Summer”, Molbert Contemporary Gallery, Saint Petersburg",
+            "2023 — Union of Artists of Moscow Region, Troitsk",
+            "2023 — “Flower Festival”, Troitsk Open Gallery",
+          ],
+          cvPleinItems: ["2024 — Olkhon Island, Lake Baikal", "2026 — Armenia (art tour)"],
+          acqKicker: "Acquisition",
+          acqTitle: "How to acquire a work",
+          acqSteps: [
+            {
+              n: "01",
+              title: "Choose a work",
+              desc: "Browse available watercolours in the “Works” section.",
+            },
+            {
+              n: "02",
+              title: "Click “Message”",
+              desc: "Send a request for the work you are interested in via Telegram or MAX.",
+            },
+            {
+              n: "03",
+              title: "Discuss the details",
+              desc: "Elena will reply about availability, price, framing and shipping.",
+            },
+            {
+              n: "04",
+              title: "Confirm purchase or reserve",
+              desc: "The work can be purchased, reserved, or discussed as a personal commission.",
+            },
+          ],
+          acqNote:
+            "We can discuss framing, shipping, reserving a work, and the possibility of creating a similar watercolour as a personal commission.",
+          acqCta: "Message on Telegram",
+          acqCtaMax: "Message on MAX",
+          tgKicker: "Follow new works",
+          tgBody:
+            "New works, the process of creating watercolors, plein air sessions, exhibitions, and events from the artist’s creative practice can be seen in the artist’s personal channels.",
+          igCta: "Follow on Instagram",
+          tgCta: "Follow on Telegram",
+          tgCtaMax: "Follow on MAX",
+          footerCtaMax: "Message on MAX",
+          footerName: "Elena Kozlova",
+          footerTagline: "contemporary watercolour artist",
+          footerBio:
+            "Elena Kozlova's practice focuses on landscapes of inner states and figurative studies. In her work, watercolour acts as a medium for fixing emotional and plastic observations — joining spontaneity and precision.",
+          footerMeta: [
+            "Member of the Russian Watercolour Society.",
+            "Participant in group exhibitions in Moscow, Saint Petersburg and the Moscow region (2016–2026).",
+            "Works are held in private collections across Russia and Europe.",
+          ],
+          footerContactLabel: "For inquiries, commissions and collaborations",
+          footerCta: "Message on Telegram",
+          rights: "All rights reserved",
+        };
 
   const mailto = "mailto:elenakozlova77@yandex.ru";
   const serif = { fontFamily: "'Cormorant Garamond', serif" };
@@ -316,11 +445,21 @@ function Index() {
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
           <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
-            <a href="#works" className="hover:text-foreground transition-colors">{t.nav.works}</a>
-            <a href="#about" className="hover:text-foreground transition-colors">{t.nav.about}</a>
-            <a href="#cv" className="hover:text-foreground transition-colors">{t.nav.cv}</a>
-            <Link to="/collaboration" className="hover:text-foreground transition-colors">{t.nav.collab}</Link>
-            <a href="#contact" className="hover:text-foreground transition-colors">{t.nav.contact}</a>
+            <a href="#works" className="hover:text-foreground transition-colors">
+              {t.nav.works}
+            </a>
+            <a href="#about" className="hover:text-foreground transition-colors">
+              {t.nav.about}
+            </a>
+            <a href="#cv" className="hover:text-foreground transition-colors">
+              {t.nav.cv}
+            </a>
+            <Link to="/collaboration" className="hover:text-foreground transition-colors">
+              {t.nav.collab}
+            </Link>
+            <a href="#contact" className="hover:text-foreground transition-colors">
+              {t.nav.contact}
+            </a>
           </div>
           <div className="flex items-center gap-3 md:gap-4 text-[11px] tracking-[0.2em]">
             <a
@@ -372,7 +511,9 @@ function Index() {
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
           <div className="flex items-center justify-between px-6 h-16 border-b border-border/30">
-            <span className="text-[11px] tracking-[0.35em] uppercase">{lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}</span>
+            <span className="text-[11px] tracking-[0.35em] uppercase">
+              {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
+            </span>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -383,11 +524,46 @@ function Index() {
             </button>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center gap-8 px-6">
-            <a href="#works" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.works}</a>
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.about}</a>
-            <a href="#cv" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.cv}</a>
-            <Link to="/collaboration" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.collab}</Link>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} style={serif} className="text-3xl font-light hover:text-foreground/70 transition-colors">{t.nav.contact}</a>
+            <a
+              href="#works"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.works}
+            </a>
+            <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.about}
+            </a>
+            <a
+              href="#cv"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.cv}
+            </a>
+            <Link
+              to="/collaboration"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.collab}
+            </Link>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.contact}
+            </a>
           </div>
         </div>
       )}
@@ -396,18 +572,34 @@ function Index() {
       <section id="top" className="pt-28 md:pt-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-8 md:gap-12 items-end md:items-center min-h-[88vh] md:min-h-[calc(100vh-5rem)] pb-16 md:pb-12">
           <div className="md:col-span-5">
-            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.heroKicker}</p>
-            <h1 style={serif} className="text-6xl md:text-[7.5rem] leading-[0.92] font-light whitespace-pre-line tracking-tight">
+            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">
+              {t.heroKicker}
+            </p>
+            <h1
+              style={serif}
+              className="text-6xl md:text-[7.5rem] leading-[0.92] font-light whitespace-pre-line tracking-tight"
+            >
               {t.heroName}
             </h1>
             <p className="mt-10 text-base md:text-[15px] leading-[1.8] text-foreground/70 whitespace-pre-line text-justify hyphens-auto">
               {t.heroLead}
             </p>
+            <div className="mt-8 space-y-2 text-[14px] md:text-[15px] leading-[1.65] text-foreground/62">
+              {t.heroTrust.map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
             <div className="mt-10 flex flex-wrap gap-3 items-center text-[11px] tracking-[0.3em] uppercase">
-              <a href="#works" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a
+                href="#works"
+                className="inline-block text-center rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+              >
                 {t.heroCta}
               </a>
-              <a href="#about" className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+              <a
+                href="#about"
+                className="inline-block text-center rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+              >
                 {t.heroCta2}
               </a>
             </div>
@@ -424,7 +616,17 @@ function Index() {
                 maskComposite: "intersect",
               }}
             >
-              <img src={hero} srcSet={makeSrcSet(hero, hero800)} sizes="(max-width: 768px) 100vw, 50vw" alt={lang === "ru" ? "Художник-акварелист Елена Козлова" : "Watercolour artist Elena Kozlova"} className="w-full h-full object-cover" />
+              <img
+                src={hero}
+                srcSet={makeSrcSet(hero, hero800)}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt={
+                  lang === "ru"
+                    ? "Художник-акварелист Елена Козлова"
+                    : "Watercolour artist Elena Kozlova"
+                }
+                className="w-full h-full object-cover"
+              />
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
@@ -441,23 +643,110 @@ function Index() {
         </div>
       </section>
 
+      {/* SPACES PREVIEW */}
+      <section className="py-20 md:py-24 border-t border-border/40 bg-secondary/30">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-12 mb-10 md:mb-12">
+            <div className="md:col-span-5">
+              <h2
+                style={serif}
+                className="max-w-[10ch] text-[2.85rem] md:text-[4.75rem] lg:text-[5rem] font-light leading-[0.98] whitespace-pre-line"
+              >
+                {t.collabIntroTitle}
+              </h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 max-w-[42rem]">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-5">
+                {t.collabIntroCaseKicker}
+              </p>
+              <h3
+                style={serif}
+                className="text-3xl md:text-[3.6rem] font-light leading-[1.02] mb-4"
+              >
+                {t.collabIntroCaseTitle}
+              </h3>
+              {t.collabIntroAddress ? (
+                <p className="text-[12px] tracking-[0.18em] uppercase text-foreground/55 mb-5">
+                  {t.collabIntroAddress}
+                </p>
+              ) : null}
+              <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/75">
+                {t.collabIntroBody}
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
+            <img
+              src={coffeeBeansFacade}
+              srcSet={makeSrcSet(coffeeBeansFacade, coffeeBeansFacade800)}
+              sizes="(max-width: 768px) 100vw, 400px"
+              alt={t.collabIntroAltFacade}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover aspect-[3/4] block"
+            />
+            <img
+              src={coffeeBeansInterior}
+              srcSet={makeSrcSet(coffeeBeansInterior, coffeeBeansInterior800)}
+              sizes="(max-width: 768px) 100vw, 400px"
+              alt={t.collabIntroAltInterior}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover aspect-[3/4] block"
+            />
+            <img
+              src={coffeeBeansDetail}
+              srcSet={makeSrcSet(coffeeBeansDetail, coffeeBeansDetail800)}
+              sizes="(max-width: 768px) 100vw, 400px"
+              alt={t.collabIntroAltDetail}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover aspect-[3/4] block"
+            />
+          </div>
+          <div className="flex justify-center mt-8 md:mt-10">
+            <Link
+              to="/collaboration"
+              className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+            >
+              {t.collabIntroCta}
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* WORKS — category tiles */}
       <section id="works" className="py-24 md:py-32 border-t border-border/50 scroll-mt-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-20">
             <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worksTitle}</h2>
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                {t.worksKicker}
+              </p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">
+                {t.worksTitle}
+              </h2>
             </div>
             <div className="md:col-span-6 md:col-start-7 md:pt-4">
-              <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
+              <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">
+                {t.worksIntro}
+              </p>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
             {[
-              { id: "paintings" as const, title: t.paintingsTitle, img: paintingsTile as string | null, img800: paintingsTile800 as string | null },
-              { id: "postcards" as const, title: t.postcardsTitle, img: postcardsTile as string | null, img800: postcardsTile800 as string | null },
+              {
+                id: "paintings" as const,
+                title: t.paintingsTitle,
+                img: paintingsTile as string | null,
+                img800: paintingsTile800 as string | null,
+              },
+              {
+                id: "postcards" as const,
+                title: t.postcardsTitle,
+                img: postcardsTile as string | null,
+                img800: postcardsTile800 as string | null,
+              },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -488,7 +777,10 @@ function Index() {
                   )}
                 </div>
                 <div className="px-6 py-5 flex items-center justify-between">
-                  <span style={serif} className="text-2xl md:text-3xl italic font-light text-[#6b5557]">
+                  <span
+                    style={serif}
+                    className="text-2xl md:text-3xl italic font-light text-[#6b5557]"
+                  >
                     {cat.title}
                   </span>
                   <span className="text-[11px] tracking-[0.3em] uppercase text-foreground/50 group-hover:text-foreground/80 transition-colors">
@@ -502,88 +794,271 @@ function Index() {
       </section>
 
       {/* CATEGORY OVERLAY */}
-      {openCategory !== null && (() => {
-        const closeLabel = lang === "ru" ? "Закрыть" : "Close";
-        const title = openCategory === "paintings" ? t.paintingsTitle : t.postcardsTitle;
-        return (
-          <div
-            className="fixed inset-0 z-[90] bg-background overflow-y-auto"
-            role="dialog"
-            aria-modal="true"
-            aria-label={title}
-          >
-            <button
-              type="button"
-              onClick={() => setOpenCategory(null)}
-              aria-label={closeLabel}
-              className="fixed top-5 right-5 md:top-8 md:right-8 z-[95] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light bg-background/80 backdrop-blur rounded-full border border-border/40"
+      {openCategory !== null &&
+        (() => {
+          const closeLabel = lang === "ru" ? "Закрыть" : "Close";
+          const title = openCategory === "paintings" ? t.paintingsTitle : t.postcardsTitle;
+          return (
+            <div
+              className="fixed inset-0 z-[90] bg-background overflow-y-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-label={title}
             >
-              ×
-            </button>
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 md:py-24">
-              <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
-                <div className="md:col-span-7">
-                  <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worksKicker}</p>
-                  <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{title}</h2>
+              <button
+                type="button"
+                onClick={() => setOpenCategory(null)}
+                aria-label={closeLabel}
+                className="fixed top-5 right-5 md:top-8 md:right-8 z-[95] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light bg-background/80 backdrop-blur rounded-full border border-border/40"
+              >
+                ×
+              </button>
+              <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 md:py-24">
+                <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
+                  <div className="md:col-span-7">
+                    <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                      {t.worksKicker}
+                    </p>
+                    <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">
+                      {title}
+                    </h2>
+                  </div>
+                  {openCategory === "paintings" && (
+                    <div className="md:col-span-5 md:pt-4">
+                      <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">
+                        {t.worksIntro}
+                      </p>
+                    </div>
+                  )}
+                  {openCategory === "postcards" && (
+                    <div className="md:col-span-5 md:pt-4">
+                      <p className="text-[15px] leading-[1.85] text-foreground/70">
+                        {t.postcardsIntro}
+                      </p>
+                    </div>
+                  )}
                 </div>
-                {openCategory === "paintings" && (
-                  <div className="md:col-span-5 md:pt-4">
-                    <p className="text-[15px] leading-[1.85] text-foreground/70 whitespace-pre-line">{t.worksIntro}</p>
-                  </div>
-                )}
-                {openCategory === "postcards" && (
-                  <div className="md:col-span-5 md:pt-4">
-                    <p className="text-[15px] leading-[1.85] text-foreground/70">{t.postcardsIntro}</p>
-                  </div>
-                )}
-              </div>
 
-              {openCategory === "paintings" ? (
-                <>
-                <div className="flex flex-col md:flex-row md:flex-wrap md:items-start md:justify-center gap-x-10 gap-y-20 md:gap-y-28">
-                  {works.map((w, i) => {
-                    const info = w[lang];
-                    const { wCm } = parseSizeCm(info.s, w.vertical);
-                    // Ширина карточки на desktop пропорциональна физической ширине работы:
-                    // 70 см → ~48% контейнера, 38 см → ~26%. Вертикальные работы (vertical: true)
-                    // получают узкую колонку — их короткая сторона = wCm.
-                    const widthPct = (wCm / 70) * 48;
-                    const sold = lang === "ru" ? info.st.toLowerCase() === "продано" : info.st.toLowerCase() === "sold";
-                    return (
-                      <figure key={i} className="group w-full md:[width:var(--card-w)]" style={{ ["--card-w" as string]: `${widthPct}%` }}>
-                        <button
-                          type="button"
-                          onClick={() => setOpenIdx(i)}
-                          aria-label={info.t}
-                          className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
-                        >
-                          <img src={w.src} srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined} sizes="(max-width: 768px) 100vw, 50vw" alt={getWorkAlt(info, lang)} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
-                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
-                            <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
-                              {info.t}
-                            </span>
-                          </div>
-                        </button>
-                        <figcaption className="mt-6">
-                          <div className="flex items-baseline justify-between gap-4">
-                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
-                              <button type="button" onClick={() => setOpenIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
-                                {info.t}
+                {openCategory === "paintings" ? (
+                  <>
+                    <div className="flex flex-col md:flex-row md:flex-wrap md:items-start md:justify-center gap-x-10 gap-y-20 md:gap-y-28">
+                      {works.map((w, i) => {
+                        const info = w[lang];
+                        const { wCm } = parseSizeCm(info.s, w.vertical);
+                        // Ширина карточки на desktop пропорциональна физической ширине работы:
+                        // 70 см → ~48% контейнера, 38 см → ~26%. Вертикальные работы (vertical: true)
+                        // получают узкую колонку — их короткая сторона = wCm.
+                        const widthPct = (wCm / 70) * 48;
+                        const sold =
+                          lang === "ru"
+                            ? info.st.toLowerCase() === "продано"
+                            : info.st.toLowerCase() === "sold";
+                        return (
+                          <Fragment key={i}>
+                            {w.breakBefore && (
+                              <div aria-hidden className="hidden md:block basis-full h-0" />
+                            )}
+                            <figure
+                              className="group w-full md:[width:var(--card-w)]"
+                              style={{ ["--card-w" as string]: `${widthPct}%` }}
+                            >
+                              <button
+                                type="button"
+                                onClick={() => setOpenIdx(i)}
+                                aria-label={info.t}
+                                className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+                              >
+                                <img
+                                  src={w.src}
+                                  srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined}
+                                  sizes="(max-width: 768px) 100vw, 50vw"
+                                  alt={getWorkAlt(info, lang)}
+                                  loading="lazy"
+                                  decoding="async"
+                                  fetchPriority="low"
+                                  className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]"
+                                />
+                                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
+                                  <span
+                                    style={serif}
+                                    className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md"
+                                  >
+                                    {info.t}
+                                  </span>
+                                </div>
                               </button>
-                            </h3>
-                            <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
-                              {formatPrice(w.price, lang)}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex items-start justify-between gap-4">
-                            <p className="text-[12px] tracking-[0.1em] text-foreground/55">
-                              {info.m || t.cardMedium} · {info.s} · {info.y}
-                            </p>
-                            <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}>
-                              {info.st}
-                            </span>
-                          </div>
-                          {!sold && (
+                              <figcaption className="mt-6">
+                                <div className="flex items-baseline justify-between gap-4">
+                                  <h3
+                                    style={serif}
+                                    className="text-xl md:text-2xl italic font-light leading-tight"
+                                  >
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenIdx(i)}
+                                      className="text-left hover:text-foreground/70 transition-colors cursor-pointer"
+                                    >
+                                      {info.t}
+                                    </button>
+                                  </h3>
+                                  <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
+                                    {formatPrice(w.price, lang)}
+                                  </span>
+                                </div>
+                                <div className="mt-2 flex items-start justify-between gap-4">
+                                  <p className="text-[12px] tracking-[0.1em] text-foreground/55">
+                                    {info.m || t.cardMedium} · {info.s} · {info.y}
+                                  </p>
+                                  <span
+                                    className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}
+                                  >
+                                    {info.st}
+                                  </span>
+                                </div>
+                                {!sold && (
+                                  <div className="mt-5 flex gap-3">
+                                    <a
+                                      href={TG_DM_LINK}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                                    >
+                                      {lang === "ru" ? "Написать" : "Message"}
+                                      <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                                    </a>
+                                    <a
+                                      href={MAX_LINK}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                                    >
+                                      {lang === "ru" ? "Написать" : "Message"}
+                                      <MaxIcon className="w-4 h-4" />
+                                    </a>
+                                  </div>
+                                )}
+                              </figcaption>
+                            </figure>
+                            {w.breakAfter && (
+                              <div aria-hidden className="hidden md:block basis-full h-0" />
+                            )}
+                          </Fragment>
+                        );
+                      })}
+                    </div>
+                    {/* Полный каталог — CTA блок под сеткой работ */}
+                    <div className="mt-32 md:mt-40 pt-20 md:pt-24 border-t border-border/40">
+                      <div className="max-w-3xl mx-auto text-center px-4">
+                        <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                          {t.catalogKicker}
+                        </p>
+                        <h3
+                          style={serif}
+                          className="text-4xl md:text-5xl font-light leading-[1.1] mb-8"
+                        >
+                          {t.catalogTitle}
+                        </h3>
+                        <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/75 mb-12 max-w-2xl mx-auto">
+                          {t.catalogBody}
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <a
+                            href={IG_CATALOG_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                          >
+                            <Instagram className="w-4 h-4" strokeWidth={1.75} />
+                            {t.catalogCtaIg}
+                          </a>
+                          <a
+                            href={TG_DM_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                          >
+                            <Send className="w-4 h-4" strokeWidth={1.75} />
+                            {t.catalogCtaTg}
+                          </a>
+                          <a
+                            href={MAX_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                          >
+                            <MaxIcon className="w-4 h-4" />
+                            {t.catalogCtaMax}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
+                    {postcards.map((p, i) => {
+                      const title = lang === "ru" ? p.ru : p.en;
+                      const statusText = p.sold
+                        ? lang === "ru"
+                          ? "Продано"
+                          : "Sold"
+                        : t.postcardStatus;
+                      return (
+                        <figure key={i} className="group">
+                          <button
+                            type="button"
+                            onClick={() => setOpenPostcardIdx(i)}
+                            aria-label={title}
+                            className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+                          >
+                            <img
+                              src={p.src}
+                              srcSet={makeSrcSet(p.src, p.src800)}
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                              alt={getPostcardAlt(title, lang)}
+                              loading="lazy"
+                              decoding="async"
+                              fetchPriority="low"
+                              className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]"
+                            />
+                            <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
+                              <span
+                                style={serif}
+                                className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md"
+                              >
+                                {title}
+                              </span>
+                            </div>
+                          </button>
+                          <figcaption className="mt-6">
+                            <div className="flex items-baseline justify-between gap-4">
+                              <h3
+                                style={serif}
+                                className="text-xl md:text-2xl italic font-light leading-tight"
+                              >
+                                <button
+                                  type="button"
+                                  onClick={() => setOpenPostcardIdx(i)}
+                                  className="text-left hover:text-foreground/70 transition-colors cursor-pointer"
+                                >
+                                  {title}
+                                </button>
+                              </h3>
+                              <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
+                                {lang === "ru" ? "1 000 руб." : "10 €"}
+                              </span>
+                            </div>
+                            <div className="mt-2 flex items-start justify-between gap-4">
+                              <p className="text-[12px] tracking-[0.1em] text-foreground/55">
+                                {t.postcardMedium} · {t.postcardSize}
+                              </p>
+                              <span
+                                className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}
+                              >
+                                {statusText}
+                              </span>
+                            </div>
                             <div className="mt-5 flex gap-3">
                               <a
                                 href={TG_DM_LINK}
@@ -606,395 +1081,388 @@ function Index() {
                                 <MaxIcon className="w-4 h-4" />
                               </a>
                             </div>
-                          )}
-                        </figcaption>
-                      </figure>
-                    );
-                  })}
-                </div>
-                {/* Полный каталог — CTA блок под сеткой работ */}
-                <div className="mt-32 md:mt-40 pt-20 md:pt-24 border-t border-border/40">
-                  <div className="max-w-3xl mx-auto text-center px-4">
-                    <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.catalogKicker}</p>
-                    <h3 style={serif} className="text-4xl md:text-5xl font-light leading-[1.1] mb-8">{t.catalogTitle}</h3>
-                    <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/75 mb-12 max-w-2xl mx-auto">{t.catalogBody}</p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <a
-                        href={IG_CATALOG_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                      >
-                        <Instagram className="w-4 h-4" strokeWidth={1.75} />
-                        {t.catalogCtaIg}
-                      </a>
-                      <a
-                        href={TG_DM_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                      >
-                        <Send className="w-4 h-4" strokeWidth={1.75} />
-                        {t.catalogCtaTg}
-                      </a>
-                      <a
-                        href={MAX_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                      >
-                        <MaxIcon className="w-4 h-4" />
-                        {t.catalogCtaMax}
-                      </a>
-                    </div>
+                          </figcaption>
+                        </figure>
+                      );
+                    })}
                   </div>
-                </div>
-                </>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
-                  {postcards.map((p, i) => {
-                    const title = lang === "ru" ? p.ru : p.en;
-                    const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
-                    return (
-                      <figure key={i} className="group">
-                        <button
-                          type="button"
-                          onClick={() => setOpenPostcardIdx(i)}
-                          aria-label={title}
-                          className="relative overflow-hidden bg-secondary block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
-                        >
-                          <img src={p.src} srcSet={makeSrcSet(p.src, p.src800)} sizes="(max-width: 768px) 100vw, 33vw" alt={getPostcardAlt(title, lang)} loading="lazy" decoding="async" fetchPriority="low" className="w-full h-auto object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.025]" />
-                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-700 flex items-end p-6 md:p-8">
-                            <span style={serif} className="text-2xl md:text-3xl italic text-background opacity-0 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">
-                              {title}
-                            </span>
-                          </div>
-                        </button>
-                        <figcaption className="mt-6">
-                          <div className="flex items-baseline justify-between gap-4">
-                            <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight">
-                              <button type="button" onClick={() => setOpenPostcardIdx(i)} className="text-left hover:text-foreground/70 transition-colors cursor-pointer">
-                                {title}
-                              </button>
-                            </h3>
-                            <span className="text-[13px] md:text-[15px] tracking-[0.04em] text-foreground/85 whitespace-nowrap">
-                              {lang === "ru" ? "1 000 руб." : "10 €"}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex items-start justify-between gap-4">
-                            <p className="text-[12px] tracking-[0.1em] text-foreground/55">
-                              {t.postcardMedium} · {t.postcardSize}
-                            </p>
-                            <span className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${p.sold ? "text-foreground/40" : "text-foreground/80"}`}>
-                              {statusText}
-                            </span>
-                          </div>
-                          <div className="mt-5 flex gap-3">
-                            <a
-                              href={TG_DM_LINK}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                            >
-                              {lang === "ru" ? "Написать" : "Message"}
-                              <Send className="w-3.5 h-3.5" strokeWidth={2} />
-                            </a>
-                            <a
-                              href={MAX_LINK}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex-1 inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                            >
-                              {lang === "ru" ? "Написать" : "Message"}
-                              <MaxIcon className="w-4 h-4" />
-                            </a>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-        );
-      })()}
-
-      {/* POSTCARD MODAL */}
-      {openPostcardIdx !== null && (() => {
-        const p = postcards[openPostcardIdx];
-        const title = lang === "ru" ? p.ru : p.en;
-        const labels = lang === "ru"
-          ? { tech: "Техника", size: "Размер", status: "Статус", price: "Цена", cta: "Запросить стоимость", close: "Закрыть", front: "Лицевая сторона", back: "Обратная сторона" }
-          : { tech: "Technique", size: "Size", status: "Status", price: "Price", cta: "Request price", close: "Close", front: "Front", back: "Reverse" };
-        const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
-        const priceText = lang === "ru" ? "1 000 руб." : "10 €";
-        const rows = [
-          { label: labels.tech, value: t.postcardMedium },
-          { label: labels.size, value: t.postcardSize },
-          { label: labels.status, value: statusText },
-          { label: labels.price, value: priceText },
-        ];
-        const postcardImages = [
-          { src: p.src, alt: `${title} — ${labels.front}` },
-          { src: postcardBack, alt: `${title} — ${labels.back}` },
-        ];
-        return (
-          <div
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
-            onClick={() => setOpenPostcardIdx(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-label={title}
-          >
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setOpenPostcardIdx(null); }}
-              aria-label={labels.close}
-              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
-            >
-              ×
-            </button>
-            <div
-              className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
-                <div className="w-full flex flex-col items-center">
-                  <button
-                    type="button"
-                    onClick={() => setLightbox({ images: postcardImages, index: 0 })}
-                    className="block cursor-zoom-in"
-                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
-                  >
-                    <img
-                      src={p.src}
-                      srcSet={makeSrcSet(p.src, p.src800)}
-                      sizes="(max-width: 768px) 100vw, 60vw"
-                      alt={`${title} — ${labels.front}`}
-                      loading="eager"
-                      decoding="async"
-                      className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
-                    />
-                  </button>
-                  <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.front}</p>
-                </div>
-                <div className="w-full flex flex-col items-center">
-                  <button
-                    type="button"
-                    onClick={() => setLightbox({ images: postcardImages, index: 1 })}
-                    className="block cursor-zoom-in"
-                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
-                  >
-                    <img
-                      src={postcardBack}
-                      srcSet={makeSrcSet(postcardBack, postcardBack800)}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      alt={`${title} — ${labels.back}`}
-                      loading="eager"
-                      decoding="async"
-                      className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
-                    />
-                  </button>
-                  <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{labels.back}</p>
-                </div>
-              </div>
-              <div className="md:col-span-4 flex flex-col justify-center md:py-8">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{t.postcardsTitle}</p>
-                <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
-                  {title}
-                </h2>
-                <dl className="space-y-5 mb-10">
-                  {rows.map((r) => (
-                    <div key={r.label} className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3">
-                      <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{r.label}</dt>
-                      <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="flex flex-col sm:flex-row gap-2.5">
-                  <a
-                    href={TG_DM_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
-                  >
-                    {lang === "ru" ? "Написать" : "Message"}
-                    <Send className="w-3.5 h-3.5" strokeWidth={2} />
-                  </a>
-                  <a
-                    href={MAX_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                  >
-                    {lang === "ru" ? "Написать" : "Message"}
-                    <MaxIcon className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })()}
-
-
-
-
-
-      {/* ARTWORK MODAL */}
-      {openIdx !== null && (() => {
-        const w = works[openIdx];
-        const info = w[lang];
-        const labels = lang === "ru"
-          ? { cat: "Категория", tech: "Техника", size: "Размер", year: "Год", status: "Статус", price: "Цена", desc: "Описание", cta: "Запросить цену", ask: "Задать вопрос", close: "Закрыть" }
-          : { cat: "Category", tech: "Technique", size: "Size", year: "Year", status: "Status", price: "Price", desc: "Description", cta: "Request price", ask: "Ask a question", close: "Close" };
-        const rows: { label: string; value: string }[] = [
-          { label: labels.cat, value: info.c },
-          { label: labels.tech, value: info.m },
-          { label: labels.size, value: info.s },
-          { label: labels.year, value: info.y },
-          { label: labels.status, value: info.st },
-          { label: labels.price, value: formatPrice(w.price, lang) },
-        ];
-        return (
-          <div
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
-            onClick={() => setOpenIdx(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-label={info.t}
-          >
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setOpenIdx(null); }}
-              aria-label={labels.close}
-              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
-            >
-              ×
-            </button>
-            <div
-              className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
-                {w.diptych ? (
-                  (() => {
-                    const diptychImages = w.diptych.map((d) => ({
-                      src: d.src,
-                      alt: `${info.t} — ${lang === "ru" ? d.labelRu : d.labelEn}`,
-                    }));
-                    return w.diptych.map((d, i) => (
-                      <div key={i} className="w-full flex flex-col items-center">
-                        <button
-                          type="button"
-                          onClick={() => setLightbox({ images: diptychImages, index: i })}
-                          className="block cursor-zoom-in"
-                          aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
-                        >
-                          <img
-                            src={d.src}
-                            srcSet={d.src800 ? makeSrcSet(d.src, d.src800) : undefined}
-                            sizes="(max-width: 768px) 100vw, 60vw"
-                            alt={diptychImages[i].alt}
-                            loading="eager"
-                            decoding="async"
-                            className="max-w-full max-h-[55vh] w-auto h-auto object-contain"
-                          />
-                        </button>
-                        <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
-                          {lang === "ru" ? d.labelRu : d.labelEn}
-                        </p>
-                      </div>
-                    ));
-                  })()
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setLightbox({ images: [{ src: w.src, alt: getWorkAlt(info, lang) }], index: 0 })}
-                    className="block cursor-zoom-in"
-                    aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
-                  >
-                    <img
-                      src={w.src}
-                      srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined}
-                      sizes="(max-width: 768px) 100vw, 70vw"
-                      alt={getWorkAlt(info, lang)}
-                      loading="eager"
-                      decoding="async"
-                      className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
-                    />
-                  </button>
                 )}
               </div>
-              <div className="md:col-span-4 flex flex-col justify-center md:py-8">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">{info.c}</p>
-                <h2 style={serif} className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10">
-                  {info.t}
-                </h2>
-                <dl className="space-y-5 mb-10">
-                  {rows.slice(1).map((r) => (
-                    <div key={r.label} className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3">
-                      <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">{r.label}</dt>
-                      <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="mb-10">
-                  <p className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mb-3">{labels.desc}</p>
-                  <p style={serif} className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic">
-                    {info.d}
-                  </p>
+            </div>
+          );
+        })()}
+
+      {/* POSTCARD MODAL */}
+      {openPostcardIdx !== null &&
+        (() => {
+          const p = postcards[openPostcardIdx];
+          const title = lang === "ru" ? p.ru : p.en;
+          const labels =
+            lang === "ru"
+              ? {
+                  tech: "Техника",
+                  size: "Размер",
+                  status: "Статус",
+                  price: "Цена",
+                  cta: "Запросить стоимость",
+                  close: "Закрыть",
+                  front: "Лицевая сторона",
+                  back: "Обратная сторона",
+                }
+              : {
+                  tech: "Technique",
+                  size: "Size",
+                  status: "Status",
+                  price: "Price",
+                  cta: "Request price",
+                  close: "Close",
+                  front: "Front",
+                  back: "Reverse",
+                };
+          const statusText = p.sold ? (lang === "ru" ? "Продано" : "Sold") : t.postcardStatus;
+          const priceText = lang === "ru" ? "1 000 руб." : "10 €";
+          const rows = [
+            { label: labels.tech, value: t.postcardMedium },
+            { label: labels.size, value: t.postcardSize },
+            { label: labels.status, value: statusText },
+            { label: labels.price, value: priceText },
+          ];
+          const postcardImages = [
+            { src: p.src, alt: `${title} — ${labels.front}` },
+            { src: postcardBack, alt: `${title} — ${labels.back}` },
+          ];
+          return (
+            <div
+              className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
+              onClick={() => setOpenPostcardIdx(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={title}
+            >
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenPostcardIdx(null);
+                }}
+                aria-label={labels.close}
+                className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
+              >
+                ×
+              </button>
+              <div
+                className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
+                  <div className="w-full flex flex-col items-center">
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ images: postcardImages, index: 0 })}
+                      className="block cursor-zoom-in"
+                      aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                    >
+                      <img
+                        src={p.src}
+                        srcSet={makeSrcSet(p.src, p.src800)}
+                        sizes="(max-width: 768px) 100vw, 60vw"
+                        alt={`${title} — ${labels.front}`}
+                        loading="eager"
+                        decoding="async"
+                        className="max-w-full max-h-[60vh] w-auto h-auto object-contain"
+                      />
+                    </button>
+                    <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                      {labels.front}
+                    </p>
+                  </div>
+                  <div className="w-full flex flex-col items-center">
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ images: postcardImages, index: 1 })}
+                      className="block cursor-zoom-in"
+                      aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                    >
+                      <img
+                        src={postcardBack}
+                        srcSet={makeSrcSet(postcardBack, postcardBack800)}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        alt={`${title} — ${labels.back}`}
+                        loading="eager"
+                        decoding="async"
+                        className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
+                      />
+                    </button>
+                    <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                      {labels.back}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2.5">
-                  <a
-                    href={TG_DM_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                <div className="md:col-span-4 flex flex-col justify-center md:py-8">
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">
+                    {t.postcardsTitle}
+                  </p>
+                  <h2
+                    style={serif}
+                    className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10"
                   >
-                    {lang === "ru" ? "Написать" : "Message"}
-                    <Send className="w-3.5 h-3.5" strokeWidth={2} />
-                  </a>
-                  <a
-                    href={MAX_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-                  >
-                    {lang === "ru" ? "Написать" : "Message"}
-                    <MaxIcon className="w-4 h-4" />
-                  </a>
+                    {title}
+                  </h2>
+                  <dl className="space-y-5 mb-10">
+                    {rows.map((r) => (
+                      <div
+                        key={r.label}
+                        className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3"
+                      >
+                        <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                          {r.label}
+                        </dt>
+                        <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div className="flex flex-col sm:flex-row gap-2.5">
+                    <a
+                      href={TG_DM_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                    >
+                      {lang === "ru" ? "Написать" : "Message"}
+                      <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                    </a>
+                    <a
+                      href={MAX_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                    >
+                      {lang === "ru" ? "Написать" : "Message"}
+                      <MaxIcon className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })()}
+          );
+        })()}
 
-
-
+      {/* ARTWORK MODAL */}
+      {openIdx !== null &&
+        (() => {
+          const w = works[openIdx];
+          const info = w[lang];
+          const labels =
+            lang === "ru"
+              ? {
+                  cat: "Категория",
+                  tech: "Техника",
+                  size: "Размер",
+                  year: "Год",
+                  status: "Статус",
+                  price: "Цена",
+                  desc: "Описание",
+                  cta: "Запросить цену",
+                  ask: "Задать вопрос",
+                  close: "Закрыть",
+                }
+              : {
+                  cat: "Category",
+                  tech: "Technique",
+                  size: "Size",
+                  year: "Year",
+                  status: "Status",
+                  price: "Price",
+                  desc: "Description",
+                  cta: "Request price",
+                  ask: "Ask a question",
+                  close: "Close",
+                };
+          const rows: { label: string; value: string }[] = [
+            { label: labels.cat, value: info.c },
+            { label: labels.tech, value: info.m },
+            { label: labels.size, value: info.s },
+            { label: labels.year, value: info.y },
+            { label: labels.status, value: info.st },
+            { label: labels.price, value: formatPrice(w.price, lang) },
+          ];
+          return (
+            <div
+              className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm overflow-y-auto"
+              onClick={() => setOpenIdx(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={info.t}
+            >
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenIdx(null);
+                }}
+                aria-label={labels.close}
+                className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-11 h-11 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors text-3xl leading-none font-light"
+              >
+                ×
+              </button>
+              <div
+                className="min-h-full grid md:grid-cols-12 gap-8 md:gap-12 px-4 md:px-12 lg:px-20 py-16 md:py-12"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="md:col-span-8 flex flex-col gap-6 md:gap-8 items-center justify-center">
+                  {w.diptych ? (
+                    (() => {
+                      const diptychImages = w.diptych.map((d) => ({
+                        src: d.src,
+                        alt: `${info.t} — ${lang === "ru" ? d.labelRu : d.labelEn}`,
+                      }));
+                      return w.diptych.map((d, i) => (
+                        <div key={i} className="w-full flex flex-col items-center">
+                          <button
+                            type="button"
+                            onClick={() => setLightbox({ images: diptychImages, index: i })}
+                            className="block cursor-zoom-in"
+                            aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                          >
+                            <img
+                              src={d.src}
+                              srcSet={d.src800 ? makeSrcSet(d.src, d.src800) : undefined}
+                              sizes="(max-width: 768px) 100vw, 60vw"
+                              alt={diptychImages[i].alt}
+                              loading="eager"
+                              decoding="async"
+                              className="max-w-full max-h-[55vh] w-auto h-auto object-contain"
+                            />
+                          </button>
+                          <p className="mt-3 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                            {lang === "ru" ? d.labelRu : d.labelEn}
+                          </p>
+                        </div>
+                      ));
+                    })()
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setLightbox({
+                          images: [{ src: w.src, alt: getWorkAlt(info, lang) }],
+                          index: 0,
+                        })
+                      }
+                      className="block cursor-zoom-in"
+                      aria-label={lang === "ru" ? "Открыть на весь экран" : "Open fullscreen"}
+                    >
+                      <img
+                        src={w.src}
+                        srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined}
+                        sizes="(max-width: 768px) 100vw, 70vw"
+                        alt={getWorkAlt(info, lang)}
+                        loading="eager"
+                        decoding="async"
+                        className="max-w-full max-h-[88vh] w-auto h-auto object-contain"
+                      />
+                    </button>
+                  )}
+                </div>
+                <div className="md:col-span-4 flex flex-col justify-center md:py-8">
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 mb-4">
+                    {info.c}
+                  </p>
+                  <h2
+                    style={serif}
+                    className="text-3xl md:text-4xl lg:text-5xl italic font-light leading-[1.1] mb-10"
+                  >
+                    {info.t}
+                  </h2>
+                  <dl className="space-y-5 mb-10">
+                    {rows.slice(1).map((r) => (
+                      <div
+                        key={r.label}
+                        className="grid grid-cols-12 gap-3 items-baseline border-b border-border/40 pb-3"
+                      >
+                        <dt className="col-span-4 text-[10px] tracking-[0.25em] uppercase text-foreground/50">
+                          {r.label}
+                        </dt>
+                        <dd className="col-span-8 text-[13px] text-foreground/85">{r.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div className="mb-10">
+                    <p className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mb-3">
+                      {labels.desc}
+                    </p>
+                    <p
+                      style={serif}
+                      className="text-lg md:text-xl leading-[1.6] font-light text-foreground/85 italic"
+                    >
+                      {info.d}
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2.5">
+                    <a
+                      href={TG_DM_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+                    >
+                      {lang === "ru" ? "Написать" : "Message"}
+                      <Send className="w-3.5 h-3.5" strokeWidth={2} />
+                    </a>
+                    <a
+                      href={MAX_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap text-[10px] tracking-[0.2em] uppercase rounded-full px-4 py-2.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
+                    >
+                      {lang === "ru" ? "Написать" : "Message"}
+                      <MaxIcon className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
       {/* ABOUT */}
       <section id="about" className="py-32 md:py-44 border-t border-border/50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-5 md:col-start-1">
             <div className="md:sticky md:top-32">
-              <img src={portrait} srcSet={makeSrcSet(portrait, portrait800)} sizes="(max-width: 768px) 100vw, 50vw" alt={lang === "ru" ? "Художник Елена Козлова в студии" : "Artist Elena Kozlova in the studio"} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+              <img
+                src={portrait}
+                srcSet={makeSrcSet(portrait, portrait800)}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt={
+                  lang === "ru"
+                    ? "Художник Елена Козлова в студии"
+                    : "Artist Elena Kozlova in the studio"
+                }
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:pt-16">
-            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.aboutKicker}</p>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">
+              {t.aboutKicker}
+            </p>
             <h2 style={serif} className="text-3xl md:text-5xl leading-[1.15] font-light mb-12">
-              {lang === "ru" ? "Акварель как фиксация ускользающего." : "Watercolour as a record of the fleeting."}
+              {lang === "ru"
+                ? "Акварель как фиксация ускользающего."
+                : "Watercolour as a record of the fleeting."}
             </h2>
             <div className="space-y-6 text-[15px] leading-[1.85] text-foreground/75 max-w-xl">
-              {t.aboutBody.map((p, i) => <p key={i}>{p}</p>)}
+              {t.aboutBody.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
             <div className="flex flex-col sm:flex-row gap-3 mt-12">
-              <Link to="/collaboration" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <Link
+                to="/collaboration"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+              >
                 {t.aboutCta}
               </Link>
             </div>
@@ -1007,8 +1475,12 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-20">
             <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.worldKicker}</p>
-              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">{t.worldTitle}</h2>
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                {t.worldKicker}
+              </p>
+              <h2 style={serif} className="text-5xl md:text-7xl font-light leading-none">
+                {t.worldTitle}
+              </h2>
             </div>
             <div className="md:col-span-6 md:col-start-7 md:pt-4">
               <p className="text-[15px] leading-[1.85] text-foreground/70">{t.worldBody}</p>
@@ -1061,7 +1533,6 @@ function Index() {
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-
         </div>
       </section>
 
@@ -1069,8 +1540,12 @@ function Index() {
       <section id="cv" className="py-32 md:py-44 border-t border-border/50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.cvKicker}</p>
-            <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">{t.cvTitle}</h2>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+              {t.cvKicker}
+            </p>
+            <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">
+              {t.cvTitle}
+            </h2>
           </div>
           <div className="md:col-span-7 md:col-start-6 space-y-14">
             {[
@@ -1079,10 +1554,16 @@ function Index() {
               { title: t.cvPlein, items: t.cvPleinItems },
             ].map((block, i) => (
               <div key={i}>
-                <h3 className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6 pb-3 border-b border-border">{block.title}</h3>
+                <h3 className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6 pb-3 border-b border-border">
+                  {block.title}
+                </h3>
                 <ul className="space-y-3">
                   {block.items.map((it, j) => (
-                    <li key={j} style={serif} className="text-lg md:text-xl font-light text-foreground/85 leading-relaxed">
+                    <li
+                      key={j}
+                      style={serif}
+                      className="text-lg md:text-xl font-light text-foreground/85 leading-relaxed"
+                    >
                       {it}
                     </li>
                   ))}
@@ -1096,8 +1577,13 @@ function Index() {
       {/* TELEGRAM */}
       <section className="py-32 md:py-40 border-t border-border/50">
         <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">{t.tgKicker}</p>
-          <p style={serif} className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12">
+          <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">
+            {t.tgKicker}
+          </p>
+          <p
+            style={serif}
+            className="text-3xl md:text-4xl leading-[1.35] font-light text-foreground/85 whitespace-pre-line mb-12"
+          >
             {t.tgBody}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1134,25 +1620,33 @@ function Index() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-20">
             <div className="md:col-span-5">
-              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.acqKicker}</p>
-              <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">{t.acqTitle}</h2>
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                {t.acqKicker}
+              </p>
+              <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">
+                {t.acqTitle}
+              </h2>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 mb-20">
             {t.acqSteps.map((s) => (
               <div key={s.n} className="border-t border-border pt-6">
                 <p className="text-[11px] tracking-[0.3em] text-foreground/45 mb-5">{s.n}</p>
-                <h3 style={serif} className="text-xl md:text-2xl italic font-light leading-tight mb-4">
+                <h3
+                  style={serif}
+                  className="text-xl md:text-2xl italic font-light leading-tight mb-4"
+                >
                   {s.title}
                 </h3>
-                <p className="text-[14px] leading-[1.75] text-foreground/65">
-                  {s.desc}
-                </p>
+                <p className="text-[14px] leading-[1.75] text-foreground/65">{s.desc}</p>
               </div>
             ))}
           </div>
           <div className="max-w-2xl">
-            <p style={serif} className="text-xl md:text-2xl leading-[1.5] font-light text-foreground/80 italic mb-10">
+            <p
+              style={serif}
+              className="text-xl md:text-2xl leading-[1.5] font-light text-foreground/80 italic mb-10"
+            >
               {t.acqNote}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -1181,34 +1675,85 @@ function Index() {
       <footer id="contact" className="border-t border-border/50 bg-secondary/30">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 md:py-32 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-7">
-            <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05] mb-4">{t.footerName}</h2>
-            <p className="text-[12px] tracking-[0.2em] uppercase text-foreground/55 mb-10">{t.footerTagline}</p>
-            <p className="text-[15px] leading-[1.85] text-foreground/75 max-w-xl mb-8">{t.footerBio}</p>
+            <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05] mb-4">
+              {t.footerName}
+            </h2>
+            <p className="text-[12px] tracking-[0.2em] uppercase text-foreground/55 mb-10">
+              {t.footerTagline}
+            </p>
+            <p className="text-[15px] leading-[1.85] text-foreground/75 max-w-xl mb-8">
+              {t.footerBio}
+            </p>
             <ul className="space-y-2 text-[13px] text-foreground/65 max-w-xl">
-              {t.footerMeta.map((m, i) => <li key={i}>{m}</li>)}
+              {t.footerMeta.map((m, i) => (
+                <li key={i}>{m}</li>
+              ))}
             </ul>
           </div>
           <div className="md:col-span-4 md:col-start-9">
-            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">{t.footerContactLabel}</p>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+              {t.footerContactLabel}
+            </p>
             <div className="space-y-4 mb-10">
-              <a href={mailto} className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                <Mail className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
-                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">elenakozlova77@yandex.ru</span>
+              <a
+                href={mailto}
+                className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors"
+                style={serif}
+              >
+                <Mail
+                  className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors"
+                  strokeWidth={1.5}
+                />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">
+                  elenakozlova77@yandex.ru
+                </span>
               </a>
-              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                <Instagram className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
-                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">@elenakozlovaart</span>
+              <a
+                href={IG_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors"
+                style={serif}
+              >
+                <Instagram
+                  className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors"
+                  strokeWidth={1.5}
+                />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">
+                  @elenakozlovaart
+                </span>
               </a>
-              <a href={TG_CHANNEL_LINK} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors" style={serif}>
-                <Send className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors" strokeWidth={1.5} />
-                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">@ElenaKozlova_Art</span>
+              <a
+                href={TG_CHANNEL_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 text-lg md:text-xl text-foreground/90 hover:text-foreground transition-colors"
+                style={serif}
+              >
+                <Send
+                  className="w-5 h-5 flex-shrink-0 text-foreground/50 group-hover:text-foreground transition-colors"
+                  strokeWidth={1.5}
+                />
+                <span className="group-hover:underline underline-offset-4 decoration-foreground/30">
+                  @ElenaKozlova_Art
+                </span>
               </a>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <a href={TG_DM_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors">
+              <a
+                href={TG_DM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
+              >
                 {t.footerCta}
               </a>
-              <a href={MAX_LINK} target="_blank" rel="noopener noreferrer" className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors">
+              <a
+                href={MAX_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-[#e8dcdb] text-[#6b5557] hover:bg-[#dcc9c9] transition-colors"
+              >
                 {t.footerCtaMax}
               </a>
             </div>
@@ -1216,65 +1761,87 @@ function Index() {
         </div>
         <div className="border-t border-border/40">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.3em] uppercase text-foreground/45">
-            <span>© {new Date().getFullYear()} {t.footerName}</span>
+            <span>
+              © {new Date().getFullYear()} {t.footerName}
+            </span>
             <span>{t.rights}</span>
           </div>
         </div>
       </footer>
 
       {/* LIGHTBOX */}
-      {lightbox && typeof document !== "undefined" && (() => {
-        const current = lightbox.images[lightbox.index];
-        const hasMany = lightbox.images.length > 1;
-        const go = (delta: number) =>
-          setLightbox({ ...lightbox, index: (lightbox.index + delta + lightbox.images.length) % lightbox.images.length });
-        return createPortal(
-          <div
-            className="fixed inset-0 z-[200] bg-[#efe8de]/95 backdrop-blur-sm flex items-center justify-center"
-            onClick={() => setLightbox(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-label={current.alt}
-          >
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
-              aria-label={lang === "ru" ? "Закрыть" : "Close"}
-              className="fixed top-5 right-5 md:top-8 md:right-8 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/80 hover:text-[#1a1a1a] transition-colors text-3xl leading-none font-light"
+      {lightbox &&
+        typeof document !== "undefined" &&
+        (() => {
+          const current = lightbox.images[lightbox.index];
+          const hasMany = lightbox.images.length > 1;
+          const go = (delta: number) =>
+            setLightbox({
+              ...lightbox,
+              index: (lightbox.index + delta + lightbox.images.length) % lightbox.images.length,
+            });
+          return createPortal(
+            <div
+              className="fixed inset-0 z-[200] bg-[#efe8de]/95 backdrop-blur-sm flex items-center justify-center"
+              onClick={() => setLightbox(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={current.alt}
             >
-              ×
-            </button>
-            {hasMany && (
-              <>
-                <button
-                  type="button"
-                  onClick={(e) => { e.stopPropagation(); go(-1); }}
-                  aria-label={lang === "ru" ? "Предыдущее" : "Previous"}
-                  className="fixed left-3 md:left-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
-                >
-                  <ChevronLeft className="w-8 h-8" />
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => { e.stopPropagation(); go(1); }}
-                  aria-label={lang === "ru" ? "Следующее" : "Next"}
-                  className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
-                >
-                  <ChevronRight className="w-8 h-8" />
-                </button>
-              </>
-            )}
-            <img
-              src={current.src}
-              alt={current.alt}
-              onClick={(e) => e.stopPropagation()}
-              style={{ width: "95vw", height: "90vh", maxWidth: "95vw", maxHeight: "90vh", objectFit: "contain" }}
-              className="select-none drop-shadow-[0_20px_60px_rgba(60,40,30,0.35)]"
-            />
-          </div>,
-          document.body,
-        );
-      })()}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox(null);
+                }}
+                aria-label={lang === "ru" ? "Закрыть" : "Close"}
+                className="fixed top-5 right-5 md:top-8 md:right-8 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/80 hover:text-[#1a1a1a] transition-colors text-3xl leading-none font-light"
+              >
+                ×
+              </button>
+              {hasMany && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      go(-1);
+                    }}
+                    aria-label={lang === "ru" ? "Предыдущее" : "Previous"}
+                    className="fixed left-3 md:left-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
+                  >
+                    <ChevronLeft className="w-8 h-8" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      go(1);
+                    }}
+                    aria-label={lang === "ru" ? "Следующее" : "Next"}
+                    className="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-[210] w-11 h-11 flex items-center justify-center text-[#3a3a3a]/75 hover:text-[#1a1a1a] transition-colors"
+                  >
+                    <ChevronRight className="w-8 h-8" />
+                  </button>
+                </>
+              )}
+              <img
+                src={current.src}
+                alt={current.alt}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  width: "95vw",
+                  height: "90vh",
+                  maxWidth: "95vw",
+                  maxHeight: "90vh",
+                  objectFit: "contain",
+                }}
+                className="select-none drop-shadow-[0_20px_60px_rgba(60,40,30,0.35)]"
+              />
+            </div>,
+            document.body,
+          );
+        })()}
     </div>
   );
 }
