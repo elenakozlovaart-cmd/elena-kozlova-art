@@ -10,6 +10,112 @@ import {
 
 import appCss from "../styles.css?url";
 
+const assetRecoveryScript = `(function () {
+  var key = "elena-kozlova-asset-reload-v2";
+  var reloadParam = "__asset_reload";
+  var reasonParam = "__asset_reason";
+
+  function shouldHandle(url) {
+    try {
+      var parsed = new URL(url, window.location.href);
+      return parsed.origin === window.location.origin && parsed.pathname.startsWith("/assets/");
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isRecoverableMessage(message) {
+    return (
+      message.indexOf("/assets/") !== -1 ||
+      message.indexOf("Failed to fetch dynamically imported module") !== -1 ||
+      message.indexOf("Importing a module script failed") !== -1 ||
+      message.indexOf("ChunkLoadError") !== -1 ||
+      message.indexOf("Loading chunk") !== -1
+    );
+  }
+
+  function buildFreshUrl(reason) {
+    var currentUrl = new URL(window.location.href);
+    var currentAttempt = Number(currentUrl.searchParams.get(reloadParam) || "0");
+    currentUrl.searchParams.set(reloadParam, String(currentAttempt + 1));
+    currentUrl.searchParams.set(reasonParam, reason);
+    return currentUrl.toString();
+  }
+
+  function reloadOnce(reason, url) {
+    try {
+      if (window.sessionStorage.getItem(key)) return;
+      window.sessionStorage.setItem(
+        key,
+        JSON.stringify({ reason: reason, url: url || window.location.href, at: Date.now() }),
+      );
+    } catch (error) {}
+
+    window.location.replace(buildFreshUrl(reason));
+  }
+
+  window.addEventListener(
+    "error",
+    function (event) {
+      var target = event.target;
+      if (target instanceof HTMLScriptElement && shouldHandle(target.src)) {
+        reloadOnce("script", target.src);
+        return;
+      }
+      if (
+        target instanceof HTMLLinkElement &&
+        (target.rel === "stylesheet" || target.rel === "modulepreload") &&
+        shouldHandle(target.href)
+      ) {
+        reloadOnce(target.rel, target.href);
+        return;
+      }
+
+      var message = String((event && event.message) || "");
+      if (isRecoverableMessage(message)) {
+        reloadOnce("window-error", message);
+      }
+    },
+    true,
+  );
+
+  window.addEventListener("vite:preloadError", function (event) {
+    var detail = event && typeof event === "object" && "payload" in event ? event.payload : "";
+    var message = String(detail || "");
+    if (!isRecoverableMessage(message)) return;
+    if (event && typeof event.preventDefault === "function") {
+      event.preventDefault();
+    }
+    reloadOnce("vite:preloadError", message);
+  });
+
+  window.addEventListener("unhandledrejection", function (event) {
+    var message = String((event.reason && event.reason.message) || event.reason || "");
+    if (!isRecoverableMessage(message)) return;
+    if (event && typeof event.preventDefault === "function") {
+      event.preventDefault();
+    }
+    reloadOnce("import", message);
+  });
+
+  window.addEventListener(
+    "load",
+    function () {
+      try {
+        window.sessionStorage.removeItem(key);
+
+        var cleanUrl = new URL(window.location.href);
+        if (cleanUrl.searchParams.has(reloadParam) || cleanUrl.searchParams.has(reasonParam)) {
+          cleanUrl.searchParams.delete(reloadParam);
+          cleanUrl.searchParams.delete(reasonParam);
+          window.history.replaceState({}, document.title, cleanUrl.toString());
+        }
+      } catch (error) {}
+    },
+    { once: true },
+  );
+})();`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -90,6 +196,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "canonical", href: "https://elenakozlovaart.ru/" },
     ],
     scripts: [
+      {
+        children: assetRecoveryScript,
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify([
