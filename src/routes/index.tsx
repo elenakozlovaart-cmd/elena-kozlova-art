@@ -208,8 +208,8 @@ function Index() {
             "В кафе «Кофе в зёрнах» работа из серии анималистики с изображением лисы естественно вошла в пространство и визуально, и по смыслу. Образ лисы перекликается с айдентикой кафе, поэтому акварель воспринимается здесь не как случайный декоративный акцент, а как живая и органичная деталь. В таких пространствах работа не перегружает интерьер, а помогает ему стать более собранным, теплым и запоминающимся.",
           collabIntroCta: "О сотрудничестве",
           collabIntroAltFacade: "Фасад кафе «Кофе в зёрнах»",
-          collabIntroAltInterior: "Акварель с лисой в интерьере кафе «Кофе в зёрнах»",
-          collabIntroAltDetail: "Деталь пространства кафе «Кофе в зёрнах» с логотипом лисы",
+          collabIntroAltInterior: "Акварель с лисой над столиком в кафе «Кофе в зёрнах»",
+          collabIntroAltDetail: "Чашка кофе на столике с логотипом лисы в кафе «Кофе в зёрнах»",
           aboutKicker: "О художнике",
           aboutBody: [
             "В своей практике Елена Козлова обращается к акварели как к медиуму, позволяющему фиксировать ускользающие состояния — свет, движение, внутреннее напряжение формы.",
@@ -333,8 +333,8 @@ function Index() {
             "At the cafe “Kofe v Zernakh”, a fox painting from Elena's animal series naturally entered the space both visually and conceptually. The fox echoes the cafe's identity, so the watercolour reads not as accidental decor, but as a living and organic part of the place. In spaces like this, a work does not overwhelm the interior; it helps it feel more cohesive, warm, and memorable.",
           collabIntroCta: "About collaboration",
           collabIntroAltFacade: "Facade of the cafe “Kofe v Zernakh”",
-          collabIntroAltInterior: "Fox watercolour in the interior of the cafe “Kofe v Zernakh”",
-          collabIntroAltDetail: "Detail from the cafe “Kofe v Zernakh” with the fox logo",
+          collabIntroAltInterior: "Fox watercolour above a table in the cafe “Kofe v Zernakh”",
+          collabIntroAltDetail: "Cup of coffee on a table with the fox logo in the cafe “Kofe v Zernakh”",
           aboutKicker: "About the artist",
           aboutBody: [
             "In her practice, Elena Kozlova turns to watercolor as a medium that captures fleeting states — light, movement, and the inner tension of form.",
@@ -689,7 +689,7 @@ function Index() {
             />
             <img
               src={coffeeBeansInterior}
-              srcSet={makeSrcSet(coffeeBeansInterior, coffeeBeansInterior800)}
+              srcSet={`${coffeeBeansInterior800} 800w, ${coffeeBeansInterior} 1085w`}
               sizes="(max-width: 768px) 100vw, 400px"
               alt={t.collabIntroAltInterior}
               loading="lazy"
@@ -698,7 +698,7 @@ function Index() {
             />
             <img
               src={coffeeBeansDetail}
-              srcSet={makeSrcSet(coffeeBeansDetail, coffeeBeansDetail800)}
+              srcSet={`${coffeeBeansDetail800} 800w, ${coffeeBeansDetail} 1086w`}
               sizes="(max-width: 768px) 100vw, 400px"
               alt={t.collabIntroAltDetail}
               loading="lazy"
