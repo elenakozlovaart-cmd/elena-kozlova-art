@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Send, Instagram, Mail, ChevronLeft } from "lucide-react";
+import { Send, Instagram, ChevronLeft } from "lucide-react";
 
 import buketnayaElena from "@/assets/spaces/buketnaya-elena-1600w.jpg";
 import buketnayaElenaSmall from "@/assets/spaces/buketnaya-elena-800w.jpg";
@@ -10,8 +10,8 @@ import buketnayaWall from "@/assets/spaces/buketnaya-wall-1600w.jpg";
 import buketnayaWallSmall from "@/assets/spaces/buketnaya-wall-800w.jpg";
 import buketnayaBear from "@/assets/spaces/buketnaya-bear-1600w.jpg";
 import buketnayaBearSmall from "@/assets/spaces/buketnaya-bear-800w.jpg";
-import collaborationHero from "@/assets/spaces/collaboration-hero-1047w.png";
-import collaborationHero800 from "@/assets/spaces/collaboration-hero-800w.png";
+import collaborationHero from "@/assets/spaces/collaboration-hero-1047w.jpg";
+import collaborationHero800 from "@/assets/spaces/collaboration-hero-800w.jpg";
 import mockupArmenia from "@/assets/spaces/mockup-armenia-1600w.jpg";
 import mockupArmeniaSmall from "@/assets/spaces/mockup-armenia-800w.jpg";
 import mockupUsadby from "@/assets/spaces/mockup-usadby-1600w.jpg";
@@ -25,8 +25,6 @@ const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
 const IG_LINK = "https://instagram.com/elenakozlovaart";
-const MAIL_LINK = "mailto:elenakozlova77@yandex.ru?subject=Сотрудничество";
-
 const MaxIcon = ({ className }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
@@ -60,7 +58,7 @@ export const Route = createFileRoute("/collaboration")({
       {
         name: "description",
         content:
-          "Авторская акварель Елены Козловой для интерьеров кафе, ресторанов, отелей и офисов. Кейс магазина «Букетная» (Троицк), серии работ под разные пространства — премиум-лобби, рестораны, минималистичные кафе, pet-friendly заведения.",
+          "Авторская акварель Елены Козловой для интерьеров кафе, ресторанов, отелей и офисов. Завершённый кейс магазина «Букетная», серии работ под разные пространства — премиум-лобби, рестораны, минималистичные кафе, pet-friendly заведения.",
       },
       { property: "og:title", content: "Сотрудничество — Елена Козлова" },
       {
@@ -107,13 +105,12 @@ function CollaborationPage() {
       heroCta: "Запросить подборку",
       heroAlt: "Акварель в интерьерном пространстве",
 
-      caseKicker: "Реализованный проект",
+      caseKicker: "Кейс сотрудничества",
       caseTitle: "«Букетная»",
-      caseAddress: "Москва, Троицк, ул. Нагорная, 8",
       caseBody:
-        "Магазин букетов и подарков, где живут мои акварели — круглая серия на стене, работы в рамах, открытки. Владельцам хотелось, чтобы интерьер ощущался тёплым и собранным, с живой деталью, которая не выглядит случайной. Акварель добавила пространству воздуха и мягкого присутствия — того, что сложно передать постером или обычным декором.\n\nНесколько работ находятся здесь на реализации, поэтому в «Букетную» можно зайти не только чтобы посмотреть акварель вживую, но и купить работу — вместе с цветами в качестве подарка.",
+        "Цветочный магазин и пространство подарков, где работали мои акварели: круглая серия на стене, работы в рамах, открытки. Владельцам было важно, чтобы интерьер ощущался тёплым и собранным, с живой деталью, которая не выглядит случайной. Акварель добавила пространству воздуха и мягкого присутствия — того, что сложно передать постером или обычным декором.\n\nЭтот проект остался для меня важным примером того, как авторская акварель может естественно жить в небольшом коммерческом пространстве и поддерживать его характер.",
       caseAlt1: "Художница в магазине «Букетная» на фоне круглых акварелей",
-      caseAlt2: "Фасад магазина «Букетная» в Троицке",
+      caseAlt2: "Фасад магазина «Букетная»",
       caseAlt3: "Стенка с акварелями над букетами в «Букетной»",
       caseAlt4: "Акварель «Белый медведь» в раме на стене магазина",
 
@@ -134,7 +131,7 @@ function CollaborationPage() {
         {
           n: "01",
           title: "Расскажите про пространство",
-          desc: "Пара фото, размер стены, какое ощущение хотите. В Telegram, MAX или на почту.",
+          desc: "Пара фото, размер стены, какое ощущение хотите. Удобнее всего — в Telegram или MAX.",
         },
         {
           n: "02",
@@ -150,10 +147,9 @@ function CollaborationPage() {
 
       ctaKicker: "Связь",
       ctaTitle: "Напишите — соберём подборку под ваше пространство",
-      ctaBody: "Отвечаю в течение дня.",
+      ctaBody: "Быстрее всего отвечаю в Telegram и MAX.",
       ctaTg: "Написать в Telegram",
       ctaMax: "Написать в MAX",
-      ctaMail: "Написать на почту",
 
       footerName: "Елена Козлова",
       footerRights: "Все права защищены",
@@ -170,13 +166,12 @@ function CollaborationPage() {
       heroCta: "Request a selection",
       heroAlt: "Watercolour in an interior setting",
 
-      caseKicker: "Completed project",
+      caseKicker: "Collaboration case",
       caseTitle: "Buketnaya",
-      caseAddress: "Moscow, Troitsk, 8 Nagornaya Street",
       caseBody:
-        "A flower and gift shop where my watercolours live: the round series on the wall, framed works, postcards. The owners wanted the space to feel warm and considered — with a living detail that does not look accidental. Watercolour brought air and a soft presence — something that is hard to convey through a poster or ordinary decor.\n\nSeveral works are on consignment here, so you can stop by Buketnaya not only to see the watercolour in person, but also to buy a piece together with flowers as a gift.",
+        "A flower and gift shop where my watercolours once lived: the round series on the wall, framed works, postcards. The owners wanted the space to feel warm and considered, with a living detail that did not look accidental. Watercolour brought air and a soft presence — something that is hard to convey through a poster or ordinary decor.\n\nThis project remains an important example for me of how original watercolour can naturally live in a small commercial space and support its character.",
       caseAlt1: "The artist sitting at Buketnaya in front of round watercolours",
-      caseAlt2: "Facade of Buketnaya shop in Troitsk",
+      caseAlt2: "Facade of Buketnaya shop",
       caseAlt3: "Wall with watercolours above bouquets at Buketnaya",
       caseAlt4: "Framed watercolour of a polar bear on the shop wall",
 
@@ -197,7 +192,7 @@ function CollaborationPage() {
         {
           n: "01",
           title: "Tell me about the space",
-          desc: "A couple of photos, wall size, the feeling you’re after. On Telegram, MAX or email.",
+          desc: "A couple of photos, wall size, the feeling you’re after. Telegram or MAX works best.",
         },
         {
           n: "02",
@@ -213,10 +208,9 @@ function CollaborationPage() {
 
       ctaKicker: "Get in touch",
       ctaTitle: "Drop me a line — I’ll put together a selection for your space",
-      ctaBody: "I usually respond within a day.",
+      ctaBody: "Telegram and MAX are the fastest ways to reach me.",
       ctaTg: "Message on Telegram",
       ctaMax: "Message on MAX",
-      ctaMail: "Email me",
 
       footerName: "Elena Kozlova",
       footerRights: "All rights reserved",
@@ -314,6 +308,9 @@ function CollaborationPage() {
               alt={t.heroAlt}
               loading="eager"
               decoding="async"
+              fetchPriority="high"
+              width={1047}
+              height={1501}
               className="w-full h-auto block"
             />
           </div>
@@ -331,9 +328,6 @@ function CollaborationPage() {
               <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05] mb-3">
                 {t.caseTitle}
               </h2>
-              <p className="text-[12px] tracking-[0.2em] uppercase text-foreground/55">
-                {t.caseAddress}
-              </p>
             </div>
             <div className="md:col-span-6 md:col-start-7">
               <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/75 whitespace-pre-line">
@@ -350,6 +344,9 @@ function CollaborationPage() {
                 alt={t.caseAlt1}
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
+                width={1178}
+                height={1600}
                 className="w-full h-full object-cover aspect-[3/4] block"
               />
               <img
@@ -359,6 +356,9 @@ function CollaborationPage() {
                 alt={t.caseAlt2}
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
+                width={1200}
+                height={1600}
                 className="w-full h-full object-cover aspect-[3/4] block"
               />
               <img
@@ -368,6 +368,9 @@ function CollaborationPage() {
                 alt={t.caseAlt4}
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
+                width={1200}
+                height={1600}
                 className="w-full h-full object-cover aspect-[3/4] block"
               />
             </div>
@@ -379,6 +382,9 @@ function CollaborationPage() {
                 alt={t.caseAlt3}
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
+                width={1600}
+                height={900}
                 className="w-full h-auto block"
               />
             </div>
@@ -486,13 +492,6 @@ function CollaborationPage() {
             >
               <MaxIcon className="w-4 h-4" />
               {t.ctaMax}
-            </a>
-            <a
-              href={MAIL_LINK}
-              className="inline-flex items-center justify-center gap-2 text-[11px] tracking-[0.3em] uppercase rounded-full px-7 py-3.5 bg-transparent border border-[#d9c5c4] text-[#6b5557] hover:bg-[#f1e6e5] transition-colors"
-            >
-              <Mail className="w-4 h-4" strokeWidth={1.75} />
-              {t.ctaMail}
             </a>
           </div>
         </div>

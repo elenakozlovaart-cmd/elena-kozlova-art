@@ -251,6 +251,8 @@ function Index() {
           cvPlein: "Пленэры",
           cvSoloItems: ["2019 — Персональная выставка, Дом учёных, Троицк (Москва)"],
           cvGroupItems: [
+            "2026 — IV Международный фестиваль акварели «Colors of Armenia»",
+            "2026 — «Координаты истории: русские усадьбы», Зеленоград",
             "2025 — Акварельный фестиваль «Яблоневый сад», Лобня",
             "2025 — Троицкий музей им. Лялько, Троицк (Москва)",
             "2024 — Коллективная выставка «Моё лето», галерея современного искусства Molbert, Санкт-Петербург",
@@ -376,6 +378,8 @@ function Index() {
           cvPlein: "Plein air",
           cvSoloItems: ["2019 — House of Scientists, Troitsk (Moscow)"],
           cvGroupItems: [
+            "2026 — IV International Watercolour Festival “Colors of Armenia”",
+            "2026 — “Coordinates of History: Russian Estates”, Zelenograd",
             "2025 — Watercolour Festival “Yablonevy Sad”, Lobnya",
             "2025 — Lyalka Museum, Troitsk (Moscow)",
             "2024 — “My Summer”, Molbert Contemporary Gallery, Saint Petersburg",
