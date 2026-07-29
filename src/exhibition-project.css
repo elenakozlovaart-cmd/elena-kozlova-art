@@ -1,0 +1,603 @@
+.exhibition-project-page {
+  --ep-paper: #f7f4ed;
+  --ep-paper-cool: #e1ecee;
+  --ep-ink: #182c3a;
+  --ep-muted: #687b84;
+  --ep-blue: #326e85;
+  --ep-deep: #142b3a;
+  --ep-coral: #dc8065;
+  min-height: 100vh;
+  color: var(--ep-ink);
+  background:
+    radial-gradient(circle at 82% 6%, rgb(50 110 133 / 8%), transparent 30rem),
+    var(--ep-paper);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+}
+
+.exhibition-project-page *,
+.exhibition-project-page *::before,
+.exhibition-project-page *::after {
+  box-sizing: border-box;
+}
+
+.exhibition-project-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ep-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: 64px;
+  border-bottom: 1px solid rgb(255 255 255 / 18%);
+  color: white;
+  background: rgb(20 43 58 / 82%);
+  backdrop-filter: blur(14px);
+}
+
+.ep-nav-inner {
+  width: min(1400px, calc(100% - 48px));
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ep-brand,
+.ep-desktop-nav,
+.ep-language {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.ep-brand {
+  letter-spacing: 0.34em;
+  white-space: nowrap;
+}
+
+.ep-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.1vw, 34px);
+  color: rgb(255 255 255 / 70%);
+}
+
+.ep-desktop-nav a {
+  transition: color 180ms ease;
+}
+
+.ep-desktop-nav a:hover,
+.ep-desktop-nav .active {
+  color: white;
+}
+
+.ep-language {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.ep-language button {
+  padding: 4px;
+  border: 0;
+  color: rgb(255 255 255 / 45%);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ep-language button.active {
+  color: white;
+}
+
+.ep-mobile-menu-button,
+.ep-mobile-menu {
+  display: none;
+}
+
+.ep-hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.76fr) minmax(520px, 1.24fr);
+  color: white;
+  background: var(--ep-deep);
+}
+
+.ep-hero-copy {
+  position: relative;
+  z-index: 2;
+  padding: 144px max(48px, calc((100vw - 1400px) / 2 + 48px)) 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ep-eyebrow {
+  margin: 0 0 38px;
+  color: rgb(255 255 255 / 68%);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.ep-hero h1,
+.ep-section h2,
+.ep-rain-info h3,
+.ep-footer-name {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+}
+
+.ep-hero h1 {
+  max-width: 560px;
+  margin: 0 0 34px;
+  font-size: clamp(72px, 7.2vw, 126px);
+  line-height: 0.79;
+  letter-spacing: -0.045em;
+}
+
+.ep-accent-rule {
+  width: 112px;
+  height: 5px;
+  margin-bottom: 36px;
+  background: var(--ep-coral);
+}
+
+.ep-hero-meta {
+  display: grid;
+  gap: 10px;
+  color: rgb(255 255 255 / 78%);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ep-hero-art {
+  min-height: 100svh;
+  background-position: center;
+  background-size: cover;
+}
+
+.ep-scroll-mark {
+  position: absolute;
+  bottom: 38px;
+  left: max(48px, calc((100vw - 1400px) / 2 + 48px));
+  color: rgb(255 255 255 / 50%);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.ep-section {
+  padding: 120px 48px;
+}
+
+.ep-container {
+  width: min(1240px, 100%);
+  margin: auto;
+}
+
+.ep-kicker {
+  margin: 0 0 18px;
+  color: var(--ep-blue);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.ep-section h2 {
+  margin: 0 0 36px;
+  font-size: clamp(52px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.ep-concept-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.ep-concept-copy {
+  max-width: 720px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.75;
+}
+
+.ep-concept-copy p {
+  margin: 0 0 24px;
+}
+
+.ep-states {
+  padding: 34px;
+  border-radius: 30px;
+  background: var(--ep-paper-cool);
+}
+
+.ep-state {
+  padding: 30px;
+  border-radius: 18px;
+  background: white;
+}
+
+.ep-state + .ep-state {
+  margin-top: 18px;
+  color: white;
+  background: var(--ep-blue);
+}
+
+.ep-state-number {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+}
+
+.ep-state strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.ep-state-detail {
+  color: var(--ep-muted);
+  font-size: 12px;
+}
+
+.ep-state + .ep-state .ep-state-detail {
+  color: rgb(255 255 255 / 76%);
+}
+
+.ep-water-section {
+  background: rgb(255 255 255 / 58%);
+}
+
+.ep-section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 72px;
+}
+
+.ep-section-head h2 {
+  margin-bottom: 0;
+}
+
+.ep-section-note {
+  max-width: 390px;
+  margin: 0;
+  color: var(--ep-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ep-water-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 70px 34px;
+  align-items: start;
+}
+
+.ep-scale-stage {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.ep-scale-stage img {
+  display: block;
+  object-fit: cover;
+  box-shadow: 0 22px 55px rgb(20 43 58 / 12%);
+}
+
+.ep-scale-stage.portrait img {
+  width: 75.7%;
+  aspect-ratio: 28 / 37;
+}
+
+.ep-scale-stage.landscape img {
+  width: 100%;
+  aspect-ratio: 37 / 28;
+}
+
+.ep-art-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.ep-art-meta {
+  margin: 0;
+  color: var(--ep-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.ep-rain-section {
+  padding-top: 132px;
+  color: white;
+  background:
+    radial-gradient(circle at 12% 24%, rgb(50 110 133 / 42%), transparent 34rem),
+    var(--ep-deep);
+}
+
+.ep-rain-section .ep-kicker,
+.ep-rain-section .ep-section-note {
+  color: rgb(255 255 255 / 58%);
+}
+
+.ep-rain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 100px 56px;
+}
+
+.ep-rain-frame {
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.ep-rain-frame img {
+  width: 85.7%;
+  display: block;
+  box-shadow: 0 30px 70px rgb(0 0 0 / 28%);
+}
+
+.ep-rain-card.large .ep-rain-frame img {
+  width: 100%;
+}
+
+.ep-rain-info {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.ep-rain-info h3 {
+  margin: 0 0 8px;
+  font-size: clamp(32px, 3vw, 48px);
+  line-height: 0.95;
+}
+
+.ep-rain-info .ep-art-meta {
+  color: rgb(255 255 255 / 58%);
+}
+
+.ep-rain-description {
+  margin: 0;
+  color: rgb(255 255 255 / 75%);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.ep-status-section {
+  overflow: hidden;
+  position: relative;
+  scroll-margin-top: 64px;
+}
+
+.ep-status-section::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
+  border: 1px solid rgb(50 110 133 / 16%);
+  border-radius: 50%;
+}
+
+.ep-status-card {
+  position: relative;
+  padding: clamp(42px, 7vw, 88px);
+  border-radius: 34px;
+  background: var(--ep-paper-cool);
+}
+
+.ep-status-card h2 {
+  max-width: 850px;
+}
+
+.ep-status-card > p:not(.ep-kicker) {
+  max-width: 700px;
+  margin: 0 0 38px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.ep-button {
+  display: inline-flex;
+  min-height: 48px;
+  padding: 0 25px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ep-blue);
+  border-radius: 999px;
+  color: white;
+  background: var(--ep-blue);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.ep-button:hover {
+  color: var(--ep-blue);
+  background: transparent;
+}
+
+.ep-footer {
+  padding: 52px 48px;
+  color: rgb(255 255 255 / 70%);
+  background: var(--ep-deep);
+}
+
+.ep-footer-inner {
+  width: min(1240px, 100%);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ep-footer-name {
+  color: white;
+  font-size: 28px;
+}
+
+.ep-footer-link {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1120px) {
+  .ep-desktop-nav {
+    display: none;
+  }
+
+  .ep-mobile-menu-button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    place-items: center;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .ep-mobile-menu {
+    position: fixed;
+    inset: 64px 0 auto;
+    z-index: 49;
+    padding: 28px 24px;
+    color: white;
+    background: rgb(20 43 58 / 97%);
+  }
+
+  .ep-mobile-menu.open {
+    display: grid;
+    gap: 20px;
+  }
+
+  .ep-mobile-menu a {
+    font-size: 18px;
+  }
+
+  .ep-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .ep-hero-copy {
+    min-height: 72svh;
+    padding: 126px 32px 60px;
+  }
+
+  .ep-hero-art {
+    min-height: 58svh;
+  }
+
+  .ep-scroll-mark {
+    display: none;
+  }
+
+  .ep-concept-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ep-water-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ep-rain-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .ep-nav-inner {
+    width: calc(100% - 32px);
+  }
+
+  .ep-language {
+    margin-left: auto;
+  }
+
+  .ep-hero-copy {
+    padding-inline: 24px;
+  }
+
+  .ep-hero h1 {
+    font-size: clamp(64px, 22vw, 90px);
+  }
+
+  .ep-section {
+    padding: 88px 20px;
+  }
+
+  .ep-section-head {
+    display: block;
+    margin-bottom: 44px;
+  }
+
+  .ep-section-note {
+    margin-top: 22px;
+  }
+
+  .ep-water-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .ep-water-grid article {
+    width: min(100%, 430px);
+    margin-inline: auto;
+  }
+
+  .ep-rain-frame {
+    height: auto;
+    min-height: 250px;
+  }
+
+  .ep-rain-info {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ep-states {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .ep-state {
+    padding: 24px;
+  }
+
+  .ep-footer {
+    padding: 42px 20px;
+  }
+
+  .ep-footer-inner {
+    display: grid;
+  }
+}

@@ -66,6 +66,7 @@ export const Route = createFileRoute("/")({
           "Современная акварельная живопись. Пейзажи внутренних состояний и фигуративные этюды.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://elenakozlovaart.ru/" }],
   }),
   component: Index,
 });
@@ -186,6 +187,7 @@ function Index() {
             works: "Работы",
             about: "О художнике",
             cv: "Выставки",
+            project: "Выставочный проект",
             collab: "Сотрудничество",
             contact: "Контакты",
           },
@@ -313,6 +315,7 @@ function Index() {
             works: "Works",
             about: "About",
             cv: "Exhibitions",
+            project: "Exhibition Project",
             collab: "Collaboration",
             contact: "Contact",
           },
@@ -448,7 +451,7 @@ function Index() {
           <a href="#top" className="text-[11px] tracking-[0.35em] uppercase">
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
-          <div className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
+          <div className="hidden md:flex items-center gap-6 xl:gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
             <a href="#works" className="hover:text-foreground transition-colors">
               {t.nav.works}
             </a>
@@ -458,6 +461,9 @@ function Index() {
             <a href="#cv" className="hover:text-foreground transition-colors">
               {t.nav.cv}
             </a>
+            <Link to="/exhibition-project" className="hover:text-foreground transition-colors">
+              {t.nav.project}
+            </Link>
             <Link to="/collaboration" className="hover:text-foreground transition-colors">
               {t.nav.collab}
             </Link>
@@ -552,6 +558,14 @@ function Index() {
             >
               {t.nav.cv}
             </a>
+            <Link
+              to="/exhibition-project"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.project}
+            </Link>
             <Link
               to="/collaboration"
               onClick={() => setMobileMenuOpen(false)}
