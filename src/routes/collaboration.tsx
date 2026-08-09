@@ -20,6 +20,14 @@ import mockupCircles from "@/assets/spaces/mockup-circles-1600w.jpg";
 import mockupCirclesSmall from "@/assets/spaces/mockup-circles-800w.jpg";
 import mockupVet from "@/assets/spaces/mockup-vet-1600w.jpg";
 import mockupVetSmall from "@/assets/spaces/mockup-vet-800w.jpg";
+import selectionFlowersBefore from "@/assets/spaces/selection-flowers-before-1200w.jpg";
+import selectionFlowersBeforeSmall from "@/assets/spaces/selection-flowers-before-800w.jpg";
+import selectionFlowersVisual from "@/assets/spaces/selection-flowers-visual-1200w.jpg";
+import selectionFlowersVisualSmall from "@/assets/spaces/selection-flowers-visual-800w.jpg";
+import selectionArchesBefore from "@/assets/spaces/selection-arches-before-1200w.jpg";
+import selectionArchesBeforeSmall from "@/assets/spaces/selection-arches-before-800w.jpg";
+import selectionArchesVisual from "@/assets/spaces/selection-arches-visual-1200w.jpg";
+import selectionArchesVisualSmall from "@/assets/spaces/selection-arches-visual-800w.jpg";
 
 const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
@@ -58,13 +66,13 @@ export const Route = createFileRoute("/collaboration")({
       {
         name: "description",
         content:
-          "Авторская акварель Елены Козловой для интерьеров кафе, ресторанов, отелей и офисов. Завершённый кейс магазина «Букетная», серии работ под разные пространства — премиум-лобби, рестораны, минималистичные кафе, pet-friendly заведения.",
+          "Подбор оригинальных акварелей Елены Козловой для дизайнерских проектов, кафе, ресторанов, небольших отелей и офисов. По фото пространства — 3–5 подходящих работ с предварительной стоимостью.",
       },
       { property: "og:title", content: "Сотрудничество — Елена Козлова" },
       {
         property: "og:description",
         content:
-          "Акварель в интерьеры кафе, ресторанов и отелей. Реализованный кейс и подборки под разные пространства.",
+          "Оригинальная акварель для дизайнеров и камерных пространств. Пришлите фото интерьера — Елена предложит 3–5 подходящих работ.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://elenakozlovaart.ru/collaboration" },
@@ -98,12 +106,14 @@ function CollaborationPage() {
       navHome: "Главная",
       navCollab: "Сотрудничество",
 
-      heroKicker: "Сотрудничество",
-      heroTitle: "Акварель для пространств,\nв которых важна атмосфера",
+      heroKicker: "Для дизайнеров и камерных пространств",
+      heroTitle: "Помогаю завершить интерьер\nоригинальной акварелью",
       heroBody:
-        "Подбираю работы под интерьер кафе, ресторана, отеля или офиса. Авторская акварель — каждая работа существует в единственном экземпляре, и в пространстве звучит как голос места.",
-      heroCta: "Запросить подборку",
+        "Подбираю 3–5 авторских работ под концепцию, масштаб и характер интерьера. Чтобы начать, достаточно прислать фото пространства и размер стены — в ответ вы получите подборку с предварительной стоимостью.",
+      heroCta: "Прислать фото в Telegram",
+      heroCtaNote: "Откроется личный чат со мной — Еленой Козловой.",
       heroAlt: "Акварель в интерьерном пространстве",
+      heroBadge: "Визуализация",
 
       caseKicker: "Кейс сотрудничества",
       caseTitle: "«Букетная»",
@@ -114,10 +124,47 @@ function CollaborationPage() {
       caseAlt3: "Стенка с акварелями над букетами в «Букетной»",
       caseAlt4: "Акварель «Белый медведь» в раме на стене магазина",
 
+      selectionKicker: "Пример подбора",
+      selectionTitle: "Две стены — два решения",
+      selectionBody:
+        "В каждой паре сначала показана реальная фотография кафе, затем — визуализация с акварелями. Так можно заранее сравнить масштаб, ритм и характер композиции до принятия решения.",
+      selectionRealBadge: "Реальный кадр",
+      selectionBadge: "Визуализация",
+      selectionItems: [
+        {
+          src: selectionFlowersBefore,
+          srcSmall: selectionFlowersBeforeSmall,
+          label: "Стена с Еленой · Исходный кадр",
+          alt: "Елена Козлова в реальном кафе перед стеной до подбора акварелей",
+          visualization: false,
+        },
+        {
+          src: selectionFlowersVisual,
+          srcSmall: selectionFlowersVisualSmall,
+          label: "Цветочная серия · Три работы",
+          alt: "Визуализация трёх круглых цветочных акварелей на стене кафе",
+          visualization: true,
+        },
+        {
+          src: selectionArchesBefore,
+          srcSmall: selectionArchesBeforeSmall,
+          label: "Арочные ниши · Исходный кадр",
+          alt: "Реальная фотография стены кафе с тремя арочными нишами",
+          visualization: false,
+        },
+        {
+          src: selectionArchesVisual,
+          srcSmall: selectionArchesVisualSmall,
+          label: "Круглая серия · Ритм арок",
+          alt: "Визуализация трёх круглых акварелей в арочных нишах кафе",
+          visualization: true,
+        },
+      ],
+
       mockupsKicker: "Варианты",
       mockupsTitle: "Серии под разные пространства",
       mockupsBody:
-        "Несколько примеров, как авторские серии работают в реальных интерьерах. Под ваше пространство соберу подборку отдельно.",
+        "Интерьерные визуализации помогают заранее оценить масштаб и настроение серии. Под ваше пространство соберу отдельную подборку.",
       mockups: [
         { src: mockupArmenia, srcSmall: mockupArmeniaSmall, label: "Премиум-лобби отеля" },
         { src: mockupUsadby, srcSmall: mockupUsadbySmall, label: "Ресторан русской кухни" },
@@ -146,10 +193,11 @@ function CollaborationPage() {
       ],
 
       ctaKicker: "Связь",
-      ctaTitle: "Напишите — соберём подборку под ваше пространство",
-      ctaBody: "Быстрее всего отвечаю в Telegram и MAX.",
-      ctaTg: "Написать в Telegram",
-      ctaMax: "Написать в MAX",
+      ctaTitle: "Пришлите фото пространства — предложу подходящие работы",
+      ctaBody:
+        "Добавьте размер стены и какое ощущение хотите создать. Быстрее всего отвечаю в Telegram и MAX.",
+      ctaTg: "Прислать фото в Telegram",
+      ctaMax: "Прислать фото в MAX",
 
       footerName: "Елена Козлова",
       footerRights: "Все права защищены",
@@ -159,12 +207,14 @@ function CollaborationPage() {
       navHome: "Home",
       navCollab: "Collaboration",
 
-      heroKicker: "Collaboration",
-      heroTitle: "Watercolour for spaces\nwhere atmosphere matters",
+      heroKicker: "For designers and boutique interiors",
+      heroTitle: "Helping complete interiors\nwith original watercolour",
       heroBody:
-        "I select works for the interiors of cafés, restaurants, hotels and offices. Each watercolour is an original — and in a space it sounds like the voice of the place itself.",
-      heroCta: "Request a selection",
+        "I select 3–5 original works to suit an interior’s concept, scale and character. To get started, simply send a photo of the space and the wall dimensions — you’ll receive a selection with preliminary prices.",
+      heroCta: "Send a photo via Telegram",
+      heroCtaNote: "This opens a personal chat with me, Elena Kozlova.",
       heroAlt: "Watercolour in an interior setting",
+      heroBadge: "Visualisation",
 
       caseKicker: "Collaboration case",
       caseTitle: "Buketnaya",
@@ -175,10 +225,47 @@ function CollaborationPage() {
       caseAlt3: "Wall with watercolours above bouquets at Buketnaya",
       caseAlt4: "Framed watercolour of a polar bear on the shop wall",
 
+      selectionKicker: "Selection example",
+      selectionTitle: "Two walls — two approaches",
+      selectionBody:
+        "Each pair begins with a real photograph of the café, followed by a watercolour visualisation. This makes it possible to compare scale, rhythm and composition before making a decision.",
+      selectionRealBadge: "Real photograph",
+      selectionBadge: "Visualisation",
+      selectionItems: [
+        {
+          src: selectionFlowersBefore,
+          srcSmall: selectionFlowersBeforeSmall,
+          label: "Wall with Elena · Original photograph",
+          alt: "Elena Kozlova in a real café before watercolours were selected for the wall",
+          visualization: false,
+        },
+        {
+          src: selectionFlowersVisual,
+          srcSmall: selectionFlowersVisualSmall,
+          label: "Flower series · Three works",
+          alt: "Visualisation of three round floral watercolours on a café wall",
+          visualization: true,
+        },
+        {
+          src: selectionArchesBefore,
+          srcSmall: selectionArchesBeforeSmall,
+          label: "Arched niches · Original photograph",
+          alt: "Real photograph of a café wall with three arched niches",
+          visualization: false,
+        },
+        {
+          src: selectionArchesVisual,
+          srcSmall: selectionArchesVisualSmall,
+          label: "Round series · Rhythm of the arches",
+          alt: "Visualisation of three round watercolours in the café’s arched niches",
+          visualization: true,
+        },
+      ],
+
       mockupsKicker: "Examples",
       mockupsTitle: "Series for different spaces",
       mockupsBody:
-        "A few examples of how author series work in real interiors. For your specific space I’ll put together a selection separately.",
+        "Interior visualisations help assess the scale and mood of a series in advance. I’ll create a separate selection for your space.",
       mockups: [
         { src: mockupArmenia, srcSmall: mockupArmeniaSmall, label: "Premium hotel lobby" },
         { src: mockupUsadby, srcSmall: mockupUsadbySmall, label: "Russian cuisine restaurant" },
@@ -207,10 +294,11 @@ function CollaborationPage() {
       ],
 
       ctaKicker: "Get in touch",
-      ctaTitle: "Drop me a line — I’ll put together a selection for your space",
-      ctaBody: "Telegram and MAX are the fastest ways to reach me.",
-      ctaTg: "Message on Telegram",
-      ctaMax: "Message on MAX",
+      ctaTitle: "Send a photo of your space — I’ll suggest suitable works",
+      ctaBody:
+        "Include the wall dimensions and the feeling you want to create. Telegram and MAX are the fastest ways to reach me.",
+      ctaTg: "Send a photo on Telegram",
+      ctaMax: "Send a photo on MAX",
 
       footerName: "Elena Kozlova",
       footerRights: "All rights reserved",
@@ -290,17 +378,28 @@ function CollaborationPage() {
             <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-8">
               {t.heroKicker}
             </p>
+            <h1
+              style={serif}
+              className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.05] whitespace-pre-line mb-7"
+            >
+              {t.heroTitle}
+            </h1>
             <p className="text-base md:text-[17px] leading-[1.8] text-foreground/70 mb-12">
               {t.heroBody}
             </p>
             <a
-              href="#contact"
+              href={TG_DM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block text-[11px] tracking-[0.3em] uppercase rounded-full px-8 py-4 bg-[#b89a99] text-white hover:bg-[#a8888a] transition-colors"
             >
               {t.heroCta}
             </a>
+            <p className="mt-3 text-[12px] leading-relaxed text-foreground/55">
+              {t.heroCtaNote}
+            </p>
           </div>
-          <div className="md:col-span-7 md:order-2 order-1">
+          <div className="relative md:col-span-7 md:order-2 order-1">
             <img
               src={collaborationHero}
               srcSet={`${collaborationHero800} 800w, ${collaborationHero} 1047w`}
@@ -313,6 +412,9 @@ function CollaborationPage() {
               height={1501}
               className="w-full h-auto block"
             />
+            <span className="absolute top-4 left-4 rounded-full px-4 py-2 bg-background/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-foreground/75">
+              {t.heroBadge}
+            </span>
           </div>
         </div>
       </section>
@@ -392,6 +494,52 @@ function CollaborationPage() {
         </div>
       </section>
 
+      {/* SELECTION EXAMPLE — REAL SPACE + VISUALISATIONS */}
+      <section className="py-24 md:py-32 border-t border-border/40">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid md:grid-cols-12 gap-8 mb-14 md:mb-16">
+            <div className="md:col-span-5">
+              <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 mb-6">
+                {t.selectionKicker}
+              </p>
+              <h2 style={serif} className="text-4xl md:text-6xl font-light leading-[1.05]">
+                {t.selectionTitle}
+              </h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7">
+              <p className="text-[15px] md:text-[16px] leading-[1.85] text-foreground/70">
+                {t.selectionBody}
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {t.selectionItems.map((item) => (
+              <figure key={item.label}>
+                <div className="relative overflow-hidden bg-secondary">
+                  <img
+                    src={item.src}
+                    srcSet={`${item.srcSmall} 800w, ${item.src} 1200w`}
+                    sizes="(max-width: 768px) 100vw, 420px"
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={1200}
+                    height={1500}
+                    className="w-full aspect-[4/5] object-cover block"
+                  />
+                  <span className="absolute top-4 left-4 rounded-full px-4 py-2 bg-background/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-foreground/75">
+                    {item.visualization ? t.selectionBadge : t.selectionRealBadge}
+                  </span>
+                </div>
+                <figcaption className="mt-5 text-[12px] tracking-[0.22em] uppercase text-foreground/65">
+                  {item.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* MOCKUPS */}
       <section className="py-24 md:py-32 border-t border-border/40">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -409,7 +557,7 @@ function CollaborationPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {t.mockups.map((m, i) => (
               <figure key={i}>
-                <div className="overflow-hidden bg-secondary">
+                <div className="relative overflow-hidden bg-secondary">
                   <img
                     src={m.src}
                     srcSet={`${m.srcSmall} 800w, ${m.src} 1600w`}
@@ -423,6 +571,9 @@ function CollaborationPage() {
                     decoding="async"
                     className="w-full h-auto object-cover aspect-[4/3]"
                   />
+                  <span className="absolute top-4 left-4 rounded-full px-4 py-2 bg-background/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-foreground/75">
+                    {t.selectionBadge}
+                  </span>
                 </div>
                 <figcaption className="mt-5 text-[12px] tracking-[0.25em] uppercase text-foreground/65">
                   {m.label}

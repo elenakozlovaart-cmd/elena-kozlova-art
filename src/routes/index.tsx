@@ -207,7 +207,7 @@ function Index() {
           collabIntroCaseTitle: "«Кофе в зёрнах»",
           collabIntroAddress: "Москва, Троицк, Солнечная улица, 9",
           collabIntroBody:
-            "В кафе «Кофе в зёрнах» работа из серии анималистики с изображением лисы естественно вошла в пространство и визуально, и по смыслу. Образ лисы перекликается с айдентикой кафе, поэтому акварель воспринимается здесь не как случайный декоративный акцент, а как живая и органичная деталь. В таких пространствах работа не перегружает интерьер, а помогает ему стать более собранным, теплым и запоминающимся.",
+            "В кафе уже была выразительная айдентика с образом лисы, но стене не хватало художественного центра. Мы выбрали оригинальную акварель с созвучным образом — она продолжила характер бренда и связала интерьер с его визуальной историей.",
           collabIntroCta: "О сотрудничестве",
           collabIntroAltFacade: "Фасад кафе «Кофе в зёрнах»",
           collabIntroAltInterior: "Акварель с лисой над столиком в кафе «Кофе в зёрнах»",
@@ -335,7 +335,7 @@ function Index() {
           collabIntroCaseTitle: "“Kofe v Zernakh”",
           collabIntroAddress: "Moscow, Troitsk, Solnechnaya Street, 9",
           collabIntroBody:
-            "At the cafe “Kofe v Zernakh”, a fox painting from Elena's animal series naturally entered the space both visually and conceptually. The fox echoes the cafe's identity, so the watercolour reads not as accidental decor, but as a living and organic part of the place. In spaces like this, a work does not overwhelm the interior; it helps it feel more cohesive, warm, and memorable.",
+            "The café already had a distinctive identity built around the image of a fox, but the wall lacked an artistic focal point. We chose an original watercolour with a kindred motif — it extended the character of the brand and connected the interior with its visual story.",
           collabIntroCta: "About collaboration",
           collabIntroAltFacade: "Facade of the cafe “Kofe v Zernakh”",
           collabIntroAltInterior: "Fox watercolour above a table in the cafe “Kofe v Zernakh”",
