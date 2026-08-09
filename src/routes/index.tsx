@@ -53,6 +53,8 @@ import coffeeBeansFacade from "@/assets/spaces/coffee-beans-facade-1600w.jpg";
 import coffeeBeansFacade800 from "@/assets/spaces/coffee-beans-facade-800w.jpg";
 import coffeeBeansInterior from "@/assets/spaces/coffee-beans-interior-1600w.jpg";
 import coffeeBeansInterior800 from "@/assets/spaces/coffee-beans-interior-800w.jpg";
+import coffeeBeansArtwork from "@/assets/spaces/coffee-beans-artwork-1086w.jpg";
+import coffeeBeansArtwork800 from "@/assets/spaces/coffee-beans-artwork-800w.jpg";
 import coffeeBeansDetail from "@/assets/spaces/coffee-beans-detail-1600w.jpg";
 import coffeeBeansDetail800 from "@/assets/spaces/coffee-beans-detail-800w.jpg";
 
@@ -208,9 +210,19 @@ function Index() {
           collabIntroAddress: "Москва, Троицк, Солнечная улица, 9",
           collabIntroBody:
             "В кафе уже была выразительная айдентика с образом лисы, но стене не хватало художественного центра. Мы выбрали оригинальную акварель с созвучным образом — она продолжила характер бренда и связала интерьер с его визуальной историей.",
+          collabIntroStoryTitle: "Когда картина продолжает характер места",
+          collabIntroStepInteriorLabel: "Интерьер кафе",
+          collabIntroStepInteriorText: "Работа становится художественным центром стены.",
+          collabIntroStepArtworkLabel: "Оригинал работы",
+          collabIntroStepArtworkText: "«Лесной взгляд» · 2022 · 28 × 37 см",
+          collabIntroStepIdentityLabel: "Деталь айдентики",
+          collabIntroStepIdentityText: "Образ лисы уже был частью визуальной истории кафе.",
+          collabIntroStepResultLabel: "Подбор для интерьера",
+          collabIntroStepResultText: "Не заполнить стену, а продолжить историю пространства.",
           collabIntroCta: "О сотрудничестве",
           collabIntroAltFacade: "Фасад кафе «Кофе в зёрнах»",
           collabIntroAltInterior: "Акварель с лисой над столиком в кафе «Кофе в зёрнах»",
+          collabIntroAltArtwork: "Оригинальная акварель Елены Козловой «Лесной взгляд»",
           collabIntroAltDetail: "Чашка кофе на столике с логотипом лисы в кафе «Кофе в зёрнах»",
           aboutKicker: "О художнике",
           aboutBody: [
@@ -336,9 +348,19 @@ function Index() {
           collabIntroAddress: "Moscow, Troitsk, Solnechnaya Street, 9",
           collabIntroBody:
             "The café already had a distinctive identity built around the image of a fox, but the wall lacked an artistic focal point. We chose an original watercolour with a kindred motif — it extended the character of the brand and connected the interior with its visual story.",
+          collabIntroStoryTitle: "When a painting extends the character of a place",
+          collabIntroStepInteriorLabel: "Café interior",
+          collabIntroStepInteriorText: "The work becomes the artistic focal point of the wall.",
+          collabIntroStepArtworkLabel: "Original artwork",
+          collabIntroStepArtworkText: "“Forest Gaze” · 2022 · 28 × 37 cm",
+          collabIntroStepIdentityLabel: "Identity detail",
+          collabIntroStepIdentityText: "The fox was already part of the café’s visual story.",
+          collabIntroStepResultLabel: "Interior selection",
+          collabIntroStepResultText: "Not to fill a wall, but to continue the story of the space.",
           collabIntroCta: "About collaboration",
           collabIntroAltFacade: "Facade of the cafe “Kofe v Zernakh”",
           collabIntroAltInterior: "Fox watercolour above a table in the cafe “Kofe v Zernakh”",
+          collabIntroAltArtwork: "Elena Kozlova’s original watercolour “Forest Gaze”",
           collabIntroAltDetail: "Cup of coffee on a table with the fox logo in the cafe “Kofe v Zernakh”",
           aboutKicker: "About the artist",
           aboutBody: [
@@ -695,34 +717,90 @@ function Index() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
-            <img
-              src={coffeeBeansFacade}
-              srcSet={makeSrcSet(coffeeBeansFacade, coffeeBeansFacade800)}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt={t.collabIntroAltFacade}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover aspect-[3/4] block"
-            />
-            <img
-              src={coffeeBeansInterior}
-              srcSet={`${coffeeBeansInterior800} 800w, ${coffeeBeansInterior} 1085w`}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt={t.collabIntroAltInterior}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover aspect-[3/4] block"
-            />
-            <img
-              src={coffeeBeansDetail}
-              srcSet={`${coffeeBeansDetail800} 800w, ${coffeeBeansDetail} 1086w`}
-              sizes="(max-width: 768px) 100vw, 400px"
-              alt={t.collabIntroAltDetail}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover aspect-[3/4] block"
-            />
+          <div className="max-w-5xl mx-auto mb-7 md:mb-9">
+            <p style={serif} className="text-3xl md:text-4xl font-light leading-[1.15]">
+              {t.collabIntroStoryTitle}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 md:gap-5 max-w-5xl mx-auto">
+            <figure>
+              <img
+                src={coffeeBeansInterior}
+                srcSet={`${coffeeBeansInterior800} 800w, ${coffeeBeansInterior} 1085w`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 260px"
+                alt={t.collabIntroAltInterior}
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover aspect-[4/5] block"
+              />
+              <figcaption className="pt-4">
+                <p className="text-[10px] tracking-[0.28em] uppercase text-foreground/50 mb-2">
+                  {t.collabIntroStepInteriorLabel}
+                </p>
+                <p className="text-[14px] leading-[1.6] text-foreground/75">
+                  {t.collabIntroStepInteriorText}
+                </p>
+              </figcaption>
+            </figure>
+            <figure>
+              <div className="aspect-[4/5] bg-background p-5 md:p-6 flex items-center justify-center">
+                <img
+                  src={coffeeBeansArtwork}
+                  srcSet={`${coffeeBeansArtwork800} 800w, ${coffeeBeansArtwork} 1086w`}
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 230px"
+                  alt={t.collabIntroAltArtwork}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain block"
+                />
+              </div>
+              <figcaption className="pt-4">
+                <p className="text-[10px] tracking-[0.28em] uppercase text-foreground/50 mb-2">
+                  {t.collabIntroStepArtworkLabel}
+                </p>
+                <p className="text-[14px] leading-[1.6] text-foreground/75">
+                  {t.collabIntroStepArtworkText}
+                </p>
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                src={coffeeBeansDetail}
+                srcSet={`${coffeeBeansDetail800} 800w, ${coffeeBeansDetail} 1086w`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 260px"
+                alt={t.collabIntroAltDetail}
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover aspect-[4/5] block"
+              />
+              <figcaption className="pt-4">
+                <p className="text-[10px] tracking-[0.28em] uppercase text-foreground/50 mb-2">
+                  {t.collabIntroStepIdentityLabel}
+                </p>
+                <p className="text-[14px] leading-[1.6] text-foreground/75">
+                  {t.collabIntroStepIdentityText}
+                </p>
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                src={coffeeBeansFacade}
+                srcSet={makeSrcSet(coffeeBeansFacade, coffeeBeansFacade800)}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 260px"
+                alt={t.collabIntroAltFacade}
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover aspect-[4/5] block"
+              />
+              <figcaption className="pt-4">
+                <p className="text-[10px] tracking-[0.28em] uppercase text-foreground/50 mb-2">
+                  {t.collabIntroStepResultLabel}
+                </p>
+                <p className="text-[14px] leading-[1.6] text-foreground/75">
+                  {t.collabIntroStepResultText}
+                </p>
+              </figcaption>
+            </figure>
           </div>
           <div className="flex justify-center mt-8 md:mt-10">
             <Link
