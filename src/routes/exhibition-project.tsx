@@ -193,7 +193,7 @@ const copy = {
       works: "Работы",
       about: "О художнике",
       exhibitions: "Выставки",
-      project: "Выставочный проект",
+      project: "Выставочные проекты",
       collaboration: "Сотрудничество",
       contact: "Контакты",
     },
@@ -241,7 +241,7 @@ const copy = {
       works: "Works",
       about: "About",
       exhibitions: "Exhibitions",
-      project: "Exhibition Project",
+      project: "Exhibition Projects",
       collaboration: "Collaboration",
       contact: "Contact",
     },
@@ -330,7 +330,7 @@ function ExhibitionProject() {
             <a href="/#works">{t.nav.works}</a>
             <a href="/#about">{t.nav.about}</a>
             <a href="/#cv">{t.nav.exhibitions}</a>
-            <Link to="/exhibition-project" className="active">
+            <Link to="/exhibition-projects" className="active">
               {t.nav.project}
             </Link>
             <Link to="/collaboration">{t.nav.collaboration}</Link>
@@ -375,9 +375,9 @@ function ExhibitionProject() {
         <a href="/#cv" onClick={() => setMobileMenuOpen(false)}>
           {t.nav.exhibitions}
         </a>
-        <a href="#top" onClick={() => setMobileMenuOpen(false)}>
+        <Link to="/exhibition-projects" onClick={() => setMobileMenuOpen(false)}>
           {t.nav.project}
-        </a>
+        </Link>
         <Link to="/collaboration" onClick={() => setMobileMenuOpen(false)}>
           {t.nav.collaboration}
         </Link>

@@ -9,8 +9,7 @@
   min-height: 100vh;
   color: var(--ep-ink);
   background:
-    radial-gradient(circle at 82% 6%, rgb(50 110 133 / 8%), transparent 30rem),
-    var(--ep-paper);
+    radial-gradient(circle at 82% 6%, rgb(50 110 133 / 8%), transparent 30rem), var(--ep-paper);
   font-family: "Inter", sans-serif;
   font-weight: 300;
 }
@@ -326,8 +325,7 @@
   padding-top: 132px;
   color: white;
   background:
-    radial-gradient(circle at 12% 24%, rgb(50 110 133 / 42%), transparent 34rem),
-    var(--ep-deep);
+    radial-gradient(circle at 12% 24%, rgb(50 110 133 / 42%), transparent 34rem), var(--ep-deep);
 }
 
 .ep-rain-section .ep-kicker,
@@ -467,6 +465,397 @@
   text-transform: uppercase;
 }
 
+/* Exhibition projects index */
+.ep-index-page {
+  background:
+    radial-gradient(circle at 16% 12%, rgb(220 128 101 / 10%), transparent 28rem),
+    radial-gradient(circle at 88% 4%, rgb(50 110 133 / 10%), transparent 30rem), var(--ep-paper);
+}
+
+.ep-index-main {
+  width: min(1400px, 100%);
+  min-height: calc(100svh - 132px);
+  margin: auto;
+  padding: 148px 48px 120px;
+}
+
+.ep-index-header {
+  max-width: 930px;
+  margin-bottom: 74px;
+}
+
+.ep-index-header h1,
+.ep-project-card h2,
+.ep-motherland-grid h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+}
+
+.ep-index-header h1 {
+  margin: 0 0 32px;
+  font-size: clamp(64px, 8vw, 120px);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+}
+
+.ep-index-header > p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: var(--ep-muted);
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.7;
+}
+
+.ep-project-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.ep-project-card {
+  overflow: hidden;
+  border: 1px solid rgb(24 44 58 / 10%);
+  border-radius: 30px;
+  background: rgb(255 255 255 / 72%);
+  box-shadow: 0 30px 80px rgb(20 43 58 / 8%);
+}
+
+.ep-project-card-image {
+  overflow: hidden;
+  display: block;
+  aspect-ratio: 16 / 11;
+  background: var(--ep-deep);
+}
+
+.ep-project-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 900ms ease;
+}
+
+.ep-project-card.water .ep-project-card-image img {
+  object-position: center 48%;
+}
+
+.ep-project-card:hover .ep-project-card-image img {
+  transform: scale(1.025);
+}
+
+.ep-project-card-copy {
+  padding: clamp(30px, 4vw, 52px);
+}
+
+.ep-project-card h2 {
+  margin: 0 0 16px;
+  font-size: clamp(42px, 5vw, 70px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.ep-project-card-meta {
+  margin: 0 0 24px;
+  color: var(--ep-blue);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ep-project-card-body {
+  min-height: 78px;
+  margin: 0 0 30px;
+  color: var(--ep-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Motherland project */
+.ep-motherland-page {
+  --ep-paper: #fff;
+  --ep-paper-cool: #f1f4f5;
+  --ep-ink: #142936;
+  --ep-muted: #697983;
+  --ep-blue: #9d2025;
+  --ep-deep: #142936;
+  --ep-coral: #9d2025;
+  background: var(--ep-paper);
+  overflow-x: clip;
+}
+
+.ep-motherland-page main,
+.ep-motherland-page section,
+.ep-motherland-page .ep-container {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-motherland-hero {
+  min-height: 100svh;
+  padding: 112px max(48px, calc((100vw - 1440px) / 2 + 48px)) 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+  gap: clamp(48px, 5vw, 76px);
+  align-items: center;
+  color: white;
+  background: var(--ep-deep);
+}
+
+.ep-motherland-hero-copy {
+  min-width: 0;
+}
+
+.ep-motherland-eyebrow {
+  margin: 0 0 clamp(54px, 8vh, 96px);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ep-motherland-hero h1,
+.ep-motherland-section h2,
+.ep-motherland-parts h3,
+.ep-motherland-artist h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+}
+
+.ep-motherland-hero h1 {
+  margin: 0 0 36px;
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-size: clamp(64px, 6vw, 106px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.ep-motherland-kind {
+  margin: 0 0 44px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.ep-motherland-hero-meta {
+  display: grid;
+  gap: 11px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.ep-motherland-theme {
+  margin: clamp(70px, 10vh, 126px) 0 0;
+  color: rgb(255 255 255 / 68%);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.ep-motherland-hero-art {
+  min-width: 0;
+  padding: clamp(26px, 3vw, 54px);
+  border-radius: 8px;
+  background: white;
+}
+
+.ep-motherland-hero-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.ep-motherland-section {
+  padding: 112px 48px 54px;
+  background: white;
+}
+
+.ep-motherland-section:nth-of-type(odd) {
+  background: #fbfbfb;
+}
+
+.ep-motherland-section .ep-container {
+  position: relative;
+}
+
+.ep-motherland-section-header {
+  margin-bottom: 70px;
+}
+
+.ep-motherland-section-header h2 {
+  width: fit-content;
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ep-blue);
+  font-size: clamp(52px, 5vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+.ep-motherland-section-header p {
+  margin: 0;
+  color: var(--ep-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ep-motherland-overview-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 72px;
+  align-items: center;
+}
+
+.ep-motherland-overview-works {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.ep-motherland-overview-works > *,
+.ep-motherland-statement-grid > *,
+.ep-motherland-parts-grid > *,
+.ep-motherland-author-grid > * {
+  min-width: 0;
+}
+
+.ep-motherland-overview figure {
+  margin: 0;
+  text-align: center;
+}
+
+.ep-motherland-overview img,
+.ep-motherland-parts img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.ep-motherland-overview figcaption {
+  margin-top: 28px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ep-motherland-tech {
+  padding: 46px 38px;
+  display: grid;
+  gap: 24px;
+  border-radius: 20px;
+  background: var(--ep-paper-cool);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.ep-motherland-tech strong {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.ep-motherland-pdf-marker {
+  margin: 62px 0 0;
+  color: var(--ep-muted);
+  font-size: 10px;
+  text-align: right;
+}
+
+.ep-motherland-statement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 70px;
+}
+
+.ep-motherland-statement-grid p,
+.ep-motherland-parts p,
+.ep-motherland-installation p,
+.ep-motherland-artist p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.ep-motherland-statement blockquote {
+  width: min(58%, 680px);
+  margin: 70px 0 0 auto;
+  padding: 28px 34px;
+  border-radius: 20px;
+  background: var(--ep-paper-cool);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.ep-motherland-parts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 6vw, 80px);
+}
+
+.ep-motherland-parts article {
+  min-width: 0;
+}
+
+.ep-motherland-parts article > img {
+  width: min(100%, 430px);
+  margin-inline: auto;
+}
+
+.ep-motherland-parts article > div {
+  width: min(100%, 430px);
+  margin: 34px auto 0;
+}
+
+.ep-motherland-parts h3 {
+  margin: 0 0 20px;
+  font-size: 44px;
+  line-height: 1;
+}
+
+.ep-motherland-author-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 88px;
+  align-items: start;
+}
+
+.ep-motherland-installation {
+  padding: 50px 46px;
+  border-radius: 24px;
+  background: var(--ep-paper-cool);
+}
+
+.ep-motherland-installation h3 {
+  margin: 0 0 36px;
+  font-size: 15px;
+}
+
+.ep-motherland-installation p + h3 {
+  margin-top: 78px;
+}
+
+.ep-motherland-artist h3 {
+  margin: 26px 0 22px;
+  font-size: clamp(48px, 5vw, 70px);
+  line-height: 1;
+}
+
+.ep-motherland-artist > strong {
+  display: block;
+  margin-bottom: 58px;
+  color: var(--ep-blue);
+  font-size: 15px;
+}
+
+.ep-motherland-contacts {
+  margin-top: 88px;
+  display: grid;
+  gap: 22px;
+  color: var(--ep-muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 1120px) {
   .ep-desktop-nav {
     display: none;
@@ -531,6 +920,37 @@
 
   .ep-rain-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ep-index-main {
+    padding-top: 126px;
+  }
+
+  .ep-motherland-hero {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding-top: 124px;
+  }
+
+  .ep-motherland-hero-copy {
+    min-height: auto;
+  }
+
+  .ep-motherland-overview-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-motherland-tech {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ep-motherland-parts-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ep-motherland-parts article > img,
+  .ep-motherland-parts article > div {
+    width: min(100%, 520px);
   }
 }
 
@@ -599,5 +1019,116 @@
 
   .ep-footer-inner {
     display: grid;
+  }
+
+  .ep-index-main {
+    padding: 112px 20px 88px;
+  }
+
+  .ep-index-header {
+    margin-bottom: 44px;
+  }
+
+  .ep-project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-project-card-body {
+    min-height: 0;
+  }
+
+  .ep-motherland-hero {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 112px 20px 54px;
+    gap: 42px;
+  }
+
+  .ep-motherland-eyebrow {
+    margin-bottom: 48px;
+    font-size: 11px;
+  }
+
+  .ep-motherland-hero h1 {
+    margin-bottom: 24px;
+    font-size: clamp(42px, 13.2vw, 80px);
+    white-space: nowrap;
+  }
+
+  .ep-motherland-kind {
+    margin-bottom: 34px;
+  }
+
+  .ep-motherland-theme {
+    margin-top: 56px;
+  }
+
+  .ep-motherland-hero-art {
+    padding: 18px;
+  }
+
+  .ep-motherland-section {
+    padding: 82px 20px 40px;
+  }
+
+  .ep-motherland-section-header {
+    margin-bottom: 48px;
+  }
+
+  .ep-motherland-section-header h2 {
+    font-size: clamp(44px, 14vw, 62px);
+  }
+
+  .ep-motherland-overview-works,
+  .ep-motherland-statement-grid,
+  .ep-motherland-parts-grid,
+  .ep-motherland-author-grid {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .ep-motherland-overview-works {
+    gap: 50px;
+  }
+
+  .ep-motherland-tech {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-motherland-statement-grid {
+    gap: 28px;
+  }
+
+  .ep-motherland-statement blockquote {
+    width: 100%;
+    margin-top: 46px;
+    padding: 24px;
+  }
+
+  .ep-motherland-parts-grid {
+    gap: 70px;
+  }
+
+  .ep-motherland-installation {
+    padding: 34px 26px;
+  }
+
+  .ep-motherland-installation p + h3 {
+    margin-top: 54px;
+  }
+
+  .ep-motherland-artist h3 {
+    margin-top: 0;
+  }
+
+  .ep-motherland-artist > strong {
+    margin-bottom: 38px;
+  }
+
+  .ep-motherland-contacts {
+    margin-top: 54px;
   }
 }

@@ -10,13 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ExhibitionProjectsRouteImport } from './routes/exhibition-projects'
 import { Route as ExhibitionProjectRouteImport } from './routes/exhibition-project'
 import { Route as CollaborationRouteImport } from './routes/collaboration'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExhibitionProjectsMotherlandRouteImport } from './routes/exhibition-projects.motherland'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExhibitionProjectsRoute = ExhibitionProjectsRouteImport.update({
+  id: '/exhibition-projects',
+  path: '/exhibition-projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExhibitionProjectRoute = ExhibitionProjectRouteImport.update({
@@ -34,43 +41,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExhibitionProjectsMotherlandRoute =
+  ExhibitionProjectsMotherlandRouteImport.update({
+    id: '/motherland',
+    path: '/motherland',
+    getParentRoute: () => ExhibitionProjectsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
+  '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/exhibition-projects/motherland': typeof ExhibitionProjectsMotherlandRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
+  '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/exhibition-projects/motherland': typeof ExhibitionProjectsMotherlandRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
+  '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/exhibition-projects/motherland': typeof ExhibitionProjectsMotherlandRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/collaboration' | '/exhibition-project' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/collaboration'
+    | '/exhibition-project'
+    | '/exhibition-projects'
+    | '/sitemap.xml'
+    | '/exhibition-projects/motherland'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collaboration' | '/exhibition-project' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/collaboration'
+    | '/exhibition-project'
+    | '/exhibition-projects'
+    | '/sitemap.xml'
+    | '/exhibition-projects/motherland'
   id:
     | '__root__'
     | '/'
     | '/collaboration'
     | '/exhibition-project'
+    | '/exhibition-projects'
     | '/sitemap.xml'
+    | '/exhibition-projects/motherland'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CollaborationRoute: typeof CollaborationRoute
   ExhibitionProjectRoute: typeof ExhibitionProjectRoute
+  ExhibitionProjectsRoute: typeof ExhibitionProjectsRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -81,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exhibition-projects': {
+      id: '/exhibition-projects'
+      path: '/exhibition-projects'
+      fullPath: '/exhibition-projects'
+      preLoaderRoute: typeof ExhibitionProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/exhibition-project': {
@@ -104,13 +145,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exhibition-projects/motherland': {
+      id: '/exhibition-projects/motherland'
+      path: '/motherland'
+      fullPath: '/exhibition-projects/motherland'
+      preLoaderRoute: typeof ExhibitionProjectsMotherlandRouteImport
+      parentRoute: typeof ExhibitionProjectsRoute
+    }
   }
 }
+
+interface ExhibitionProjectsRouteChildren {
+  ExhibitionProjectsMotherlandRoute: typeof ExhibitionProjectsMotherlandRoute
+}
+
+const ExhibitionProjectsRouteChildren: ExhibitionProjectsRouteChildren = {
+  ExhibitionProjectsMotherlandRoute: ExhibitionProjectsMotherlandRoute,
+}
+
+const ExhibitionProjectsRouteWithChildren =
+  ExhibitionProjectsRoute._addFileChildren(ExhibitionProjectsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CollaborationRoute: CollaborationRoute,
   ExhibitionProjectRoute: ExhibitionProjectRoute,
+  ExhibitionProjectsRoute: ExhibitionProjectsRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport

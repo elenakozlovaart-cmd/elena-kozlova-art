@@ -189,7 +189,7 @@ function Index() {
             works: "Работы",
             about: "О художнике",
             cv: "Выставки",
-            project: "Выставочный проект",
+            project: "Выставочные проекты",
             collab: "Сотрудничество",
             contact: "Контакты",
           },
@@ -265,6 +265,7 @@ function Index() {
           cvPlein: "Пленэры",
           cvSoloItems: ["2019 — Персональная выставка, Дом учёных, Троицк (Москва)"],
           cvGroupItems: [
+            "2026 — Участница международной онлайн-выставки «Water», No.35 Gallery, Лондон",
             "2026 — IV Международный фестиваль акварели «Colors of Armenia»",
             "2026 — «Координаты истории: русские усадьбы», Зеленоград",
             "2025 — Акварельный фестиваль «Яблоневый сад», Лобня",
@@ -327,7 +328,7 @@ function Index() {
             works: "Works",
             about: "About",
             cv: "Exhibitions",
-            project: "Exhibition Project",
+            project: "Exhibition Projects",
             collab: "Collaboration",
             contact: "Contact",
           },
@@ -403,6 +404,7 @@ function Index() {
           cvPlein: "Plein air",
           cvSoloItems: ["2019 — House of Scientists, Troitsk (Moscow)"],
           cvGroupItems: [
+            "2026 — Participating artist in the international online exhibition “Water”, No.35 Gallery, London",
             "2026 — IV International Watercolour Festival “Colors of Armenia”",
             "2026 — “Coordinates of History: Russian Estates”, Zelenograd",
             "2025 — Watercolour Festival “Yablonevy Sad”, Lobnya",
@@ -483,7 +485,7 @@ function Index() {
             <a href="#cv" className="hover:text-foreground transition-colors">
               {t.nav.cv}
             </a>
-            <Link to="/exhibition-project" className="hover:text-foreground transition-colors">
+            <Link to="/exhibition-projects" className="hover:text-foreground transition-colors">
               {t.nav.project}
             </Link>
             <Link to="/collaboration" className="hover:text-foreground transition-colors">
@@ -581,7 +583,7 @@ function Index() {
               {t.nav.cv}
             </a>
             <Link
-              to="/exhibition-project"
+              to="/exhibition-projects"
               onClick={() => setMobileMenuOpen(false)}
               style={serif}
               className="text-3xl font-light hover:text-foreground/70 transition-colors"
