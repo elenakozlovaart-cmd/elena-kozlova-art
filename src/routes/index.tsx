@@ -1012,7 +1012,8 @@ function Index() {
                                 </div>
                                 <div className="mt-2 flex items-start justify-between gap-4">
                                   <p className="text-[12px] tracking-[0.1em] text-foreground/55">
-                                    {info.m || t.cardMedium} · {info.s} · {info.y}
+                                    {info.m || t.cardMedium} ·{" "}
+                                    <span className="whitespace-nowrap">{info.s}</span> · {info.y}
                                   </p>
                                   <span
                                     className={`text-[10px] tracking-[0.25em] uppercase whitespace-nowrap ${sold ? "text-foreground/40" : "text-foreground/80"}`}
