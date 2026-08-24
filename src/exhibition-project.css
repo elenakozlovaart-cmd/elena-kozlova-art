@@ -416,7 +416,7 @@
   line-height: 1.7;
 }
 
-.ep-button {
+.exhibition-project-page .ep-button {
   display: inline-flex;
   min-height: 48px;
   padding: 0 25px;
@@ -434,7 +434,7 @@
     color 180ms ease;
 }
 
-.ep-button:hover {
+.exhibition-project-page .ep-button:hover {
   color: var(--ep-blue);
   background: transparent;
 }

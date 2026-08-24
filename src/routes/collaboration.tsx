@@ -20,6 +20,7 @@ import mockupCircles from "@/assets/spaces/mockup-circles-1600w.jpg";
 import mockupCirclesSmall from "@/assets/spaces/mockup-circles-800w.jpg";
 import mockupVet from "@/assets/spaces/mockup-vet-1600w.jpg";
 import mockupVetSmall from "@/assets/spaces/mockup-vet-800w.jpg";
+import collaborationOgImage from "@/assets/spaces/og-collaboration-1200x630.jpg";
 import selectionFlowersBefore from "@/assets/spaces/selection-flowers-before-1200w.jpg";
 import selectionFlowersBeforeSmall from "@/assets/spaces/selection-flowers-before-800w.jpg";
 import selectionFlowersVisual from "@/assets/spaces/selection-flowers-visual-1200w.jpg";
@@ -33,7 +34,7 @@ const COLLABORATION_TITLE = "Акварель для интерьера — по
 const COLLABORATION_DESCRIPTION =
   "Подбор 3–5 оригинальных акварелей по фото и размеру стены — для частных интерьеров, кафе, ресторанов, небольших отелей и офисов.";
 const COLLABORATION_URL = "https://elenakozlovaart.ru/collaboration";
-const COLLABORATION_OG_IMAGE = "https://elenakozlovaart.ru/og-collaboration.jpg";
+const COLLABORATION_OG_IMAGE = `https://elenakozlovaart.ru${collaborationOgImage}`;
 
 const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
