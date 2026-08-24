@@ -362,7 +362,8 @@ function Index() {
           collabIntroAltFacade: "Facade of the cafe “Kofe v Zernakh”",
           collabIntroAltInterior: "Fox watercolour above a table in the cafe “Kofe v Zernakh”",
           collabIntroAltArtwork: "Elena Kozlova’s original watercolour “Forest Gaze”",
-          collabIntroAltDetail: "Cup of coffee on a table with the fox logo in the cafe “Kofe v Zernakh”",
+          collabIntroAltDetail:
+            "Cup of coffee on a table with the fox logo in the cafe “Kofe v Zernakh”",
           aboutKicker: "About the artist",
           aboutBody: [
             "In her practice, Elena Kozlova turns to watercolor as a medium that captures fleeting states — light, movement, and the inner tension of form.",
@@ -970,7 +971,11 @@ function Index() {
                               >
                                 <img
                                   src={w.src}
-                                  srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined}
+                                  srcSet={
+                                    w.src800
+                                      ? `${w.src800} 800w, ${w.src} ${w.srcWidth ?? 1600}w`
+                                      : undefined
+                                  }
                                   sizes="(max-width: 768px) 100vw, 50vw"
                                   alt={getWorkAlt(info, lang)}
                                   loading="lazy"
@@ -1454,7 +1459,9 @@ function Index() {
                     >
                       <img
                         src={w.src}
-                        srcSet={w.src800 ? makeSrcSet(w.src, w.src800) : undefined}
+                        srcSet={
+                          w.src800 ? `${w.src800} 800w, ${w.src} ${w.srcWidth ?? 1600}w` : undefined
+                        }
                         sizes="(max-width: 768px) 100vw, 70vw"
                         alt={getWorkAlt(info, lang)}
                         loading="eager"
