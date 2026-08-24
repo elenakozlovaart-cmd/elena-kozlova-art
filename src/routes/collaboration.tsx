@@ -29,6 +29,12 @@ import selectionArchesBeforeSmall from "@/assets/spaces/selection-arches-before-
 import selectionArchesVisual from "@/assets/spaces/selection-arches-visual-1200w.jpg";
 import selectionArchesVisualSmall from "@/assets/spaces/selection-arches-visual-800w.jpg";
 
+const COLLABORATION_TITLE = "Акварель для интерьера — подбор работ | Елена Козлова";
+const COLLABORATION_DESCRIPTION =
+  "Подбор 3–5 оригинальных акварелей по фото и размеру стены — для частных интерьеров, кафе, ресторанов, небольших отелей и офисов.";
+const COLLABORATION_URL = "https://elenakozlovaart.ru/collaboration";
+const COLLABORATION_OG_IMAGE = "https://elenakozlovaart.ru/og-collaboration.jpg";
+
 const TG_CHANNEL_LINK = "https://t.me/ElenaKozlova_Art";
 const TG_DM_LINK = "https://t.me/ElenaKozlovaArt";
 const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jYQ";
@@ -62,20 +68,47 @@ export const Route = createFileRoute("/collaboration")({
   component: CollaborationPage,
   head: () => ({
     meta: [
-      { title: "Сотрудничество — Елена Козлова, художник-акварелист" },
+      { title: COLLABORATION_TITLE },
       {
         name: "description",
-        content:
-          "Подбор оригинальных акварелей Елены Козловой для дизайнерских проектов, кафе, ресторанов, небольших отелей и офисов. По фото пространства — 3–5 подходящих работ с предварительной стоимостью.",
+        content: COLLABORATION_DESCRIPTION,
       },
-      { property: "og:title", content: "Сотрудничество — Елена Козлова" },
+      { property: "og:title", content: COLLABORATION_TITLE },
       {
         property: "og:description",
-        content:
-          "Оригинальная акварель для дизайнеров и камерных пространств. Пришлите фото интерьера — Елена предложит 3–5 подходящих работ.",
+        content: COLLABORATION_DESCRIPTION,
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://elenakozlovaart.ru/collaboration" },
+      { property: "og:url", content: COLLABORATION_URL },
+      { property: "og:image", content: COLLABORATION_OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: COLLABORATION_TITLE },
+      { name: "twitter:description", content: COLLABORATION_DESCRIPTION },
+      { name: "twitter:image", content: COLLABORATION_OG_IMAGE },
+    ],
+    links: [{ rel: "canonical", href: COLLABORATION_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Подбор оригинальных акварелей для интерьера",
+          serviceType: "Подбор 3–5 работ по фотографии и размеру стены",
+          provider: {
+            "@type": "Person",
+            name: "Елена Козлова",
+            url: "https://elenakozlovaart.ru",
+          },
+          areaServed: {
+            "@type": "Country",
+            name: "Россия",
+          },
+          url: COLLABORATION_URL,
+        }),
+      },
     ],
   }),
 });
@@ -89,15 +122,19 @@ function CollaborationPage() {
     try {
       const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
       if (stored === "ru" || stored === "en") setLang(stored);
-    } catch {}
+    } catch {
+      // Language preference is optional when browser storage is unavailable.
+    }
   }, []);
 
   useEffect(() => {
     try {
       window.localStorage.setItem(LANG_STORAGE_KEY, lang);
-    } catch {}
+    } catch {
+      // Keep the page usable when browser storage is unavailable.
+    }
     document.title =
-      lang === "ru" ? "Сотрудничество — Елена Козлова" : "Collaboration — Elena Kozlova";
+      lang === "ru" ? COLLABORATION_TITLE : "Watercolour for interiors | Elena Kozlova";
   }, [lang]);
 
   const translations = {
@@ -395,9 +432,7 @@ function CollaborationPage() {
             >
               {t.heroCta}
             </a>
-            <p className="mt-3 text-[12px] leading-relaxed text-foreground/55">
-              {t.heroCtaNote}
-            </p>
+            <p className="mt-3 text-[12px] leading-relaxed text-foreground/55">{t.heroCtaNote}</p>
           </div>
           <div className="relative md:col-span-7 md:order-2 order-1">
             <img
@@ -569,6 +604,9 @@ function CollaborationPage() {
                     }
                     loading="lazy"
                     decoding="async"
+                    fetchPriority="low"
+                    width={1600}
+                    height={1200}
                     className="w-full h-auto object-cover aspect-[4/3]"
                   />
                   <span className="absolute top-4 left-4 rounded-full px-4 py-2 bg-background/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-foreground/75">

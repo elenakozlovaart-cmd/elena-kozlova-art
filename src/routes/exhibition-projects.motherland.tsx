@@ -3,7 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import exhibitionCss from "../exhibition-project.css?url";
-import diptych from "@/assets/exhibition-motherland-source-diptych.jpg";
+import diptych from "@/assets/exhibition-motherland-diptych-1200w.jpg";
+import diptych800 from "@/assets/exhibition-motherland-diptych-800w.jpg";
 import motherlandI from "@/assets/exhibition-motherland-source-i.jpg";
 import motherlandII from "@/assets/exhibition-motherland-source-ii.jpg";
 
@@ -139,7 +140,17 @@ function MotherlandProject() {
             <p className="ep-motherland-theme">Тема фестиваля: «Снизу ещё не постучали»</p>
           </div>
           <div className="ep-motherland-hero-art">
-            <img src={diptych} alt="Родина-мать" />
+            <img
+              src={diptych}
+              srcSet={`${diptych800} 800w, ${diptych} 1200w`}
+              sizes="(max-width: 760px) 100vw, 50vw"
+              alt="Родина-мать"
+              width={1200}
+              height={896}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </div>
         </section>
 

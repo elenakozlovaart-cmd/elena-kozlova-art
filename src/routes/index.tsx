@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Современная акварельная живопись. Пейзажи внутренних состояний и фигуративные этюды.",
+          "Оригинальные акварели Елены Козловой: работы в наличии, выставочные проекты и подбор картин для частных и общественных интерьеров.",
       },
     ],
     links: [{ rel: "canonical", href: "https://elenakozlovaart.ru/" }],
@@ -861,7 +861,7 @@ function Index() {
                       srcSet={cat.img800 ? makeSrcSet(cat.img, cat.img800) : undefined}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       alt={cat.title}
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
                     />
