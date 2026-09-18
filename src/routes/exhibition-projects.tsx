@@ -15,7 +15,7 @@ import motherland from "@/assets/exhibition-motherland-diptych-1600w.jpg";
 import motherland800 from "@/assets/exhibition-motherland-diptych-800w.jpg";
 
 export const Route = createFileRoute("/exhibition-projects")({
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { title: "Выставочные проекты Елены Козловой" },
       {
@@ -33,7 +33,14 @@ export const Route = createFileRoute("/exhibition-projects")({
     ],
     links: [
       { rel: "stylesheet", href: exhibitionCss },
-      { rel: "canonical", href: "https://elenakozlovaart.ru/exhibition-projects" },
+      ...(matches[matches.length - 1]?.routeId === "/exhibition-projects"
+        ? [
+            {
+              rel: "canonical",
+              href: "https://elenakozlovaart.ru/exhibition-projects",
+            },
+          ]
+        : []),
     ],
   }),
   component: ExhibitionProjects,

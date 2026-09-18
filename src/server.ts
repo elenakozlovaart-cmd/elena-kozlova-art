@@ -25,6 +25,25 @@ function brandedErrorResponse(): Response {
   });
 }
 
+function isAssetRecoveryUrl(request: Request): boolean {
+  const url = new URL(request.url);
+  return (
+    url.searchParams.has("__asset_reload") ||
+    url.searchParams.has("__asset_reason")
+  );
+}
+
+function withNoindexHeader(response: Response): Response {
+  const headers = new Headers(response.headers);
+  headers.set("X-Robots-Tag", "noindex");
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boolean {
   let payload: unknown;
   try {
@@ -71,7 +90,13 @@ export default {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      const normalizedResponse = await normalizeCatastrophicSsrResponse(response);
+
+      // These query parameters exist only for a one-time client recovery after
+      // an outdated asset fails to load. They must never become search results.
+      return isAssetRecoveryUrl(request)
+        ? withNoindexHeader(normalizedResponse)
+        : normalizedResponse;
     } catch (error) {
       console.error(error);
       return brandedErrorResponse();
