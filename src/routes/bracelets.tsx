@@ -9,7 +9,7 @@ const MAX_LINK = "https://max.ru/join/2XSGUWjyi4zS_lLZENNtohJvgO086bGV9ka7Il06jY
 const PAGE_URL = "https://elenakozlovaart.ru/bracelets";
 const TITLE = "Браслеты из натуральных камней — Елена Козлова";
 const DESCRIPTION =
-  "Браслеты с аквамарином, аметистом, цитрином, бериллом и лунным камнем. Фотографии, описания, размеры и цены. Заказ в Telegram или MAX.";
+  "Браслеты с аквамарином, аметистом, цитрином, бериллом, гранатом, гематитом и лунным камнем. Фотографии, описания, размеры и цены. Заказ в Telegram или MAX.";
 const price = (value: number) => `${new Intl.NumberFormat("ru-RU").format(value)} ₽`;
 const telegramOrder = (choice = "") =>
   `${TG_LINK}?text=${encodeURIComponent(
@@ -223,7 +223,7 @@ function BraceletsPage() {
           <section className="b-collection b-wrap" id="b-collection">
             <div className="b-section-head">
               <h2>Выберите своё настроение</h2>
-              <p>Три истории в цвете. Рассмотрите детали и то, как украшения выглядят на руке.</p>
+              <p>Пять историй в цвете. Рассмотрите детали и то, как украшения выглядят на руке.</p>
             </div>
             <div className="b-grid">
               {bracelets.map((item) => (
