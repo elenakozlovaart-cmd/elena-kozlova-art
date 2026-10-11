@@ -191,6 +191,7 @@ function Index() {
             cv: "Выставки",
             project: "Выставочные проекты",
             collab: "Сотрудничество",
+            bracelets: "Браслеты",
             contact: "Контакты",
           },
           heroKicker: "Художник-акварелист",
@@ -330,6 +331,7 @@ function Index() {
             cv: "Exhibitions",
             project: "Exhibition Projects",
             collab: "Collaboration",
+            bracelets: "Bracelets",
             contact: "Contact",
           },
           heroKicker: "Watercolour artist",
@@ -476,7 +478,7 @@ function Index() {
           <a href="#top" className="text-[11px] tracking-[0.35em] uppercase">
             {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
           </a>
-          <div className="hidden md:flex items-center gap-6 xl:gap-10 text-[11px] tracking-[0.25em] uppercase text-foreground/70">
+          <div className="hidden xl:flex items-center gap-5 text-[11px] tracking-[0.15em] uppercase text-foreground/70">
             <a href="#works" className="hover:text-foreground transition-colors">
               {t.nav.works}
             </a>
@@ -491,6 +493,9 @@ function Index() {
             </Link>
             <Link to="/collaboration" className="hover:text-foreground transition-colors">
               {t.nav.collab}
+            </Link>
+            <Link to="/bracelets" className="hover:text-foreground transition-colors">
+              {t.nav.bracelets}
             </Link>
             <a href="#contact" className="hover:text-foreground transition-colors">
               {t.nav.contact}
@@ -534,7 +539,7 @@ function Index() {
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               aria-label={lang === "ru" ? "Открыть меню" : "Open menu"}
-              className="md:hidden text-foreground/70 hover:text-foreground transition-colors p-1 ml-1"
+              className="xl:hidden text-foreground/70 hover:text-foreground transition-colors p-1 ml-1"
             >
               <Menu className="w-6 h-6" strokeWidth={1.5} />
             </button>
@@ -544,7 +549,7 @@ function Index() {
 
       {/* MOBILE MENU OVERLAY */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
+        <div className="xl:hidden fixed inset-0 z-[60] bg-background flex flex-col">
           <div className="flex items-center justify-between px-6 h-16 border-b border-border/30">
             <span className="text-[11px] tracking-[0.35em] uppercase">
               {lang === "ru" ? "Елена Козлова" : "Elena Kozlova"}
@@ -598,6 +603,14 @@ function Index() {
               className="text-3xl font-light hover:text-foreground/70 transition-colors"
             >
               {t.nav.collab}
+            </Link>
+            <Link
+              to="/bracelets"
+              onClick={() => setMobileMenuOpen(false)}
+              style={serif}
+              className="text-3xl font-light hover:text-foreground/70 transition-colors"
+            >
+              {t.nav.bracelets}
             </Link>
             <a
               href="#contact"

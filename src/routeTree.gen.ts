@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ExhibitionProjectsRouteImport } from './routes/exhibition-projects'
 import { Route as ExhibitionProjectRouteImport } from './routes/exhibition-project'
 import { Route as CollaborationRouteImport } from './routes/collaboration'
+import { Route as BraceletsRouteImport } from './routes/bracelets'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExhibitionProjectsMotherlandRouteImport } from './routes/exhibition-projects.motherland'
 
@@ -36,6 +37,11 @@ const CollaborationRoute = CollaborationRouteImport.update({
   path: '/collaboration',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BraceletsRoute = BraceletsRouteImport.update({
+  id: '/bracelets',
+  path: '/bracelets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -50,6 +56,7 @@ const ExhibitionProjectsMotherlandRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bracelets': typeof BraceletsRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
   '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bracelets': typeof BraceletsRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
   '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
@@ -67,6 +75,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bracelets': typeof BraceletsRoute
   '/collaboration': typeof CollaborationRoute
   '/exhibition-project': typeof ExhibitionProjectRoute
   '/exhibition-projects': typeof ExhibitionProjectsRouteWithChildren
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/bracelets'
     | '/collaboration'
     | '/exhibition-project'
     | '/exhibition-projects'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/bracelets'
     | '/collaboration'
     | '/exhibition-project'
     | '/exhibition-projects'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/bracelets'
     | '/collaboration'
     | '/exhibition-project'
     | '/exhibition-projects'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BraceletsRoute: typeof BraceletsRoute
   CollaborationRoute: typeof CollaborationRoute
   ExhibitionProjectRoute: typeof ExhibitionProjectRoute
   ExhibitionProjectsRoute: typeof ExhibitionProjectsRouteWithChildren
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollaborationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bracelets': {
+      id: '/bracelets'
+      path: '/bracelets'
+      fullPath: '/bracelets'
+      preLoaderRoute: typeof BraceletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -168,6 +188,7 @@ const ExhibitionProjectsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BraceletsRoute: BraceletsRoute,
   CollaborationRoute: CollaborationRoute,
   ExhibitionProjectRoute: ExhibitionProjectRoute,
   ExhibitionProjectsRoute: ExhibitionProjectsRouteWithChildren,

@@ -1,0 +1,638 @@
+.bracelets-page {
+  background: transparent;
+  width: 100%;
+  font-family: Inter, Arial, sans-serif;
+  color: #29353c;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.bracelets-page * {
+  box-sizing: border-box;
+}
+.bracelets-page .b-page {
+  --paper: #faf8f4;
+  --ink: #29353c;
+  --quiet: #676d70;
+  --rose: #9a7475;
+  --line: #ddd7ce;
+  container-type: inline-size;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  margin: auto;
+  color-scheme: light;
+  transition: max-width 0.2s;
+}
+.bracelets-page .b-page.phone {
+  max-width: 390px;
+}
+.bracelets-page h1,
+.bracelets-page h2,
+.bracelets-page h3,
+.bracelets-page p {
+  margin: 0;
+  font-weight: 400;
+}
+.bracelets-page h1,
+.bracelets-page h2,
+.bracelets-page h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  line-height: 1.06;
+}
+.bracelets-page button,
+.bracelets-page a {
+  font: inherit;
+  color: inherit;
+}
+.bracelets-page button {
+  background: none;
+  border: 0;
+  min-height: 44px;
+  cursor: pointer;
+}
+.bracelets-page a {
+  text-decoration: none;
+}
+.bracelets-page button:focus-visible,
+.bracelets-page a:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 5px;
+}
+.bracelets-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bracelets-page .b-wrap {
+  padding-inline: 42px;
+}
+.bracelets-page .b-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 118px 22px 42px;
+  border-bottom: 1px solid var(--line);
+}
+.bracelets-page .b-brand {
+  font-size: 12px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.bracelets-page .b-nav {
+  display: flex;
+  gap: 22px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  align-items: center;
+}
+.bracelets-page .b-nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.bracelets-page .b-menu {
+  display: none;
+}
+.bracelets-page .b-mobile-nav {
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.bracelets-page .b-mobile-nav a {
+  display: block;
+  padding: 9px 0;
+}
+.bracelets-page .b-hero {
+  padding-top: 40px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 38px;
+  align-items: center;
+}
+.bracelets-page .b-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.bracelets-page h1 {
+  font-size: 58px;
+  margin-top: 24px;
+  letter-spacing: -1.4px;
+}
+.bracelets-page .b-lead {
+  margin-top: 24px;
+  max-width: 360px;
+  color: var(--quiet);
+  font-size: 14px;
+}
+.bracelets-page .b-hero-actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.bracelets-page .b-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--rose);
+  color: #fff;
+  border-radius: 30px;
+  padding: 11px 22px;
+  min-height: 46px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.bracelets-page .b-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 12px;
+  min-height: 44px;
+}
+.bracelets-page button.b-primary {
+  background: var(--rose);
+  color: #fff;
+}
+.bracelets-page .b-hero-photo {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  max-height: 490px;
+}
+.bracelets-page .b-hero-note {
+  margin-top: 12px;
+  color: var(--quiet);
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+.bracelets-page .b-intro-line {
+  padding: 22px 42px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--quiet);
+  font-size: 12px;
+}
+.bracelets-page .b-collection {
+  padding-block: 64px;
+}
+.bracelets-page .b-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.bracelets-page h2 {
+  font-size: 42px;
+}
+.bracelets-page .b-section-head p {
+  color: var(--quiet);
+  max-width: 265px;
+  font-size: 12px;
+}
+.bracelets-page .b-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.bracelets-page .b-card-photo {
+  width: 100%;
+  aspect-ratio: 1/1.14;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+.bracelets-page .b-card-photo img {
+  transition: transform 0.5s;
+}
+.bracelets-page .b-card-photo:hover img {
+  transform: scale(1.025);
+}
+.bracelets-page .b-card-meta {
+  padding-top: 18px;
+}
+.bracelets-page h3 {
+  font-size: 29px;
+}
+.bracelets-page .b-materials {
+  font-size: 12px;
+  color: var(--quiet);
+  margin-top: 9px;
+  min-height: 40px;
+}
+.bracelets-page .b-card-story {
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 64px;
+}
+.bracelets-page .b-price {
+  font-size: 12px;
+  color: var(--quiet);
+  margin-top: 16px;
+}
+.bracelets-page .b-card-actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 13px;
+}
+.bracelets-page .b-card-actions .b-primary,
+.bracelets-page .b-card-actions .b-secondary {
+  padding-inline: 15px;
+}
+.bracelets-page .b-detail {
+  padding: 32px 0 0;
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.bracelets-page .b-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.bracelets-page .b-close {
+  width: 44px;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+.bracelets-page .b-detail-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.bracelets-page .b-detail-image {
+  width: 100%;
+  aspect-ratio: 1/1.1;
+  padding: 0;
+  display: block;
+}
+.bracelets-page .b-detail-image.enlarged {
+  aspect-ratio: auto;
+  height: auto;
+}
+.bracelets-page .b-detail-image.enlarged img {
+  height: auto;
+  object-fit: contain;
+}
+.bracelets-page .b-thumbs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.bracelets-page .b-thumb {
+  width: 62px;
+  height: 70px;
+  padding: 3px;
+  border: 1px solid transparent;
+}
+.bracelets-page .b-thumb[aria-pressed="true"] {
+  border-color: var(--rose);
+}
+.bracelets-page .b-detail-text p {
+  color: var(--quiet);
+  margin-top: 17px;
+}
+.bracelets-page .b-detail-text h3 {
+  font-size: 36px;
+}
+.bracelets-page .b-specs {
+  margin-block: 24px;
+}
+.bracelets-page .b-specs div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.bracelets-page .b-specs dt {
+  color: var(--quiet);
+}
+.bracelets-page .b-specs dd {
+  margin: 0;
+  text-align: right;
+  max-width: 62%;
+}
+.bracelets-page .b-pairs {
+  background: #f0ebe5;
+  padding-block: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 38px;
+  align-items: center;
+}
+.bracelets-page .b-pair-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bracelets-page .b-pair-photos figure {
+  margin: 0;
+}
+.bracelets-page .b-pair-photos img {
+  aspect-ratio: 3/4;
+  height: auto;
+  object-fit: cover;
+}
+.bracelets-page .b-pair-photos figcaption {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 9px;
+  color: var(--quiet);
+}
+.bracelets-page .b-pairs-copy h2 {
+  margin-top: 20px;
+}
+.bracelets-page .b-pairs-copy p {
+  color: var(--quiet);
+  margin-top: 20px;
+}
+.bracelets-page .b-pairs-copy button {
+  margin-top: 25px;
+}
+.bracelets-page .b-order {
+  padding-block: 66px;
+}
+.bracelets-page .b-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin-block: 32px;
+}
+.bracelets-page .b-step-number {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px;
+  color: var(--rose);
+}
+.bracelets-page .b-step-title {
+  margin-top: 9px;
+  font-size: 15px;
+}
+.bracelets-page .b-step-desc {
+  color: var(--quiet);
+  margin-top: 8px;
+  font-size: 13px;
+}
+.bracelets-page .b-order-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.bracelets-page .b-request {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 24px;
+}
+.bracelets-page .b-request h3 {
+  font-size: 28px;
+}
+.bracelets-page .b-draft {
+  margin-top: 14px;
+  background: #f0ebe5;
+  padding: 20px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+.bracelets-page .b-request-note {
+  font-size: 12px;
+  color: var(--quiet);
+  margin-top: 12px;
+}
+.bracelets-page .b-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 42px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.bracelets-page .b-info h3 {
+  font-size: 24px;
+}
+.bracelets-page .b-info p {
+  color: var(--quiet);
+  font-size: 13px;
+  margin-top: 9px;
+}
+.bracelets-page .b-footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 42px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 11px;
+  color: var(--quiet);
+}
+.bracelets-page [hidden] {
+  display: none !important;
+}
+@container (max-width:650px) {
+  .bracelets-page .b-wrap {
+    padding-inline: 22px;
+  }
+  .bracelets-page .b-header {
+    padding: 16px 104px 16px 22px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .bracelets-page .b-brand {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+  }
+  .bracelets-page .b-nav {
+    display: none;
+  }
+  .bracelets-page .b-menu {
+    display: block;
+    font-size: 12px;
+    padding: 0;
+    min-height: 44px;
+  }
+  .bracelets-page .b-hero {
+    grid-template-columns: 1fr;
+    padding-top: 28px;
+    padding-bottom: 30px;
+    gap: 28px;
+  }
+  .bracelets-page h1 {
+    font-size: 44px;
+    margin-top: 17px;
+  }
+  .bracelets-page .b-lead {
+    margin-top: 18px;
+  }
+  .bracelets-page .b-hero-actions {
+    margin-top: 22px;
+  }
+  .bracelets-page .b-hero-photo {
+    max-height: 430px;
+    aspect-ratio: 4/4.5;
+  }
+  .bracelets-page .b-intro-line {
+    padding: 18px 22px;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 11px;
+  }
+  .bracelets-page .b-collection {
+    padding-block: 38px;
+  }
+  .bracelets-page .b-section-head {
+    display: block;
+    margin-bottom: 24px;
+  }
+  .bracelets-page .b-section-head p {
+    margin-top: 14px;
+  }
+  .bracelets-page h2 {
+    font-size: 35px;
+  }
+  .bracelets-page .b-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .bracelets-page .b-card-story,
+  .bracelets-page .b-materials {
+    min-height: 0;
+  }
+  .bracelets-page .b-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .bracelets-page .b-detail-head h2 {
+    font-size: 29px;
+  }
+  .bracelets-page .b-pairs {
+    grid-template-columns: 1fr;
+    padding-block: 38px;
+    gap: 28px;
+  }
+  .bracelets-page .b-pairs-copy {
+    grid-row: 1;
+  }
+  .bracelets-page .b-order {
+    padding-block: 42px;
+  }
+  .bracelets-page .b-steps {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .bracelets-page .b-info {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .bracelets-page .b-footer {
+    padding: 22px;
+    flex-wrap: wrap;
+  }
+  .bracelets-page .b-detail-text h3 {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bracelets-page * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.bracelets-page .b-page {
+  max-width: 1400px;
+}
+.bracelets-page .b-header {
+  padding-right: 42px;
+}
+.bracelets-page .b-card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 15px;
+}
+.bracelets-page .b-status {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.bracelets-page .b-card-story {
+  min-height: 105px;
+}
+.bracelets-page .b-companion {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.bracelets-page .b-pair-item {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--quiet);
+}
+.bracelets-page .b-care-list {
+  padding-left: 18px;
+  color: var(--quiet);
+  font-size: 13px;
+}
+.bracelets-page .b-care-list li {
+  margin: 8px 0;
+}
+.bracelets-page .b-info h3 {
+  font-size: 28px;
+}
+.bracelets-page .b-detail {
+  scroll-margin-top: 20px;
+}
+.bracelets-page .b-specs {
+  margin-block: 20px;
+}
+.bracelets-page .b-grid article {
+  display: flex;
+  flex-direction: column;
+}
+.bracelets-page .b-card-meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.bracelets-page .b-card-story {
+  flex: 1;
+}
+.bracelets-page .b-card-photo {
+  aspect-ratio: 1;
+}
+.bracelets-page .b-order-choice {
+  margin-bottom: 18px;
+  color: var(--quiet);
+}
+.bracelets-page .b-detail-image img {
+  object-fit: contain;
+  background: #f0ebe5;
+}
+@container (max-width:650px) {
+  .bracelets-page .b-header {
+    padding-right: 22px;
+    flex-wrap: nowrap;
+  }
+  .bracelets-page .b-card-story {
+    min-height: 0;
+  }
+}
